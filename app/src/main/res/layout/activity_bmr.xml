@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.BmrActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/meal_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="@string/bmr_calculator" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/gender"
+        style="@style/BmrDayFontBold"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/gender"
+        app:layout_constraintBottom_toTopOf="@id/age"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/radio_group_gender"
+        app:layout_constraintTop_toBottomOf="@id/meal_toolbar" />
+
+    <RadioGroup
+        android:id="@+id/radio_group_gender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@id/gender"
+        app:layout_constraintLeft_toRightOf="@id/gender"
+        app:layout_constraintTop_toTopOf="@id/gender">
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/gender_male"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@string/male"
+            android:textSize="16sp" />
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/gender_female"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:text="@string/female"
+            android:textSize="16sp" />
+
+    </RadioGroup>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/age"
+        style="@style/BmrDayFontBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:text="@string/age"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/gender" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/age_value"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:selectAllOnFocus="true"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@id/age"
+        app:layout_constraintLeft_toRightOf="@id/gender"
+        app:layout_constraintTop_toTopOf="@id/age" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/height"
+        style="@style/BmrDayFontBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/height"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/age" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/height_value"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:selectAllOnFocus="true"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@id/height"
+        app:layout_constraintLeft_toRightOf="@id/gender"
+        app:layout_constraintTop_toTopOf="@id/height" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/centimeter"
+        app:layout_constraintBottom_toBottomOf="@id/height"
+        app:layout_constraintLeft_toRightOf="@id/height_value" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/weight"
+        style="@style/BmrDayFontBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/weight"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/height" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/weight_value"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:selectAllOnFocus="true"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@id/weight"
+        app:layout_constraintLeft_toRightOf="@id/gender"
+        app:layout_constraintTop_toTopOf="@id/weight" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/kilogram"
+        app:layout_constraintBottom_toBottomOf="@id/weight"
+        app:layout_constraintLeft_toRightOf="@id/weight_value" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_calculate_bmr"
+        style="@style/NumberDayFont"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/calculate_bmr"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/weight" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_bmr_text"
+        style="@style/NumberDayFont"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/your_bmr_is"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_calculate_bmr" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_bmr_result"
+        style="@style/NumberDayFontBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_bmr_text"
+        app:layout_constraintLeft_toRightOf="@id/tv_bmr_text"
+        app:layout_constraintTop_toTopOf="@id/tv_bmr_text" />
+
+    <RadioGroup
+        android:id="@+id/radio_group_activity_level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_bmr_text">
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/level1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:text="@string/sedentary"
+            android:textSize="16sp" />
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/level2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:text="@string/exercice_1_3_times"
+            android:textSize="16sp" />
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/level3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:text="@string/exercice_4_5_times"
+            android:textSize="16sp" />
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/level4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:text="@string/exercice_6_8_times"
+            android:textSize="16sp" />
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/level5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:text="@string/exercice_very_intense"
+            android:textSize="16sp" />
+
+    </RadioGroup>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_calculate_daily_calorie"
+        style="@style/NumberDayFont"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/calculate_daily_calorie"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/radio_group_activity_level" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_daily_calorie_text"
+        style="@style/NumberDayFont"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/daily_calorie"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_calculate_daily_calorie" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_daily_calorie_result"
+        style="@style/NumberDayFontBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_daily_calorie_text"
+        app:layout_constraintLeft_toRightOf="@id/tv_daily_calorie_text"
+        app:layout_constraintTop_toTopOf="@id/tv_daily_calorie_text" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/fat"
+        style="@style/BmrDayFontBold"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/fat"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="@id/gender"
+        app:layout_constraintTop_toBottomOf="@id/tv_daily_calorie_text" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/fat_percent"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:selectAllOnFocus="true"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@id/fat"
+        app:layout_constraintLeft_toRightOf="@id/fat"
+        app:layout_constraintTop_toTopOf="@id/fat" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/percent_symbol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/percent"
+        app:layout_constraintBottom_toBottomOf="@id/fat"
+        app:layout_constraintLeft_toRightOf="@id/fat_percent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/fat_result"
+        style="@style/NumberDayFontBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        app:layout_constraintBottom_toBottomOf="@id/fat"
+        app:layout_constraintLeft_toRightOf="@id/percent_symbol"
+        app:layout_constraintTop_toTopOf="@id/fat" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="@string/gram"
+        app:layout_constraintBottom_toBottomOf="@id/fat"
+        app:layout_constraintLeft_toRightOf="@id/fat_result" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/carb"
+        style="@style/BmrDayFontBold"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/carb"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="@id/gender"
+        app:layout_constraintTop_toBottomOf="@id/fat" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/carb_percent"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:selectAllOnFocus="true"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@id/carb"
+        app:layout_constraintLeft_toRightOf="@id/carb"
+        app:layout_constraintTop_toTopOf="@id/carb" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/percent"
+        app:layout_constraintBottom_toBottomOf="@id/carb"
+        app:layout_constraintLeft_toRightOf="@id/carb_percent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/carb_result"
+        style="@style/NumberDayFontBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        app:layout_constraintBottom_toBottomOf="@id/carb"
+        app:layout_constraintLeft_toRightOf="@id/percent_symbol"
+        app:layout_constraintTop_toTopOf="@id/carb" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="@string/gram"
+        app:layout_constraintBottom_toBottomOf="@id/carb"
+        app:layout_constraintLeft_toRightOf="@id/carb_result" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/prot"
+        style="@style/BmrDayFontBold"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/prot"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="@id/gender"
+        app:layout_constraintTop_toBottomOf="@id/carb" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/prot_percent"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:selectAllOnFocus="true"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@id/prot"
+        app:layout_constraintLeft_toRightOf="@id/prot"
+        app:layout_constraintTop_toTopOf="@id/prot" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/percent"
+        app:layout_constraintBottom_toBottomOf="@id/prot"
+        app:layout_constraintLeft_toRightOf="@id/prot_percent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/prot_result"
+        style="@style/NumberDayFontBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        app:layout_constraintBottom_toBottomOf="@id/prot"
+        app:layout_constraintLeft_toRightOf="@id/percent_symbol"
+        app:layout_constraintTop_toTopOf="@id/prot" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="@string/gram"
+        app:layout_constraintBottom_toBottomOf="@id/prot"
+        app:layout_constraintLeft_toRightOf="@id/prot_result" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_calculate_macros"
+        style="@style/NumberDayFont"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/calculate_macro"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/prot" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
