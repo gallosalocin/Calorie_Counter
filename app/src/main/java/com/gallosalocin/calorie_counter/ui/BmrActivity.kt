@@ -65,7 +65,7 @@ class BmrActivity : AppCompatActivity() {
                 calculateMacros()
                 savedData()
                 finish()
-                Toast.makeText(this, "Profile saved", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.profile_saved), Toast.LENGTH_LONG).show()
             }
             android.R.id.home -> onBackPressed()
         }

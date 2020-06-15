@@ -3,6 +3,7 @@ package com.gallosalocin.calorie_counter.ui
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -35,13 +36,13 @@ class DayActivity : AppCompatActivity() {
 
     private fun toolbarNameDay() {
         when (MainActivity.dayTag) {
-            1 -> this.title = "Lundi"
-            2 -> this.title = "Mardi"
-            3 -> this.title = "Mercredi"
-            4 -> this.title = "Jeudi"
-            5 -> this.title = "Vendredi"
-            6 -> this.title = "Samedi"
-            7 -> this.title = "Dimanche"
+            1 -> this.title = getString(R.string.monday_cap)
+            2 -> this.title = getString(R.string.tuesday_cap)
+            3 -> this.title = getString(R.string.wednesday_cap)
+            4 -> this.title = getString(R.string.thursday_cap)
+            5 -> this.title = getString(R.string.friday_cap)
+            6 -> this.title = getString(R.string.saturday_cap)
+            7 -> this.title = getString(R.string.sunday_cap)
         }
     }
 
@@ -63,42 +64,24 @@ class DayActivity : AppCompatActivity() {
         cv_breakfast.setOnClickListener {
             Intent(this, MealActivity::class.java).also {
                 mealTag = 1
-                Toast.makeText(this, "The daytag is : ${MainActivity.dayTag} and the mealtag is : $mealTag", Toast.LENGTH_SHORT).show()
-                startActivity(it)
-            }
-        }
-        cv_breakfast_snack.setOnClickListener {
-            Intent(this, MealActivity::class.java).also {
-                mealTag = 2
-                Toast.makeText(this, "The daytag is : ${MainActivity.dayTag} and the mealtag is : $mealTag", Toast.LENGTH_SHORT).show()
                 startActivity(it)
             }
         }
         cv_lunch.setOnClickListener {
             Intent(this, MealActivity::class.java).also {
-                mealTag = 3
-                Toast.makeText(this, "The daytag is : ${MainActivity.dayTag} and the mealtag is : $mealTag", Toast.LENGTH_SHORT).show()
-                startActivity(it)
-            }
-        }
-        cv_lunch_snack.setOnClickListener {
-            Intent(this, MealActivity::class.java).also {
-                mealTag = 4
-                Toast.makeText(this, "The daytag is : ${MainActivity.dayTag} and the mealtag is : $mealTag", Toast.LENGTH_SHORT).show()
+                mealTag = 2
                 startActivity(it)
             }
         }
         cv_dinner.setOnClickListener {
             Intent(this, MealActivity::class.java).also {
-                mealTag = 5
-                Toast.makeText(this, "The daytag is : ${MainActivity.dayTag} and the mealtag is : $mealTag", Toast.LENGTH_SHORT).show()
+                mealTag = 3
                 startActivity(it)
             }
         }
-        cv_dinner_snack.setOnClickListener {
+        cv_snack.setOnClickListener {
             Intent(this, MealActivity::class.java).also {
-                mealTag = 6
-                Toast.makeText(this, "The daytag is : ${MainActivity.dayTag} and the mealtag is : $mealTag", Toast.LENGTH_SHORT).show()
+                mealTag = 4
                 startActivity(it)
             }
         }

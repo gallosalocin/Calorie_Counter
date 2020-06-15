@@ -7,7 +7,9 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.gallosalocin.calorie_counter.R
+import kotlinx.android.synthetic.main.activity_day.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.meal_toolbar
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 

@@ -35,6 +35,7 @@ class FoodAdapter : RecyclerView.Adapter<FoodAdapter.FoodViewHolder>() {
     override fun onBindViewHolder(holder: FoodViewHolder, position: Int) {
             val food = differ.currentList[position]
         holder.itemView.apply {
+            cv_food.setBackgroundColor(food.color)
             food_name.text = food.name
             food_gram.text = food.weight.toString()
             food_cal.text = food.calorie.toString()
@@ -50,6 +51,10 @@ class FoodAdapter : RecyclerView.Adapter<FoodAdapter.FoodViewHolder>() {
 
     fun submitList(list: List<Food>) {
         differ.submitList(list)
+    }
+
+    fun filterList(filteredNames: ArrayList<Food>) {
+        this.differ.submitList(filteredNames)
     }
 
     private var onItemClickListener: ((Food) -> Unit)? = null

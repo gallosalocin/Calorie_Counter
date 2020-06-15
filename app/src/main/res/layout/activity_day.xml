@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#4335504D"
     tools:context=".ui.DayActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -84,10 +85,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
-                android:text="2257"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/overall_meal_fat_current"
-                app:layout_constraintTop_toBottomOf="@id/overall_meal_cal_title" />
+                app:layout_constraintTop_toBottomOf="@id/overall_meal_cal_title"
+                tools:text="2257" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/overall_meal_fat_current"
@@ -95,10 +96,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
-                android:text="68"
                 app:layout_constraintLeft_toRightOf="@id/overall_meal_cal_current"
                 app:layout_constraintRight_toLeftOf="@id/overall_meal_carb_current"
-                app:layout_constraintTop_toBottomOf="@id/overall_meal_cal_title" />
+                app:layout_constraintTop_toBottomOf="@id/overall_meal_cal_title"
+                tools:text="68" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/overall_meal_carb_current"
@@ -106,10 +107,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
-                android:text="237"
                 app:layout_constraintLeft_toRightOf="@id/overall_meal_fat_current"
                 app:layout_constraintRight_toLeftOf="@id/overall_meal_prot_current"
-                app:layout_constraintTop_toBottomOf="@id/overall_meal_cal_title" />
+                app:layout_constraintTop_toBottomOf="@id/overall_meal_cal_title"
+                tools:text="237" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/overall_meal_prot_current"
@@ -117,32 +118,32 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
-                android:text="155"
                 app:layout_constraintLeft_toRightOf="@id/overall_meal_carb_current"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/overall_meal_cal_title" />
+                app:layout_constraintTop_toBottomOf="@id/overall_meal_cal_title"
+                tools:text="155" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/overall_cal_total"
                 style="@style/NumberDayFontBold"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                tools:text="2136"
                 android:layout_marginStart="2dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/overall_fat_total"
-                app:layout_constraintTop_toBottomOf="@id/overall_meal_cal_current" />
+                app:layout_constraintTop_toBottomOf="@id/overall_meal_cal_current"
+                tools:text="2136" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/overall_fat_total"
                 style="@style/NumberDayFontBold"
                 android:layout_width="0dp"
-                tools:text="68"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
                 app:layout_constraintLeft_toRightOf="@id/overall_cal_total"
                 app:layout_constraintRight_toLeftOf="@id/overall_carb_total"
-                app:layout_constraintTop_toBottomOf="@id/overall_meal_cal_current" />
+                app:layout_constraintTop_toBottomOf="@id/overall_meal_cal_current"
+                tools:text="68" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/overall_carb_total"
@@ -150,10 +151,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
-                tools:text="210"
                 app:layout_constraintLeft_toRightOf="@id/overall_fat_total"
                 app:layout_constraintRight_toLeftOf="@id/overall_prot_total"
-                app:layout_constraintTop_toBottomOf="@id/overall_meal_cal_current" />
+                app:layout_constraintTop_toBottomOf="@id/overall_meal_cal_current"
+                tools:text="210" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/overall_prot_total"
@@ -161,10 +162,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
-                tools:text="155"
                 app:layout_constraintLeft_toRightOf="@id/overall_carb_total"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/overall_meal_cal_current" />
+                app:layout_constraintTop_toBottomOf="@id/overall_meal_cal_current"
+                tools:text="155" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
@@ -173,10 +174,11 @@
         android:id="@+id/cv_breakfast"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="2dp"
-        android:paddingTop="6dp"
-        app:cardCornerRadius="6dp"
-        app:layout_constraintBottom_toTopOf="@id/cv_breakfast_snack"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="4dp"
+        app:cardCornerRadius="12dp"
+        app:layout_constraintBottom_toTopOf="@id/cv_lunch"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cv_meal_overall"
@@ -191,7 +193,8 @@
                 android:id="@+id/breakfast"
                 style="@style/TitleDayFontBold"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
                 android:layout_marginStart="6dp"
                 android:text="@string/breakfast"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -202,61 +205,67 @@
                 android:id="@+id/breakfast_cal_current"
                 style="@style/DayFont"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="@dimen/day_title_number"
-                android:text="2257"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/breakfast_fat_current"
-                app:layout_constraintTop_toBottomOf="@id/breakfast" />
+                app:layout_constraintTop_toBottomOf="@id/breakfast"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:text="2257" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/breakfast_fat_current"
                 style="@style/DayFont"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="@dimen/day_title_number"
-                android:text="68"
                 app:layout_constraintLeft_toRightOf="@id/breakfast_cal_current"
                 app:layout_constraintRight_toLeftOf="@id/breakfast_carb_current"
-                app:layout_constraintTop_toBottomOf="@id/breakfast" />
+                app:layout_constraintTop_toBottomOf="@id/breakfast"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:text="68" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/breakfast_carb_current"
                 style="@style/DayFont"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="@dimen/day_title_number"
-                android:text="237"
                 app:layout_constraintLeft_toRightOf="@id/breakfast_fat_current"
                 app:layout_constraintRight_toLeftOf="@id/breakfast_prot_current"
-                app:layout_constraintTop_toBottomOf="@id/breakfast" />
+                app:layout_constraintTop_toBottomOf="@id/breakfast"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:text="237" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/breakfast_prot_current"
                 style="@style/DayFont"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="@dimen/day_title_number"
-                android:text="155"
                 app:layout_constraintLeft_toRightOf="@id/breakfast_carb_current"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/breakfast" />
+                app:layout_constraintTop_toBottomOf="@id/breakfast"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:text="155" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
+
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_breakfast_snack"
+        android:id="@+id/cv_lunch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="2dp"
-        android:paddingTop="6dp"
-        app:cardCornerRadius="6dp"
-        app:layout_constraintBottom_toTopOf="@id/cv_lunch"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="4dp"
+        app:cardCornerRadius="12dp"
+        app:layout_constraintBottom_toTopOf="@id/cv_dinner"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cv_breakfast">
@@ -266,89 +275,11 @@
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/breakfast_snack"
-                style="@style/TitleDayFontBold"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:text="@string/breakfast_snack"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/breakfast_snack_cal_current"
-                style="@style/DayFont"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="@dimen/day_title_number"
-                android:text="2257"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/breakfast_snack_fat_current"
-                app:layout_constraintTop_toBottomOf="@id/breakfast_snack" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/breakfast_snack_fat_current"
-                style="@style/DayFont"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="@dimen/day_title_number"
-                android:text="68"
-                app:layout_constraintLeft_toRightOf="@id/breakfast_snack_cal_current"
-                app:layout_constraintRight_toLeftOf="@id/breakfast_snack_carb_current"
-                app:layout_constraintTop_toBottomOf="@id/breakfast_snack" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/breakfast_snack_carb_current"
-                style="@style/DayFont"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="@dimen/day_title_number"
-                android:text="237"
-                app:layout_constraintLeft_toRightOf="@id/breakfast_snack_fat_current"
-                app:layout_constraintRight_toLeftOf="@id/breakfast_snack_prot_current"
-                app:layout_constraintTop_toBottomOf="@id/breakfast_snack" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/breakfast_snack_prot_current"
-                style="@style/DayFont"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="@dimen/day_title_number"
-                android:text="155"
-                app:layout_constraintLeft_toRightOf="@id/breakfast_snack_carb_current"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/breakfast_snack" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cv_lunch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="2dp"
-        android:paddingTop="6dp"
-        app:cardCornerRadius="6dp"
-        app:layout_constraintBottom_toTopOf="@id/cv_lunch_snack"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cv_breakfast_snack">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/lunch"
                 style="@style/TitleDayFontBold"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
                 android:layout_marginStart="6dp"
                 android:text="@string/lunch"
                 app:layout_constraintHorizontal_bias="1.0"
@@ -360,61 +291,62 @@
                 android:id="@+id/lunch_cal_current"
                 style="@style/DayFont"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="@dimen/day_title_number"
-                android:text="2257"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/lunch_fat_current"
-                app:layout_constraintTop_toBottomOf="@id/lunch" />
+                app:layout_constraintTop_toBottomOf="@id/lunch"
+                tools:text="2257" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/lunch_fat_current"
                 style="@style/DayFont"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="@dimen/day_title_number"
-                android:text="68"
                 app:layout_constraintLeft_toRightOf="@id/lunch_cal_current"
                 app:layout_constraintRight_toLeftOf="@id/monday_lunch_carb_current"
-                app:layout_constraintTop_toBottomOf="@id/lunch" />
+                app:layout_constraintTop_toBottomOf="@id/lunch"
+                tools:text="68" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/monday_lunch_carb_current"
                 style="@style/DayFont"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="@dimen/day_title_number"
-                android:text="237"
                 app:layout_constraintLeft_toRightOf="@id/lunch_fat_current"
                 app:layout_constraintRight_toLeftOf="@id/lunch_prot_current"
-                app:layout_constraintTop_toBottomOf="@id/lunch" />
+                app:layout_constraintTop_toBottomOf="@id/lunch"
+                tools:text="237" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/lunch_prot_current"
                 style="@style/DayFont"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="@dimen/day_title_number"
-                android:text="155"
                 app:layout_constraintLeft_toRightOf="@id/monday_lunch_carb_current"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/lunch" />
+                app:layout_constraintTop_toBottomOf="@id/lunch"
+                tools:text="155" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_lunch_snack"
+        android:id="@+id/cv_dinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="2dp"
-        android:paddingTop="6dp"
-        app:cardCornerRadius="6dp"
-        app:layout_constraintBottom_toTopOf="@id/cv_dinner"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="4dp"
+        app:cardCornerRadius="12dp"
+        app:layout_constraintBottom_toTopOf="@id/cv_snack"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cv_lunch">
@@ -424,88 +356,11 @@
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/lunch_snack"
-                style="@style/TitleDayFontBold"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:text="@string/afternoon_snack"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/lunch_snack_cal_current"
-                style="@style/DayFont"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="@dimen/day_title_number"
-                android:text="2257"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/lunch_snack_fat_current"
-                app:layout_constraintTop_toBottomOf="@id/lunch_snack" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/lunch_snack_fat_current"
-                style="@style/DayFont"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="@dimen/day_title_number"
-                android:text="68"
-                app:layout_constraintLeft_toRightOf="@id/lunch_snack_cal_current"
-                app:layout_constraintRight_toLeftOf="@id/lunch_snack_carb_current"
-                app:layout_constraintTop_toBottomOf="@id/lunch_snack" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/lunch_snack_carb_current"
-                style="@style/DayFont"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="@dimen/day_title_number"
-                android:text="237"
-                app:layout_constraintLeft_toRightOf="@id/lunch_snack_fat_current"
-                app:layout_constraintRight_toLeftOf="@id/lunch_snack_prot_current"
-                app:layout_constraintTop_toBottomOf="@id/lunch_snack" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/lunch_snack_prot_current"
-                style="@style/DayFont"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="@dimen/day_title_number"
-                android:text="155"
-                app:layout_constraintLeft_toRightOf="@id/lunch_snack_carb_current"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/lunch_snack" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cv_dinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="2dp"
-        android:paddingTop="6dp"
-        app:cardCornerRadius="6dp"
-        app:layout_constraintBottom_toTopOf="@id/cv_dinner_snack"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cv_lunch_snack">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/dinner"
                 style="@style/TitleDayFontBold"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
                 android:layout_marginStart="6dp"
                 android:text="@string/dinner"
                 app:layout_constraintHorizontal_bias="1.0"
@@ -517,60 +372,61 @@
                 android:id="@+id/dinner_cal_current"
                 style="@style/DayFont"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="@dimen/day_title_number"
-                android:text="2257"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/dinner_fat_current"
-                app:layout_constraintTop_toBottomOf="@id/dinner" />
+                app:layout_constraintTop_toBottomOf="@id/dinner"
+                tools:text="2257" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/dinner_fat_current"
                 style="@style/DayFont"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="@dimen/day_title_number"
-                android:text="68"
                 app:layout_constraintLeft_toRightOf="@id/dinner_cal_current"
                 app:layout_constraintRight_toLeftOf="@id/dinner_carb_current"
-                app:layout_constraintTop_toBottomOf="@id/dinner" />
+                app:layout_constraintTop_toBottomOf="@id/dinner"
+                tools:text="68" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/dinner_carb_current"
                 style="@style/DayFont"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="@dimen/day_title_number"
-                android:text="237"
                 app:layout_constraintLeft_toRightOf="@id/dinner_fat_current"
                 app:layout_constraintRight_toLeftOf="@id/dinner_prot_current"
-                app:layout_constraintTop_toBottomOf="@id/dinner" />
+                app:layout_constraintTop_toBottomOf="@id/dinner"
+                tools:text="237" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/dinner_prot_current"
                 style="@style/DayFont"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="@dimen/day_title_number"
-                android:text="155"
                 app:layout_constraintLeft_toRightOf="@id/dinner_carb_current"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/dinner" />
+                app:layout_constraintTop_toBottomOf="@id/dinner"
+                tools:text="155" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cv_dinner_snack"
+        android:id="@+id/cv_snack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="2dp"
-        android:paddingTop="6dp"
-        app:cardCornerRadius="6dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="4dp"
+        app:cardCornerRadius="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -581,63 +437,64 @@
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/dinner_snack"
+                android:id="@+id/snack"
                 style="@style/TitleDayFontBold"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
                 android:layout_marginStart="6dp"
-                android:text="@string/evening_snack"
+                android:text="@string/snack"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/dinner_snack_cal_current"
+                android:id="@+id/snack_cal_current"
                 style="@style/DayFont"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="@dimen/day_title_number"
-                android:text="2257"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/dinner_snack_fat_current"
-                app:layout_constraintTop_toBottomOf="@id/dinner_snack" />
+                app:layout_constraintRight_toLeftOf="@id/snack_fat_current"
+                app:layout_constraintTop_toBottomOf="@id/snack"
+                tools:text="2257" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/dinner_snack_fat_current"
+                android:id="@+id/snack_fat_current"
                 style="@style/DayFont"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="@dimen/day_title_number"
-                android:text="68"
-                app:layout_constraintLeft_toRightOf="@id/dinner_snack_cal_current"
-                app:layout_constraintRight_toLeftOf="@id/dinner_snack_carb_current"
-                app:layout_constraintTop_toBottomOf="@id/dinner_snack" />
+                app:layout_constraintLeft_toRightOf="@id/snack_cal_current"
+                app:layout_constraintRight_toLeftOf="@id/snack_carb_current"
+                app:layout_constraintTop_toBottomOf="@id/snack"
+                tools:text="68" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/dinner_snack_carb_current"
+                android:id="@+id/snack_carb_current"
                 style="@style/DayFont"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="@dimen/day_title_number"
-                android:text="237"
-                app:layout_constraintLeft_toRightOf="@id/dinner_snack_fat_current"
-                app:layout_constraintRight_toLeftOf="@id/dinner_snack_prot_current"
-                app:layout_constraintTop_toBottomOf="@id/dinner_snack" />
+                app:layout_constraintLeft_toRightOf="@id/snack_fat_current"
+                app:layout_constraintRight_toLeftOf="@id/snack_prot_current"
+                app:layout_constraintTop_toBottomOf="@id/snack"
+                tools:text="237" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/dinner_snack_prot_current"
+                android:id="@+id/snack_prot_current"
                 style="@style/DayFont"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="@dimen/day_title_number"
-                android:text="155"
-                app:layout_constraintLeft_toRightOf="@id/dinner_snack_carb_current"
+                app:layout_constraintLeft_toRightOf="@id/snack_carb_current"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/dinner_snack" />
+                app:layout_constraintTop_toBottomOf="@id/snack"
+                tools:text="155" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

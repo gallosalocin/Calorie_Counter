@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/search_toolbar_filter"
+        android:icon="@drawable/ic_filter"
+        android:title="@string/filter_btn"
+        app:showAsAction="always">
+
+        <menu>
+
+            <item
+                android:id="@+id/search_sort_category"
+                android:title="@string/sort_by_category"
+                app:showAsAction="never" />
+
+            <item
+                android:id="@+id/search_sort_name"
+                android:title="@string/sort_by_name"
+                app:showAsAction="never" />
+
+            <item
+                android:id="@+id/search_filter_prot"
+                android:title="@string/proteins"
+                app:showAsAction="never" />
+
+            <item
+                android:id="@+id/search_filter_carb"
+                android:title="@string/carbohydrate"
+                app:showAsAction="never" />
+
+            <item
+                android:id="@+id/search_filter_veggies"
+                android:title="@string/veggies"
+                app:showAsAction="never" />
+
+            <item
+                android:id="@+id/search_filter_fruits"
+                android:title="@string/fruits"
+                app:showAsAction="never" />
+
+            <item
+                android:id="@+id/search_filter_healthy_fats"
+                android:title="@string/healthy_fats"
+                app:showAsAction="never" />
+
+            <item
+                android:id="@+id/search_filter_oils"
+                android:title="@string/oils"
+                app:showAsAction="never" />
+        </menu>
+    </item>
+</menu>

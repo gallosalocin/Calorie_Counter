@@ -5,6 +5,7 @@ import java.io.Serializable
 data class Food(
     var name: String,
     var category: String,
+    var color: Int,
     var note: String = "",
     var calorie: Int,
     var weight: Int = 100,
