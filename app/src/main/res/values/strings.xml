@@ -86,4 +86,7 @@
     <string name="sort_by_category">Trier par Catégorie</string>
     <string name="sort_by_name">Trier par Nom</string>
     <string name="new_food">Nouvel aliment</string>
+    <string name="change_value_title">Changer le poids de :</string>
+    <string name="change_weight">Changer le poids</string>
+    <string name="weight_replace">Poids remplacé</string>
 </resources>

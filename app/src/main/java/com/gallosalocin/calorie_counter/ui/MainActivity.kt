@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    fun dayChoice() {
+    private fun dayChoice() {
         monday.setOnClickListener(this)
         tuesday.setOnClickListener(this)
         wednesday.setOnClickListener(this)

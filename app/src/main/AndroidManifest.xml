@@ -10,10 +10,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.ChangeValueActivity"></activity>
         <activity
             android:name=".ui.DetailsActivity"
             android:parentActivityName=".ui.SearchActivity"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ui.SearchActivity"
             android:parentActivityName=".ui.MealActivity" />

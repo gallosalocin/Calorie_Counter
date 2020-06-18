@@ -1,17 +1,24 @@
 package com.gallosalocin.calorie_counter.ui
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View.inflate
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gallosalocin.calorie_counter.R
 import com.gallosalocin.calorie_counter.adapters.FoodAdapter
 import com.gallosalocin.calorie_counter.models.Food
 import kotlinx.android.synthetic.main.activity_search.*
+import kotlinx.android.synthetic.main.alert_edit_text_layout.*
+import kotlinx.android.synthetic.main.item_food.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -19,10 +26,11 @@ class SearchActivity : AppCompatActivity() {
 
     companion object {
         lateinit var allFoodList: MutableList<Food>
+        var isEditableFood  = false
+        const val EXTRA_FOOD = "food extras"
     }
 
     private lateinit var foodAdapter: FoodAdapter
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +43,9 @@ class SearchActivity : AppCompatActivity() {
         addFood()
         setupRecyclerView()
         setupSearchEditText()
+
     }
+
 
     private fun configToolbar() {
         setSupportActionBar(search_toolbar)
@@ -50,8 +60,8 @@ class SearchActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.search_sort_category -> {
-                allFoodList.sortBy{ it.category.toLowerCase(Locale.ROOT) }
                 setupRecyclerView()
+                allFoodList.sortBy{ it.category.toLowerCase(Locale.ROOT) }
             }
             R.id.search_sort_name -> {
                 setupRecyclerView()
@@ -99,6 +109,30 @@ class SearchActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@SearchActivity)
             foodAdapter.submitList(allFoodList)
         }
+
+        foodAdapter.setOnItemClickListener(object : FoodAdapter.OnItemClickListener {
+
+            override fun setOnClickListener(position: Int) {
+                Intent(this@SearchActivity, DetailsActivity::class.java).also {
+                    val food: Food = allFoodList[position]
+                    it.putExtra(EXTRA_FOOD, food)
+                    isEditableFood = true
+                    startActivity(it)
+                }
+            }
+
+            override fun setOnLongClickListener(position: Int) {
+                Intent(this@SearchActivity, MealActivity::class.java).also {
+                    val food: Food = allFoodList[position]
+//                    if (MainActivity.dayTag == 1 && DayActivity.mealTag == 1){
+                       MealActivity.foodMealsList.add(food)
+//                    }
+                    startActivity(it)
+                    finish()
+                }
+                Toast.makeText(applicationContext, allFoodList[position].name, Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private fun setupFabCreateFood() {
@@ -110,22 +144,16 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun addFood() {
-        allFoodList.add(Food("Blanc de poulet", getString(R.string.proteins), 0xFFE57373.toInt(), "", 162, 150, 2F, 0.7F, 35.3F))
+        allFoodList.add(Food("Blanc de poulet", getString(R.string.proteins), 0xFFE57373.toInt(), "17 minutes", 162, 150, 2F, 0.7F, 35.3F))
         allFoodList.add(Food("Jambon", getString(R.string.proteins), 0xFFE57373.toInt(), "", 162, 150, 2F, 0.7F, 35.3F))
         allFoodList.add(Food("Coco Plats", getString(R.string.veggies), 0xFF48B34D.toInt(), "", 75, 250, 0.5F, 9.1F, 4.6F))
-        allFoodList.add(Food("Carottes", getString(R.string.veggies), 0xFF48B34D.toInt(), "", 34, 100, 0.4F, 7.7F, 0.5F))
         allFoodList.add(Food("Huile d'Olive", getString(R.string.oils), 0xFFC1A36E.toInt(), "", 90, 10, 10F, 0F, 0F))
-        allFoodList.add(Food("Carottes", getString(R.string.veggies), 0xFF48B34D.toInt(), "", 34, 100, 0.4F, 7.7F, 0.5F))
-        allFoodList.add(Food("Huile d'Olive", getString(R.string.oils), 0xFFC1A36E.toInt(), "", 90, 10, 10F, 0F, 0F))
-        allFoodList.add(Food("Carottes", getString(R.string.veggies), 0xFF48B34D.toInt(), "", 34, 100, 0.4F, 7.7F, 0.5F))
         allFoodList.add(Food("Carottes", getString(R.string.veggies), 0xFF48B34D.toInt(), "", 34, 100, 0.4F, 7.7F, 0.5F))
         allFoodList.add(Food("Feta", getString(R.string.healthy_fats), 0xFF4DD0E1.toInt(), "", 34, 100, 0.4F, 7.7F, 0.5F))
         allFoodList.add(Food("Comte", getString(R.string.healthy_fats), 0xFF4DD0E1.toInt(), "", 34, 100, 0.4F, 7.7F, 0.5F))
         allFoodList.add(Food("Pomme", getString(R.string.fruits), 0xFF9575CD.toInt(), "", 34, 100, 0.4F, 7.7F, 0.5F))
         allFoodList.add(Food("Ananas", getString(R.string.fruits), 0xFF9575CD.toInt(), "", 34, 100, 0.4F, 7.7F, 0.5F))
         allFoodList.add(Food("Tomates", getString(R.string.veggies), 0xFF48B34D.toInt(), "", 34, 100, 0.4F, 7.7F, 0.5F))
-        allFoodList.add(Food("Tomates", getString(R.string.veggies), 0xFF48B34D.toInt(), "", 34, 100, 0.4F, 7.7F, 0.5F))
-        allFoodList.add(Food("Glace", getString(R.string.carbohydrate), 0xFFFFF176.toInt(), "", 34, 100, 0.4F, 7.7F, 0.5F))
         allFoodList.add(Food("Glace", getString(R.string.carbohydrate), 0xFFFFF176.toInt(), "", 34, 100, 0.4F, 7.7F, 0.5F))
     }
 
@@ -142,6 +170,11 @@ class SearchActivity : AppCompatActivity() {
         super.onResume()
         setupRecyclerView()
         allFoodList.sortBy { it.name.toLowerCase(Locale.ROOT) }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        search.text?.clear()
     }
 
 }

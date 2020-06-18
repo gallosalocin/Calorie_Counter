@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.gallosalocin.calorie_counter.R
@@ -13,13 +14,16 @@ import kotlinx.android.synthetic.main.activity_details.*
 import kotlinx.android.synthetic.main.item_food.*
 
 class DetailsActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
 
         configToolbar()
-
         configSpinner()
+
+        isEditableFood()
+        configEnterButtonSoftKeyboard()
     }
 
     private fun configToolbar() {
@@ -37,25 +41,32 @@ class DetailsActivity : AppCompatActivity() {
             R.id.details_toolbar_save -> {
                 confirmInput()
             }
-            android.R.id.home -> onBackPressed()
+            android.R.id.home -> {
+                onBackPressed()
+                finish()
+            }
         }
         return true
     }
 
-    private fun saveCreatedFood() {
-        SearchActivity.allFoodList.add(
-            Food(
-                details_name.editText?.text.toString(),
-                spinner_category.selectedItem.toString(),
-                spinner_category.tag as Int,
-                "",
-                details_calorie.editText?.text.toString().toInt(),
-                details_weight.editText?.text.toString().toInt(),
-                details_fat.editText?.text.toString().toFloat(),
-                details_carb.editText?.text.toString().toFloat(),
-                details_prot.editText?.text.toString().toFloat()
-            )
-        )
+    private fun isEditableFood() {
+        if (SearchActivity.isEditableFood) {
+            onGetExtras()
+            SearchActivity.isEditableFood = false
+        }
+    }
+
+    private fun onGetExtras() {
+        val food = intent.getSerializableExtra(SearchActivity.EXTRA_FOOD) as Food
+
+        et_details_name.setText(food.name)
+//        spinner_category.onItemSelectedListener(food.category)
+        et_details_calorie.setText(food.calorie.toString())
+        et_details_weight.setText(food.weight.toString())
+        et_details_fat.setText(food.fat.toString())
+        et_details_carb.setText(food.carb.toString())
+        et_details_prot.setText(food.prot.toString())
+        details_note.setText(food.note)
     }
 
     private fun configSpinner() {
@@ -84,6 +95,22 @@ class DetailsActivity : AppCompatActivity() {
         }
     }
 
+    private fun saveCreatedFood() {
+        SearchActivity.allFoodList.add(
+            Food(
+                et_details_name.text.toString(),
+                spinner_category.selectedItem.toString(),
+                spinner_category.tag as Int,
+                details_note.text.toString(),
+                et_details_calorie.text.toString().toInt(),
+                et_details_weight.text.toString().toInt(),
+                et_details_fat.text.toString().toFloat(),
+                et_details_carb.text.toString().toFloat(),
+                et_details_prot.text.toString().toFloat()
+            )
+        )
+    }
+
     private fun confirmInput() {
         if (!validateName() || !validateCategory() || !validateCalorie() || !validateFat() || !validateCarb() || !validateProt() || !validateWeight()) {
             return
@@ -93,8 +120,22 @@ class DetailsActivity : AppCompatActivity() {
         Toast.makeText(this, getString(R.string.food_saved), Toast.LENGTH_SHORT).show()
     }
 
+    // Press enter to save
+    private fun configEnterButtonSoftKeyboard() {
+        et_details_weight.setOnEditorActionListener { _, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                confirmInput()
+                return@setOnEditorActionListener true
+            }
+            return@setOnEditorActionListener false
+        }
+
+    }
+
+    // Validate Input Methods
+
     private fun validateName() : Boolean {
-        val name = details_name.editText?.text.toString().trim()
+        val name = et_details_name.text.toString().trim()
 
         return if (name.isEmpty()) {
             details_name.error = getString(R.string.error_add_value)
@@ -119,7 +160,7 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private fun validateCalorie() : Boolean {
-        val calorie = details_calorie.editText?.text.toString().trim()
+        val calorie = et_details_calorie.text.toString().trim()
 
         return if (calorie.isEmpty()) {
             details_calorie.error = getString(R.string.error_add_value)
@@ -131,7 +172,7 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private fun validateFat() : Boolean {
-        val fat = details_fat.editText?.text.toString().trim()
+        val fat = et_details_fat.text.toString().trim()
 
         return if (fat.isEmpty()) {
             details_fat.error = getString(R.string.error_add_value)
@@ -143,7 +184,7 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private fun validateCarb() : Boolean {
-        val carb = details_carb.editText?.text.toString().trim()
+        val carb = et_details_carb.text.toString().trim()
 
         return if (carb.isEmpty()) {
             details_carb.error = getString(R.string.error_add_value)
@@ -155,7 +196,7 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private fun validateProt() : Boolean {
-        val prot = details_prot.editText?.text.toString().trim()
+        val prot = et_details_prot.text.toString().trim()
 
         return if (prot.isEmpty()) {
             details_prot.error = getString(R.string.error_add_value)
@@ -167,7 +208,7 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private fun validateWeight() : Boolean {
-        val weight = details_weight.editText?.text.toString().trim()
+        val weight = et_details_weight.text.toString().trim()
 
         return if (weight.isEmpty()) {
             details_weight.error = getString(R.string.error_add_value)
@@ -176,5 +217,10 @@ class DetailsActivity : AppCompatActivity() {
             details_weight.error = null
             true
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        finish()
     }
 }

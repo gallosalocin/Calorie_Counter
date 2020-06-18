@@ -12,7 +12,27 @@ import kotlinx.android.synthetic.main.item_food.view.*
 
 class FoodAdapter : RecyclerView.Adapter<FoodAdapter.FoodViewHolder>() {
 
-    inner class FoodViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    private lateinit var listener: OnItemClickListener
+
+
+    inner class FoodViewHolder(itemView: View, var listener: OnItemClickListener) : RecyclerView.ViewHolder(itemView), View.OnClickListener,
+        View.OnLongClickListener {
+
+        init {
+            itemView.setOnClickListener(this)
+            itemView.setOnLongClickListener(this)
+        }
+
+        override fun onClick(view: View?) {
+            listener.setOnClickListener(adapterPosition)
+        }
+
+        override fun onLongClick(view: View?): Boolean {
+            listener.setOnLongClickListener(adapterPosition)
+            return true
+        }
+    }
+
 
     private val differCallback = object : DiffUtil.ItemCallback<Food>() {
         override fun areItemsTheSame(oldItem: Food, newItem: Food): Boolean {
@@ -26,14 +46,15 @@ class FoodAdapter : RecyclerView.Adapter<FoodAdapter.FoodViewHolder>() {
 
     val differ = AsyncListDiffer(this, differCallback)
 
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodViewHolder {
         return FoodViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_food, parent, false)
-        )
+            LayoutInflater.from(parent.context).inflate(R.layout.item_food, parent, false), listener)
     }
 
     override fun onBindViewHolder(holder: FoodViewHolder, position: Int) {
-            val food = differ.currentList[position]
+        val food = differ.currentList[position]
         holder.itemView.apply {
             cv_food.setBackgroundColor(food.color)
             food_name.text = food.name
@@ -57,9 +78,13 @@ class FoodAdapter : RecyclerView.Adapter<FoodAdapter.FoodViewHolder>() {
         this.differ.submitList(filteredNames)
     }
 
-    private var onItemClickListener: ((Food) -> Unit)? = null
-
-    fun setOnItemClickListener(listener: (Food) -> Unit) {
-        onItemClickListener = listener
+    interface OnItemClickListener{
+        fun setOnClickListener(position: Int)
+        fun setOnLongClickListener (position: Int)
     }
+
+    fun setOnItemClickListener (listener: OnItemClickListener){
+        this.listener = listener
+    }
+
 }
