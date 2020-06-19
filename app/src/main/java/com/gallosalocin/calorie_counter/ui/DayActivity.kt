@@ -9,6 +9,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.gallosalocin.calorie_counter.R
 import kotlinx.android.synthetic.main.activity_day.*
+import kotlinx.android.synthetic.main.activity_day.meal_toolbar
+import kotlinx.android.synthetic.main.activity_main.*
 
 class DayActivity : AppCompatActivity() {
 

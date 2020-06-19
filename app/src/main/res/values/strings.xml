@@ -89,4 +89,7 @@
     <string name="change_value_title">Changer le poids de :</string>
     <string name="change_weight">Changer le poids</string>
     <string name="weight_replace">Poids remplacé</string>
+    <string name="Successfully_remove_food">Aliment retiré : %1$s</string>
+    <string name="Successfully_add_food">Aliment ajouté : %1$s</string>
+    <string name="undo_snackbar">Annuler</string>
 </resources>

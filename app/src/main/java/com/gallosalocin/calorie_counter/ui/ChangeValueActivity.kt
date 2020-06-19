@@ -1,20 +1,22 @@
 package com.gallosalocin.calorie_counter.ui
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.gallosalocin.calorie_counter.R
 import com.gallosalocin.calorie_counter.models.Food
-import kotlinx.android.synthetic.main.activity_bmr.*
+import com.gallosalocin.calorie_counter.viewmodel.FoodViewModel
 import kotlinx.android.synthetic.main.activity_change_value.*
 import kotlinx.android.synthetic.main.activity_details.*
 
 class ChangeValueActivity : AppCompatActivity() {
+
+    private lateinit var foodViewModel: FoodViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_change_value)
@@ -23,6 +25,8 @@ class ChangeValueActivity : AppCompatActivity() {
         onGetExtras()
         configEnterButtonSoftKeyboard()
         isEditableFood()
+
+        foodViewModel = ViewModelProvider(this).get(FoodViewModel::class.java)
 
     }
 
@@ -86,7 +90,7 @@ class ChangeValueActivity : AppCompatActivity() {
 
     private fun saveCreatedFood() {
 
-        SearchActivity.allFoodList.add(
+        foodViewModel.insertFood(
             Food(
                 et_details_name.text.toString(),
                 spinner_category.selectedItem.toString(),

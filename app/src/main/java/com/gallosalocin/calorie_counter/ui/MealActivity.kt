@@ -57,7 +57,6 @@ class MealActivity : AppCompatActivity() {
         fab_meal_food_add.setOnClickListener {
             Intent(this, SearchActivity::class.java).also {
                 startActivity(it)
-                finish()
             }
         }
     }

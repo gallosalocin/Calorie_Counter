@@ -23,31 +23,37 @@
             <item
                 android:id="@+id/search_filter_prot"
                 android:title="@string/proteins"
+                android:visible="false"
                 app:showAsAction="never" />
 
             <item
                 android:id="@+id/search_filter_carb"
                 android:title="@string/carbohydrate"
+                android:visible="false"
                 app:showAsAction="never" />
 
             <item
                 android:id="@+id/search_filter_veggies"
                 android:title="@string/veggies"
+                android:visible="false"
                 app:showAsAction="never" />
 
             <item
                 android:id="@+id/search_filter_fruits"
                 android:title="@string/fruits"
+                android:visible="false"
                 app:showAsAction="never" />
 
             <item
                 android:id="@+id/search_filter_healthy_fats"
                 android:title="@string/healthy_fats"
+                android:visible="false"
                 app:showAsAction="never" />
 
             <item
                 android:id="@+id/search_filter_oils"
                 android:title="@string/oils"
+                android:visible="false"
                 app:showAsAction="never" />
         </menu>
     </item>
