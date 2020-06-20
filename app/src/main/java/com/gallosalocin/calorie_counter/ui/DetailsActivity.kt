@@ -5,23 +5,22 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.widget.*
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.get
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.RecyclerView
 import com.gallosalocin.calorie_counter.R
-import com.gallosalocin.calorie_counter.adapters.FoodAdapter
 import com.gallosalocin.calorie_counter.models.Food
 import com.gallosalocin.calorie_counter.utils.Category
 import com.gallosalocin.calorie_counter.viewmodel.FoodViewModel
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_details.*
-import kotlinx.android.synthetic.main.activity_search.*
 
 class DetailsActivity : AppCompatActivity() {
 
+    private val categoryList: MutableList<Category> = ArrayList()
     private lateinit var foodViewModel: FoodViewModel
     private lateinit var food: Food
 
@@ -33,6 +32,7 @@ class DetailsActivity : AppCompatActivity() {
         configSpinner()
 
         isEditableFood()
+        isInvisible()
         configEnterButtonSoftKeyboard()
 
         foodViewModel = ViewModelProvider(this).get(FoodViewModel::class.java)
@@ -71,9 +71,16 @@ class DetailsActivity : AppCompatActivity() {
 
     private fun onGetExtras() {
         food = intent.getSerializableExtra(SearchActivity.EXTRA_FOOD) as Food
+        var position = 0
+
+        for (item in categoryList) {
+            if (item.name == food.category) {
+                position = categoryList.indexOf(item)
+            }
+        }
 
         et_details_name.setText(food.name)
-//        spinner_category.setSelection(food.category.toInt())
+        spinner_category.setSelection(position)
         et_details_calorie.setText(food.calorie.toString())
         et_details_weight.setText(food.weight.toString())
         et_details_fat.setText(food.fat.toString())
@@ -108,8 +115,6 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private fun configSpinner() {
-        val categoryList: MutableList<Category> = ArrayList()
-
         categoryList.add(Category(getString(R.string.choose_category), 0xFFFFFFFF.toInt()))
         categoryList.add(Category("Protéines", 0xFFE57373.toInt()))
         categoryList.add(Category("Glucides", 0xFFFFF176.toInt()))
@@ -128,8 +133,34 @@ class DetailsActivity : AppCompatActivity() {
 
             override fun onItemSelected(adapterView: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val category = adapterView?.getItemAtPosition(position) as Category
-                spinner_category.tag = category.categoryColor
+                spinner_category.tag = category.color
             }
+        }
+    }
+
+    // If click on item, make invisible some views
+    private fun View.toggleVisibility() {
+        visibility = if (visibility == View.VISIBLE) {
+            View.INVISIBLE
+        } else {
+            View.VISIBLE
+        }
+    }
+
+    private fun isInvisible() {
+        if (SearchActivity.isInvisible){
+            spinner_category.toggleVisibility()
+            tv_nutrition_facts_text.toggleVisibility()
+            et_details_calorie.toggleVisibility()
+            details_calorie.toggleVisibility()
+            et_details_fat.toggleVisibility()
+            details_fat.toggleVisibility()
+            et_details_carb.toggleVisibility()
+            details_carb.toggleVisibility()
+            et_details_prot.toggleVisibility()
+            details_prot.toggleVisibility()
+            details_note.toggleVisibility()
+            SearchActivity.isInvisible = false
         }
     }
 
@@ -146,7 +177,6 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     // Validate Input Methods
-
     private fun confirmInput() {
         if (!validateName() || !validateCategory() || !validateCalorie() || !validateFat() || !validateCarb() || !validateProt() || !validateWeight()) {
             return
@@ -155,7 +185,7 @@ class DetailsActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun validateName() : Boolean {
+    private fun validateName(): Boolean {
         val name = et_details_name.text.toString().trim()
 
         return if (name.isEmpty()) {
@@ -167,8 +197,8 @@ class DetailsActivity : AppCompatActivity() {
         }
     }
 
-    private fun validateCategory() : Boolean {
-        val category  = spinner_category.selectedItem.toString().trim()
+    private fun validateCategory(): Boolean {
+        val category = spinner_category.selectedItem.toString().trim()
         val errorText: TextView = spinner_category.selectedView as TextView
 
         return if (category == getString(R.string.choose_category)) {
@@ -180,7 +210,7 @@ class DetailsActivity : AppCompatActivity() {
         }
     }
 
-    private fun validateCalorie() : Boolean {
+    private fun validateCalorie(): Boolean {
         val calorie = et_details_calorie.text.toString().trim()
 
         return if (calorie.isEmpty()) {
@@ -192,7 +222,7 @@ class DetailsActivity : AppCompatActivity() {
         }
     }
 
-    private fun validateFat() : Boolean {
+    private fun validateFat(): Boolean {
         val fat = et_details_fat.text.toString().trim()
 
         return if (fat.isEmpty()) {
@@ -204,7 +234,7 @@ class DetailsActivity : AppCompatActivity() {
         }
     }
 
-    private fun validateCarb() : Boolean {
+    private fun validateCarb(): Boolean {
         val carb = et_details_carb.text.toString().trim()
 
         return if (carb.isEmpty()) {
@@ -216,7 +246,7 @@ class DetailsActivity : AppCompatActivity() {
         }
     }
 
-    private fun validateProt() : Boolean {
+    private fun validateProt(): Boolean {
         val prot = et_details_prot.text.toString().trim()
 
         return if (prot.isEmpty()) {
@@ -228,7 +258,7 @@ class DetailsActivity : AppCompatActivity() {
         }
     }
 
-    private fun validateWeight() : Boolean {
+    private fun validateWeight(): Boolean {
         val weight = et_details_weight.text.toString().trim()
 
         return if (weight.isEmpty()) {

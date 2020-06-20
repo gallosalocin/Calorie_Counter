@@ -44,10 +44,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
-        app:layout_constraintBottom_toTopOf="@id/tv_nutrition_facts_text"
+        app:layout_constraintBottom_toTopOf="@id/details_weight"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/details_name" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/details_weight"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="10dp"
+        app:errorEnabled="true"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spinner_category"
+        app:layout_constraintBottom_toTopOf="@id/tv_nutrition_facts_text">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_details_weight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/weight_gram_symbol"
+            android:inputType="number"
+            android:imeOptions="actionDone"
+            android:selectAllOnFocus="true" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_nutrition_facts_text"
@@ -59,7 +82,7 @@
         app:layout_constraintBottom_toTopOf="@id/details_calorie"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/spinner_category" />
+        app:layout_constraintTop_toBottomOf="@id/details_weight" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/details_calorie"
@@ -144,28 +167,6 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/details_weight"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="5dp"
-        app:errorEnabled="true"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/details_prot">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_details_weight"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/weight_gram_symbol"
-            android:inputType="number"
-            android:imeOptions="actionDone"
-            android:selectAllOnFocus="true" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/details_note"
         android:layout_width="0dp"
@@ -178,6 +179,6 @@
         android:scrollbars="vertical"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/details_weight" />
+        app:layout_constraintTop_toBottomOf="@id/details_prot" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

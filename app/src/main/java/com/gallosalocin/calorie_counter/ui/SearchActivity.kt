@@ -1,8 +1,7 @@
 package com.gallosalocin.calorie_counter.ui
 
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.Canvas
+import android.graphics.*
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -31,6 +30,7 @@ class SearchActivity : AppCompatActivity() {
 
     companion object {
         var isEditableFood = false
+        var isInvisible = false
         const val EXTRA_FOOD = "food extras"
     }
 
@@ -70,11 +70,19 @@ class SearchActivity : AppCompatActivity() {
                     food = foodAdapter.differ.currentList[position]
                     it.putExtra(EXTRA_FOOD, food)
                     isEditableFood = true
+                    isInvisible = true
                     startActivity(it)
                 }
+                Toast.makeText(applicationContext, foodAdapter.differ.currentList[position].name, Toast.LENGTH_SHORT).show()
             }
 
             override fun setOnLongClickListener(position: Int) {
+                Intent(this@SearchActivity, DetailsActivity::class.java).also {
+                    food = foodAdapter.differ.currentList[position]
+                    it.putExtra(EXTRA_FOOD, food)
+                    isEditableFood = true
+                    startActivity(it)
+                }
                 Toast.makeText(applicationContext, foodAdapter.differ.currentList[position].name, Toast.LENGTH_SHORT).show()
             }
         })
@@ -96,11 +104,7 @@ class SearchActivity : AppCompatActivity() {
                 if (direction == ItemTouchHelper.RIGHT) {
                     foodViewModel.deleteFood(food)
                     et_search.text?.clear()
-                    Snackbar.make(
-                        rv_search,
-                        (getString(R.string.Successfully_remove_food, food.name)),
-                        Snackbar.LENGTH_LONG
-                    ).apply {
+                    Snackbar.make(rv_search, (getString(R.string.Successfully_remove_food, food.name)), Snackbar.LENGTH_LONG).apply {
                         setAction(getString(R.string.undo_snackbar)) {
                             foodViewModel.insertFood(food)
                         }
@@ -118,7 +122,32 @@ class SearchActivity : AppCompatActivity() {
                     finish()
                 }
             }
+
+//            override fun onChildDraw(canvas: Canvas, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean) {
+//                val icon: Bitmap
+//                if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
+//
+//                    val itemView = viewHolder.itemView
+//                    val height = itemView.bottom.toFloat() - itemView.top.toFloat()
+//                    val width = height / 3
+//                    val paint = Paint()
+//
+//                    if (dX > 0) {
+//                        paint.color = Color.parseColor("#2F2FD3")
+//                        val background = RectF(itemView.left.toFloat(), itemView.top.toFloat(), dX, itemView.bottom.toFloat())
+//                        canvas.drawRect(background, paint)
+//                        icon = BitmapFactory.decodeResource(resources, R.drawable.ic_delete)
+//                        val iconDest = RectF(itemView.left.toFloat() + width, itemView.top.toFloat() + width, itemView.left.toFloat() + 2 * width, itemView.bottom.toFloat() - width)
+//                        canvas.drawBitmap(icon, null, iconDest, paint)
+//                    }
+//                }
+//
+//
+//
+//                super.onChildDraw(canvas, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+//            }
         }
+
         ItemTouchHelper(itemTouchHelperCallback).apply {
             attachToRecyclerView(rv_search)
         }

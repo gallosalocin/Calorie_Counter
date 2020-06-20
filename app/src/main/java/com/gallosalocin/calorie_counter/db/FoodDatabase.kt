@@ -28,13 +28,13 @@ abstract class FoodDatabase : RoomDatabase() {
 
                     foodDao.deleteAll()
 
-                    foodDao.insertFood(Food("Blanc de poulet", "Protéines", 0xFFE57373.toInt(), "17 minutes", 162, 150, 2F, 0.7F, 35.3F))
-                    foodDao.insertFood(Food("Jambon", "Protéines", 0xFFE57373.toInt(), "", 162, 150, 2F, 0.7F, 35.3F))
-                    foodDao.insertFood(Food("Coco Plats", "Légumes", 0xFF48B34D.toInt(), "", 75, 250, 0.5F, 9.1F, 4.6F))
-                    foodDao.insertFood(Food("Huile d'Olive", "Huiles", 0xFFC1A36E.toInt(), "", 90, 10, 10F, 0F, 0F))
-                    foodDao.insertFood(Food("Feta", "Graisses saines", 0xFF4DD0E1.toInt(), "", 34, 100, 0.4F, 7.7F, 0.5F))
-                    foodDao.insertFood(Food("Pomme", "Fruits", 0xFF9575CD.toInt(), "", 34, 100, 0.4F, 7.7F, 0.5F))
-                    foodDao.insertFood(Food("Glace", "Glucides", 0xFFFFF176.toInt(), "", 34, 100, 0.4F, 7.7F, 0.5F))
+                    foodDao.insertFood(Food("Blanc de poulet", "Protéines", 0xFFE57373.toInt(), "17 minutes", 108, 100, 1.34F, 0.45F, 23.5F))
+                    foodDao.insertFood(Food("Jambon", "Protéines", 0xFFE57373.toInt(), "", 108, 100, 3F, 1.2F, 19F))
+                    foodDao.insertFood(Food("Coco Plats", "Légumes", 0xFF48B34D.toInt(), "", 30, 100, 0.2F, 3.6F, 1.9F))
+                    foodDao.insertFood(Food("Huile d'Olive", "Huiles", 0xFFC1A36E.toInt(), "", 900, 100, 100F, 0F, 0F))
+                    foodDao.insertFood(Food("Feta", "Graisses saines", 0xFF4DD0E1.toInt(), "", 257, 100, 21F, 0.7F, 17F))
+                    foodDao.insertFood(Food("Pomme", "Fruits", 0xFF9575CD.toInt(), "", 52, 100, 0.2F, 14F, 0.3F))
+                    foodDao.insertFood(Food("Glace Vanille", "Glucides", 0xFFFFF176.toInt(), "", 190, 100, 8.7F, 26F, 2.2F))
                 }
             }
         }
