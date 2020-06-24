@@ -3,14 +3,12 @@ package com.gallosalocin.calorie_counter.ui
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.Color
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.gallosalocin.calorie_counter.R
 import kotlinx.android.synthetic.main.activity_day.*
 import kotlinx.android.synthetic.main.activity_day.meal_toolbar
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_meal.*
 
 class DayActivity : AppCompatActivity() {
 
@@ -32,6 +30,11 @@ class DayActivity : AppCompatActivity() {
         toolbarNameDay()
         loadData()
         mealChoice()
+
+//        breakfast_cal_current.text = overall_meal_cal_current.toString()
+//        breakfast_fat_current.text = overall_meal_fat_current.toString()
+//        breakfast_carb_current.text = overall_meal_carb_current.toString()
+//        breakfast_prot_current.text = overall_meal_prot_current.toString()
 
     }
 
@@ -56,10 +59,10 @@ class DayActivity : AppCompatActivity() {
         val savedCarbResult = sharedPref.getInt("carbResult", 0)
         val savedProtResult = sharedPref.getInt("protResult", 0)
 
-        overall_cal_total.text = savedDailyCalorie.toInt().toString()
-        overall_fat_total.text = savedFatResult.toString()
-        overall_carb_total.text = savedCarbResult.toString()
-        overall_prot_total.text = savedProtResult.toString()
+        overall_day_cal_total.text = savedDailyCalorie.toInt().toString()
+        overall_day_fat_total.text = savedFatResult.toString()
+        overall_day_carb_total.text = savedCarbResult.toString()
+        overall_day_prot_total.text = savedProtResult.toString()
     }
 
     private fun mealChoice() {

@@ -4,21 +4,30 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.gallosalocin.calorie_counter.R
 import com.gallosalocin.calorie_counter.adapters.FoodAdapter
 import com.gallosalocin.calorie_counter.models.Food
+import com.gallosalocin.calorie_counter.viewmodel.FoodViewModel
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_day.meal_toolbar
 import kotlinx.android.synthetic.main.activity_meal.*
 
 class MealActivity : AppCompatActivity() {
 
     private lateinit var foodAdapter: FoodAdapter
+    private lateinit var foodViewModel: FoodViewModel
+    private lateinit var allFoodByDayAndMealList: List<Food>
+    private lateinit var food: Food
 
-    companion object{
-         var foodMealsList: MutableList<Food> = ArrayList()
+    companion object {
+        var isEditableFood = false
+        var isInvisible = false
+        const val EXTRA_FOOD = "food extras"
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,23 +37,9 @@ class MealActivity : AppCompatActivity() {
         toolbarMealName()
         setupFabAddFood()
 
-//        foodMealsList = ArrayList()
-
-
-//        chooseCorrectList()
-        if (MainActivity.dayTag == 1 && DayActivity.mealTag == 1) {
-            foodMealsList = ArrayList()
-            foodMealsList.add(Food("Carottes", "Legume", 0xFF48B34D.toInt(),"", 34, 100, 0.4F, 7.7F, 0.5F))
-        }
-        if (MainActivity.dayTag == 2 && DayActivity.mealTag == 1) {
-            foodMealsList.add(Food("Blanc de poulet", "Proteine", 0xFFE57373.toInt(),"", 162, 150, 2F, 0.7F, 35.3F))
-        }
-        if (MainActivity.dayTag != 1 && DayActivity.mealTag != 1 || MainActivity.dayTag != 2 && DayActivity.mealTag != 1){
-            foodMealsList.add(Food("Glace", getString(R.string.carbohydrate), 0xFFFFF176.toInt(), "", 34, 100, 0.4F, 7.7F, 0.5F))
-        }
-
-
         setupRecycleView()
+        setupViewModel()
+        configItemTouchHelper()
 
     }
 
@@ -53,7 +48,7 @@ class MealActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
 
-    private fun setupFabAddFood(){
+    private fun setupFabAddFood() {
         fab_meal_food_add.setOnClickListener {
             Intent(this, SearchActivity::class.java).also {
                 startActivity(it)
@@ -62,24 +57,76 @@ class MealActivity : AppCompatActivity() {
     }
 
     private fun setupRecycleView() {
+        allFoodByDayAndMealList = ArrayList()
+
         foodAdapter = FoodAdapter()
         rv_meal.apply {
             adapter = foodAdapter
             layoutManager = LinearLayoutManager(this@MealActivity)
-            foodAdapter.submitList(foodMealsList)
         }
+    }
 
+    private fun setupViewModel() {
+        foodViewModel = ViewModelProvider(this).get(FoodViewModel::class.java)
+        foodViewModel.allFoodsByDayAndMeal.observe(this, androidx.lifecycle.Observer { foods ->
+            allFoodByDayAndMealList = foods
+            foodAdapter.differ.submitList(allFoodByDayAndMealList)
+
+            overall_meal_cal_current.text = allFoodByDayAndMealList.sumBy { it.calorie }.toString()
+            overall_meal_fat_current.text = String.format("%.1f", allFoodByDayAndMealList.sumByDouble { it.fat.toDouble() })
+            overall_meal_carb_current.text = String.format("%.1f", allFoodByDayAndMealList.sumByDouble { it.carb.toDouble() })
+            overall_meal_prot_current.text = String.format("%.1f", allFoodByDayAndMealList.sumByDouble { it.prot.toDouble() })
+        })
+        onItemClickListener()
+    }
+
+    private fun onItemClickListener() {
         foodAdapter.setOnItemClickListener(object : FoodAdapter.OnItemClickListener {
 
             override fun setOnClickListener(position: Int) {
-                Toast.makeText(applicationContext, foodMealsList[position].name, Toast.LENGTH_SHORT).show()
+                Intent(this@MealActivity, DetailsActivity::class.java).also {
+                    food = foodAdapter.differ.currentList[position]
+                    it.putExtra(EXTRA_FOOD, food)
+                    isEditableFood = true
+                    isInvisible = true
+                    startActivity(it)
+                }
+                Toast.makeText(applicationContext, foodAdapter.differ.currentList[position].name, Toast.LENGTH_SHORT).show()
             }
 
             override fun setOnLongClickListener(position: Int) {
-                Toast.makeText(applicationContext, foodMealsList[position].name, Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, foodAdapter.differ.currentList[position].name, Toast.LENGTH_SHORT).show()
             }
         })
+    }
 
+    private fun configItemTouchHelper() {
+        val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(
+            ItemTouchHelper.UP or ItemTouchHelper.DOWN,
+            ItemTouchHelper.RIGHT
+        ) {
+            override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.adapterPosition
+                food = foodAdapter.differ.currentList[position]
+
+                if (direction == ItemTouchHelper.RIGHT) {
+                    foodViewModel.deleteFood(food)
+                    Snackbar.make(rv_meal, (getString(R.string.Successfully_remove_food, food.name)), Snackbar.LENGTH_LONG).apply {
+                        setAction(getString(R.string.undo_snackbar)) {
+                            foodViewModel.insertFood(food)
+                        }
+                        show()
+                    }
+                }
+            }
+        }
+        ItemTouchHelper(itemTouchHelperCallback).apply {
+            attachToRecyclerView(rv_meal)
+        }
     }
 
     private fun toolbarMealName() {
@@ -91,42 +138,8 @@ class MealActivity : AppCompatActivity() {
         }
     }
 
-    private fun chooseCorrectList(){
-        if (MainActivity.dayTag == 1 && DayActivity.mealTag == 1 ||
-            MainActivity.dayTag == 1 && DayActivity.mealTag == 2 ||
-            MainActivity.dayTag == 1 && DayActivity.mealTag == 3 ||
-            MainActivity.dayTag == 1 && DayActivity.mealTag == 4 ||
-            MainActivity.dayTag == 2 && DayActivity.mealTag == 1 ||
-            MainActivity.dayTag == 2 && DayActivity.mealTag == 2 ||
-            MainActivity.dayTag == 2 && DayActivity.mealTag == 3 ||
-            MainActivity.dayTag == 2 && DayActivity.mealTag == 4 ||
-            MainActivity.dayTag == 3 && DayActivity.mealTag == 1 ||
-            MainActivity.dayTag == 3 && DayActivity.mealTag == 2 ||
-            MainActivity.dayTag == 3 && DayActivity.mealTag == 3 ||
-            MainActivity.dayTag == 3 && DayActivity.mealTag == 4 ||
-            MainActivity.dayTag == 4 && DayActivity.mealTag == 1 ||
-            MainActivity.dayTag == 4 && DayActivity.mealTag == 2 ||
-            MainActivity.dayTag == 4 && DayActivity.mealTag == 3 ||
-            MainActivity.dayTag == 4 && DayActivity.mealTag == 4 ||
-            MainActivity.dayTag == 5 && DayActivity.mealTag == 1 ||
-            MainActivity.dayTag == 5 && DayActivity.mealTag == 2 ||
-            MainActivity.dayTag == 5 && DayActivity.mealTag == 3 ||
-            MainActivity.dayTag == 5 && DayActivity.mealTag == 4 ||
-            MainActivity.dayTag == 6 && DayActivity.mealTag == 1 ||
-            MainActivity.dayTag == 6 && DayActivity.mealTag == 2 ||
-            MainActivity.dayTag == 6 && DayActivity.mealTag == 3 ||
-            MainActivity.dayTag == 6 && DayActivity.mealTag == 4 ||
-            MainActivity.dayTag == 7 && DayActivity.mealTag == 1 ||
-            MainActivity.dayTag == 7 && DayActivity.mealTag == 2 ||
-            MainActivity.dayTag == 7 && DayActivity.mealTag == 3 ||
-            MainActivity.dayTag == 7 && DayActivity.mealTag == 4 )
-            setupRecycleView()
-    }
-
-    private fun addFood() {
-        foodMealsList.add(Food("Blanc de poulet", "Proteine", 0xFFE57373.toInt(),"", 162, 150, 2F, 0.7F, 35.3F))
-        foodMealsList.add(Food("Coco Plats", "Legume", 0xFF48B34D.toInt(),"", 75, 250, 0.5F, 9.1F, 4.6F))
-        foodMealsList.add(Food("Carottes", "Legume", 0xFF48B34D.toInt(),"", 34, 100, 0.4F, 7.7F, 0.5F))
-        foodMealsList.add(Food("Huile d'Olive", "Huile", 0xFFC1A36E.toInt(),"", 90, 10, 10F, 0F, 0F))
+    override fun onPause() {
+        super.onPause()
+        finish()
     }
 }

@@ -1,10 +1,10 @@
 package com.gallosalocin.calorie_counter.ui
 
 import android.content.Intent
-import android.graphics.*
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -90,7 +90,7 @@ class SearchActivity : AppCompatActivity() {
 
     private fun configItemTouchHelper() {
         val itemTouchHelperCallback = object : ItemTouchHelper.SimpleCallback(
-            ItemTouchHelper.UP or ItemTouchHelper.DOWN,
+            0,
             ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
         ) {
             override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
@@ -112,10 +112,8 @@ class SearchActivity : AppCompatActivity() {
                     }
                 } else {
                     Intent(this@SearchActivity, MealActivity::class.java).also {
-//                        val food: Food = allFoodList[position]
-//                   if (MainActivity.dayTag == 1 && DayActivity.mealTag == 1){
-                        MealActivity.foodMealsList.add(food)
-//                   }
+                        food.dayMealId = MainActivity.dayTag.toString() + DayActivity.mealTag.toString()
+                        foodViewModel.duplicateFood(food.dayMealId, food.id)
                         startActivity(it)
                         Snackbar.make(rv_search, (getString(R.string.Successfully_add_food, food.name)), Snackbar.LENGTH_LONG).show()
                     }

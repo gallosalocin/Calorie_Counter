@@ -5,7 +5,6 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.gallosalocin.calorie_counter.R
 import com.gallosalocin.calorie_counter.models.Food
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -28,13 +27,17 @@ abstract class FoodDatabase : RoomDatabase() {
 
                     foodDao.deleteAll()
 
-                    foodDao.insertFood(Food("Blanc de poulet", "Protéines", 0xFFE57373.toInt(), "17 minutes", 108, 100, 1.34F, 0.45F, 23.5F))
-                    foodDao.insertFood(Food("Jambon", "Protéines", 0xFFE57373.toInt(), "", 108, 100, 3F, 1.2F, 19F))
-                    foodDao.insertFood(Food("Coco Plats", "Légumes", 0xFF48B34D.toInt(), "", 30, 100, 0.2F, 3.6F, 1.9F))
-                    foodDao.insertFood(Food("Huile d'Olive", "Huiles", 0xFFC1A36E.toInt(), "", 900, 100, 100F, 0F, 0F))
-                    foodDao.insertFood(Food("Feta", "Graisses saines", 0xFF4DD0E1.toInt(), "", 257, 100, 21F, 0.7F, 17F))
-                    foodDao.insertFood(Food("Pomme", "Fruits", 0xFF9575CD.toInt(), "", 52, 100, 0.2F, 14F, 0.3F))
-                    foodDao.insertFood(Food("Glace Vanille", "Glucides", 0xFFFFF176.toInt(), "", 190, 100, 8.7F, 26F, 2.2F))
+                    foodDao.insertFood(Food("0","Blanc de poulet", "Protéines", 0xFFE57373.toInt(), "", 108, 100, 1.34F, 0.45F, 23.5F))
+                    foodDao.insertFood(Food("0","Jambon", "Protéines", 0xFFE57373.toInt(), "", 108, 100, 3F, 1.2F, 19F))
+                    foodDao.insertFood(Food("0","Coco Plats", "Légumes", 0xFF48B34D.toInt(), "", 30, 100, 0.2F, 3.6F, 1.9F))
+                    foodDao.insertFood(Food("0","Huile d'Olive", "Huiles", 0xFFC1A36E.toInt(), "", 900, 100, 100F, 0F, 0F))
+                    foodDao.insertFood(Food("0","Feta", "Graisses saines", 0xFF4DD0E1.toInt(), "", 257, 100, 21F, 0.7F, 17F))
+                    foodDao.insertFood(Food("0","Pomme", "Fruits", 0xFF9575CD.toInt(), "", 52, 100, 0.2F, 14F, 0.3F))
+                    foodDao.insertFood(Food("0","Glace Vanille", "Glucides", 0xFFFFF176.toInt(), "", 190, 100, 8.7F, 26F, 2.2F))
+
+                    foodDao.insertFood(Food("11","Glace Vanille", "Glucides", 0xFFFFF176.toInt(), "", 190, 100, 8.7F, 26F, 2.2F))
+                    foodDao.insertFood(Food("11","Glace Vanille", "Glucides", 0xFFFFF176.toInt(), "", 190, 100, 8.7F, 26F, 2.2F))
+                    foodDao.insertFood(Food("11","Glace Vanille", "Glucides", 0xFFFFF176.toInt(), "", 190, 100, 8.7F, 26F, 2.2F))
                 }
             }
         }

@@ -53,7 +53,7 @@
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/overall_meal_cal_title"
+                android:id="@+id/overall_day_cal_title"
                 style="@style/TitleDayFontBold"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -61,42 +61,42 @@
                 android:gravity="center"
                 android:text="@string/calories"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/overall_meal_fat_title"
+                app:layout_constraintRight_toLeftOf="@id/overall_day_fat_title"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/overall_meal_fat_title"
+                android:id="@+id/overall_day_fat_title"
                 style="@style/TitleDayFontBold"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
                 android:gravity="center"
                 android:text="@string/fats"
-                app:layout_constraintLeft_toRightOf="@id/overall_meal_cal_title"
-                app:layout_constraintRight_toLeftOf="@id/overall_meal_carb_title"
+                app:layout_constraintLeft_toRightOf="@id/overall_day_cal_title"
+                app:layout_constraintRight_toLeftOf="@id/overall_day_carb_title"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/overall_meal_carb_title"
+                android:id="@+id/overall_day_carb_title"
                 style="@style/TitleDayFontBold"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
                 android:gravity="center"
                 android:text="@string/carbs"
-                app:layout_constraintLeft_toRightOf="@id/overall_meal_fat_title"
-                app:layout_constraintRight_toLeftOf="@id/overall_meal_prot_title"
+                app:layout_constraintLeft_toRightOf="@id/overall_day_fat_title"
+                app:layout_constraintRight_toLeftOf="@id/overall_day_prot_title"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/overall_meal_prot_title"
+                android:id="@+id/overall_day_prot_title"
                 style="@style/TitleDayFontBold"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
                 android:gravity="center"
                 android:text="@string/proteins"
-                app:layout_constraintLeft_toRightOf="@id/overall_meal_carb_title"
+                app:layout_constraintLeft_toRightOf="@id/overall_day_carb_title"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

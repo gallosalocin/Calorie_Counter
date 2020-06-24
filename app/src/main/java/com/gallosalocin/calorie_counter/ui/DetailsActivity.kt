@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.gallosalocin.calorie_counter.R
 import com.gallosalocin.calorie_counter.models.Food
@@ -65,12 +64,35 @@ class DetailsActivity : AppCompatActivity() {
 
     private fun isEditableFood() {
         if (SearchActivity.isEditableFood) {
-            onGetExtras()
+            onGetExtrasFromSearch()
+        }
+        if (MealActivity.isEditableFood) {
+            onGetExtrasFromMeal()
         }
     }
 
-    private fun onGetExtras() {
+    private fun onGetExtrasFromSearch() {
         food = intent.getSerializableExtra(SearchActivity.EXTRA_FOOD) as Food
+        var position = 0
+
+        for (item in categoryList) {
+            if (item.name == food.category) {
+                position = categoryList.indexOf(item)
+            }
+        }
+
+        et_details_name.setText(food.name)
+        spinner_category.setSelection(position)
+        et_details_calorie.setText(food.calorie.toString())
+        et_details_weight.setText(food.weight.toString())
+        et_details_fat.setText(food.fat.toString())
+        et_details_carb.setText(food.carb.toString())
+        et_details_prot.setText(food.prot.toString())
+        details_note.setText(food.note)
+    }
+
+    private fun onGetExtrasFromMeal() {
+        food = intent.getSerializableExtra(MealActivity.EXTRA_FOOD) as Food
         var position = 0
 
         for (item in categoryList) {
@@ -92,6 +114,7 @@ class DetailsActivity : AppCompatActivity() {
     private fun saveOrUpdateFood() {
 
         val saveOrUpdateFood = Food(
+            "0",
             et_details_name.text.toString(),
             spinner_category.selectedItem.toString(),
             spinner_category.tag as Int,
@@ -103,10 +126,12 @@ class DetailsActivity : AppCompatActivity() {
             et_details_prot.text.toString().toFloat()
         )
 
-        if (SearchActivity.isEditableFood) {
+        if (SearchActivity.isEditableFood || MealActivity.isEditableFood) {
             saveOrUpdateFood.id = food.id
+            saveOrUpdateFood.dayMealId = food.dayMealId
             foodViewModel.updateFood(saveOrUpdateFood)
             SearchActivity.isEditableFood = false
+            MealActivity.isEditableFood = false
             Toast.makeText(this, "Aliment actualisé", Toast.LENGTH_SHORT).show()
         } else {
             foodViewModel.insertFood(saveOrUpdateFood)
@@ -148,7 +173,7 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private fun isInvisible() {
-        if (SearchActivity.isInvisible){
+        if (SearchActivity.isInvisible || MealActivity.isInvisible) {
             spinner_category.toggleVisibility()
             tv_nutrition_facts_text.toggleVisibility()
             et_details_calorie.toggleVisibility()
@@ -161,6 +186,7 @@ class DetailsActivity : AppCompatActivity() {
             details_prot.toggleVisibility()
             details_note.toggleVisibility()
             SearchActivity.isInvisible = false
+            MealActivity.isInvisible = false
         }
     }
 
@@ -182,7 +208,7 @@ class DetailsActivity : AppCompatActivity() {
             return
         }
         saveOrUpdateFood()
-        finish()
+        onBackPressed()
     }
 
     private fun validateName(): Boolean {
