@@ -34,7 +34,4 @@ interface FoodDao {
     @Query("INSERT INTO food_table(day_meal_id, name, category, color, note, calorie, weight, fat, carb, prot) SELECT :dayMeal, name, category, color, note, calorie, weight, fat, carb, prot FROM food_table WHERE id = :id")
     suspend fun duplicateFood(dayMeal: String, id: Int?)
 
-//    @Query("SELECT SUM(calorie) FROM food_table WHERE day_meal_id = :dayMeal")
-//    suspend fun getSumValue(dayMeal: String)
-
 }

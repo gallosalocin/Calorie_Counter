@@ -45,8 +45,4 @@ class FoodViewModel(application: Application) : AndroidViewModel(application) {
     fun duplicateFood(dayMeal: String, id: Int?) = viewModelScope.launch(Dispatchers.IO) {
         repository.duplicateFood(dayMeal, id)
     }
-
-//    fun sumValue(dayMeal: String) = viewModelScope.launch(Dispatchers.IO) {
-//        repository.sumValue(dayMeal)
-//    }
 }

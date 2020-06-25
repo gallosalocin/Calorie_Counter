@@ -35,9 +35,6 @@ abstract class FoodDatabase : RoomDatabase() {
                     foodDao.insertFood(Food("0","Pomme", "Fruits", 0xFF9575CD.toInt(), "", 52, 100, 0.2F, 14F, 0.3F))
                     foodDao.insertFood(Food("0","Glace Vanille", "Glucides", 0xFFFFF176.toInt(), "", 190, 100, 8.7F, 26F, 2.2F))
 
-                    foodDao.insertFood(Food("11","Glace Vanille", "Glucides", 0xFFFFF176.toInt(), "", 190, 100, 8.7F, 26F, 2.2F))
-                    foodDao.insertFood(Food("11","Glace Vanille", "Glucides", 0xFFFFF176.toInt(), "", 190, 100, 8.7F, 26F, 2.2F))
-                    foodDao.insertFood(Food("11","Glace Vanille", "Glucides", 0xFFFFF176.toInt(), "", 190, 100, 8.7F, 26F, 2.2F))
                 }
             }
         }

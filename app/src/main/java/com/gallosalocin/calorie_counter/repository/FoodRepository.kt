@@ -23,5 +23,4 @@ class FoodRepository(private val foodDao: FoodDao) {
 
     suspend fun duplicateFood(dayMeal: String, id: Int?) = foodDao.duplicateFood(dayMeal, id)
 
-//    suspend fun sumValue(dayMeal: String) = foodDao.getSumValue(dayMeal)
 }

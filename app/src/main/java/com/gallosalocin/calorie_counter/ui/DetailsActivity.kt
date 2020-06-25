@@ -129,6 +129,10 @@ class DetailsActivity : AppCompatActivity() {
         if (SearchActivity.isEditableFood || MealActivity.isEditableFood) {
             saveOrUpdateFood.id = food.id
             saveOrUpdateFood.dayMealId = food.dayMealId
+            saveOrUpdateFood.calorie = (saveOrUpdateFood.weight / 100) * (food.calorie)
+            saveOrUpdateFood.fat = (saveOrUpdateFood.weight / 100) * (food.fat)
+            saveOrUpdateFood.carb = (saveOrUpdateFood.weight / 100) * (food.carb)
+            saveOrUpdateFood.prot = (saveOrUpdateFood.weight / 100) * (food.prot)
             foodViewModel.updateFood(saveOrUpdateFood)
             SearchActivity.isEditableFood = false
             MealActivity.isEditableFood = false
