@@ -19,6 +19,11 @@ class FoodViewModel(application: Application) : AndroidViewModel(application) {
     val allFoodsByProtein: LiveData<List<Food>>
 
     val allFoodsByDayAndMeal: LiveData<List<Food>>
+    val allFoodsByBreakfast: LiveData<List<Food>>
+    val allFoodsByLunch: LiveData<List<Food>>
+    val allFoodsByDinner: LiveData<List<Food>>
+    val allFoodsBySnack: LiveData<List<Food>>
+    val allFoodsMacrosTotal: LiveData<List<Food>>
 
     init {
         val foodDao = FoodDatabase.getDatabase(application, viewModelScope).foodDao()
@@ -28,6 +33,11 @@ class FoodViewModel(application: Application) : AndroidViewModel(application) {
         allFoodsByProtein = repository.allFoodsByProtein
 
         allFoodsByDayAndMeal = repository.allFoodsSortedByDayAndMeal
+        allFoodsByBreakfast = repository.allFoodsSortedByBreakfast
+        allFoodsByLunch = repository.allFoodsSortedByLunch
+        allFoodsByDinner = repository.allFoodsSortedByDinner
+        allFoodsBySnack = repository.allFoodsSortedBySnack
+        allFoodsMacrosTotal = repository.allFoodsMacrosTotal
     }
 
     fun insertFood(food: Food) = viewModelScope.launch(Dispatchers.IO) {

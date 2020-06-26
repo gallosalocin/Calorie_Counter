@@ -39,12 +39,25 @@ class SearchActivity : AppCompatActivity() {
         setContentView(R.layout.activity_search)
 
         configToolbar()
+        Log.d("nico", "configToolbar")
         setupFabCreateFood()
+        Log.d("nico", "setupFabCreateFood")
         setupSearchEditText()
-
+        Log.d("nico", "setupSearchEditText")
         setupRecyclerView()
+        Log.d("nico", "setupRecyclerView")
         configItemTouchHelper()
+        Log.d("nico", "configItemTouchHelper")
+    }
 
+    override fun onStart() {
+        super.onStart()
+        Log.d("nico", "onStart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("nico", "onResume")
     }
 
     private fun setupRecyclerView() {

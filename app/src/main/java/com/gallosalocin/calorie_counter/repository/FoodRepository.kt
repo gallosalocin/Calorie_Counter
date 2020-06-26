@@ -5,7 +5,6 @@ import com.gallosalocin.calorie_counter.db.FoodDao
 import com.gallosalocin.calorie_counter.models.Food
 import com.gallosalocin.calorie_counter.ui.DayActivity
 import com.gallosalocin.calorie_counter.ui.MainActivity
-import com.gallosalocin.calorie_counter.ui.SearchActivity
 
 class FoodRepository(private val foodDao: FoodDao) {
 
@@ -13,7 +12,22 @@ class FoodRepository(private val foodDao: FoodDao) {
     val allFoodsByCategory: LiveData<List<Food>> = foodDao.getAllFoodsSortedByCategory()
     val allFoodsByProtein: LiveData<List<Food>> = foodDao.getAllFoodsFilteredByProtein()
 
-    val allFoodsSortedByDayAndMeal: LiveData<List<Food>> = foodDao.getAllFoodsSortedByDayAndMeal(MainActivity.dayTag.toString() + DayActivity.mealTag.toString())
+    val allFoodsSortedByDayAndMeal: LiveData<List<Food>> =
+        foodDao.getAllFoodsSortedByDayAndMeal(MainActivity.dayTag.toString() + DayActivity.mealTag.toString())
+
+    val allFoodsSortedByBreakfast: LiveData<List<Food>> =
+        foodDao.getAllFoodsSortedByBreakfast(MainActivity.dayTag.toString() + "1")
+
+    val allFoodsSortedByLunch: LiveData<List<Food>> =
+        foodDao.getAllFoodsSortedByLunch(MainActivity.dayTag.toString() + "2")
+
+    val allFoodsSortedByDinner: LiveData<List<Food>> =
+        foodDao.getAllFoodsSortedByDinner(MainActivity.dayTag.toString() + "3")
+
+    val allFoodsSortedBySnack: LiveData<List<Food>> =
+        foodDao.getAllFoodsSortedBySnack(MainActivity.dayTag.toString() + "4")
+
+    val allFoodsMacrosTotal: LiveData<List<Food>> = foodDao.getAllFoodsMacrosTotal(MainActivity.dayTag.toString() + "1", MainActivity.dayTag.toString() + "4")
 
     suspend fun insertFood(food: Food) = foodDao.insertFood(food)
 

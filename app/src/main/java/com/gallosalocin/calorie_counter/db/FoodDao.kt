@@ -34,4 +34,19 @@ interface FoodDao {
     @Query("INSERT INTO food_table(day_meal_id, name, category, color, note, calorie, weight, fat, carb, prot) SELECT :dayMeal, name, category, color, note, calorie, weight, fat, carb, prot FROM food_table WHERE id = :id")
     suspend fun duplicateFood(dayMeal: String, id: Int?)
 
+    @Query("SELECT * FROM food_table WHERE day_meal_id = :dayMeal")
+    fun getAllFoodsSortedByBreakfast(dayMeal: String): LiveData<List<Food>>
+
+    @Query("SELECT * FROM food_table WHERE day_meal_id = :dayMeal")
+    fun getAllFoodsSortedByLunch(dayMeal: String): LiveData<List<Food>>
+
+    @Query("SELECT * FROM food_table WHERE day_meal_id = :dayMeal")
+    fun getAllFoodsSortedByDinner(dayMeal: String): LiveData<List<Food>>
+
+    @Query("SELECT * FROM food_table WHERE day_meal_id = :dayMeal")
+    fun getAllFoodsSortedBySnack(dayMeal: String): LiveData<List<Food>>
+
+    @Query("SELECT * FROM food_table WHERE day_meal_id BETWEEN :dayMealStart AND :dayMealEnd")
+    fun getAllFoodsMacrosTotal(dayMealStart: String, dayMealEnd: String): LiveData<List<Food>>
+
 }

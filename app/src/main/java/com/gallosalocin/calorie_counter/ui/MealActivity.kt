@@ -2,7 +2,6 @@ package com.gallosalocin.calorie_counter.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -44,8 +43,6 @@ class MealActivity : AppCompatActivity() {
         configItemTouchHelper()
 
 
-        Log.d("nico", "onCreate")
-
     }
 
     private fun configToolbar() {
@@ -75,10 +72,12 @@ class MealActivity : AppCompatActivity() {
         foodViewModel = ViewModelProvider(this).get(FoodViewModel::class.java)
         foodViewModel.allFoodsByDayAndMeal.observe(this, androidx.lifecycle.Observer { foods ->
             allFoodByDayAndMealList = foods
-            overall_meal_cal_current.text = allFoodByDayAndMealList.sumBy { it.calorie }.toString()
-            overall_meal_fat_current.text = String.format("%.1f", allFoodByDayAndMealList.sumByDouble { it.fat.toDouble() })
-            overall_meal_carb_current.text = String.format("%.1f", allFoodByDayAndMealList.sumByDouble { it.carb.toDouble() })
-            overall_meal_prot_current.text = String.format("%.1f", allFoodByDayAndMealList.sumByDouble { it.prot.toDouble() })
+
+            meal_cal_total.text = allFoodByDayAndMealList.sumBy { it.calorie }.toString()
+            meal_fat_total.text = String.format("%.1f", allFoodByDayAndMealList.sumByDouble { it.fat.toDouble() })
+            meal_carb_total.text = String.format("%.1f", allFoodByDayAndMealList.sumByDouble { it.carb.toDouble() })
+            meal_prot_total.text = String.format("%.1f", allFoodByDayAndMealList.sumByDouble { it.prot.toDouble() })
+
             foodAdapter.differ.submitList(allFoodByDayAndMealList)
         })
         onItemClickListener()

@@ -19,11 +19,11 @@ abstract class FoodDatabase : RoomDatabase() {
         private val scope: CoroutineScope
     ) : RoomDatabase.Callback() {
 
-        override fun onOpen(db: SupportSQLiteDatabase) {
-            super.onOpen(db)
+        override fun onCreate(db: SupportSQLiteDatabase) {
+            super.onCreate(db)
             INSTANCE?.let { database ->
                 scope.launch {
-                    var foodDao = database.foodDao()
+                    val foodDao = database.foodDao()
 
                     foodDao.deleteAll()
 
@@ -34,7 +34,6 @@ abstract class FoodDatabase : RoomDatabase() {
                     foodDao.insertFood(Food("0","Feta", "Graisses saines", 0xFF4DD0E1.toInt(), "", 257, 100, 21F, 0.7F, 17F))
                     foodDao.insertFood(Food("0","Pomme", "Fruits", 0xFF9575CD.toInt(), "", 52, 100, 0.2F, 14F, 0.3F))
                     foodDao.insertFood(Food("0","Glace Vanille", "Glucides", 0xFFFFF176.toInt(), "", 190, 100, 8.7F, 26F, 2.2F))
-
                 }
             }
         }

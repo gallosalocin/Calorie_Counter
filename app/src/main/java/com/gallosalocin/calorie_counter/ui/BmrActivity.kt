@@ -30,7 +30,10 @@ class BmrActivity : AppCompatActivity() {
 
     private lateinit var sharedPref: SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
-    private val PREF_NAME = "myPref"
+
+    companion object {
+        const val PREF_BMR = "myBMR"
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -116,7 +119,7 @@ class BmrActivity : AppCompatActivity() {
     }
 
     private fun savedData() {
-        sharedPref = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        sharedPref = getSharedPreferences(PREF_BMR, Context.MODE_PRIVATE)
         editor = sharedPref.edit()
         editor.apply {
             putInt("checkedGender", checkedGender)
@@ -137,7 +140,7 @@ class BmrActivity : AppCompatActivity() {
     }
 
     private fun loadData() {
-        sharedPref = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        sharedPref = getSharedPreferences(PREF_BMR, Context.MODE_PRIVATE)
 
         val savedCheckedGender = sharedPref.getInt("checkedGender", 0)
         val savedAge = sharedPref.getInt("age", 0)
@@ -167,4 +170,5 @@ class BmrActivity : AppCompatActivity() {
         carb_result.text = savedCarbResult.toString()
         prot_result.text = savedProtResult.toString()
     }
+
 }
