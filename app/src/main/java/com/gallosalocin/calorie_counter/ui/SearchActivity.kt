@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -39,25 +38,12 @@ class SearchActivity : AppCompatActivity() {
         setContentView(R.layout.activity_search)
 
         configToolbar()
-        Log.d("nico", "configToolbar")
         setupFabCreateFood()
-        Log.d("nico", "setupFabCreateFood")
         setupSearchEditText()
-        Log.d("nico", "setupSearchEditText")
         setupRecyclerView()
-        Log.d("nico", "setupRecyclerView")
+
+        setupListLiveData()
         configItemTouchHelper()
-        Log.d("nico", "configItemTouchHelper")
-    }
-
-    override fun onStart() {
-        super.onStart()
-        Log.d("nico", "onStart")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.d("nico", "onResume")
     }
 
     private fun setupRecyclerView() {
@@ -68,6 +54,9 @@ class SearchActivity : AppCompatActivity() {
             adapter = foodAdapter
             layoutManager = LinearLayoutManager(this@SearchActivity)
         }
+    }
+
+    private fun setupListLiveData() {
         foodViewModel = ViewModelProvider(this).get(FoodViewModel::class.java)
         foodViewModel.allFoods.observe(this, androidx.lifecycle.Observer { foods ->
             allFoodList = foods
@@ -189,16 +178,41 @@ class SearchActivity : AppCompatActivity() {
                 })
             }
             R.id.search_filter_prot -> {
-                foodViewModel.allFoodsByProtein.observe(this, androidx.lifecycle.Observer { foods ->
+                foodViewModel.allFoodsCategoryProteins.observe(this, androidx.lifecycle.Observer { foods ->
                     allFoodList = foods
                     foodAdapter.differ.submitList(allFoodList)
                 })
             }
-            R.id.search_filter_carb -> categoryFilter(R.string.carbohydrate)
-            R.id.search_filter_veggies -> categoryFilter(R.string.veggies)
-            R.id.search_filter_fruits -> categoryFilter(R.string.fruits)
-            R.id.search_filter_healthy_fats -> categoryFilter(R.string.healthy_fats)
-            R.id.search_filter_oils -> categoryFilter(R.string.oils)
+            R.id.search_filter_carb -> {
+                foodViewModel.allFoodsCategoryCarbs.observe(this, androidx.lifecycle.Observer { foods ->
+                    allFoodList = foods
+                    foodAdapter.differ.submitList(allFoodList)
+                })
+            }
+            R.id.search_filter_veggies -> {
+                foodViewModel.allFoodsCategoryVeggies.observe(this, androidx.lifecycle.Observer { foods ->
+                    allFoodList = foods
+                    foodAdapter.differ.submitList(allFoodList)
+                })
+            }
+            R.id.search_filter_fruits -> {
+                foodViewModel.allFoodsCategoryFruits.observe(this, androidx.lifecycle.Observer { foods ->
+                    allFoodList = foods
+                    foodAdapter.differ.submitList(allFoodList)
+                })
+            }
+            R.id.search_filter_healthy_fats -> {
+                foodViewModel.allFoodsCategoryHealthyfats.observe(this, androidx.lifecycle.Observer { foods ->
+                    allFoodList = foods
+                    foodAdapter.differ.submitList(allFoodList)
+                })
+            }
+            R.id.search_filter_oils -> {
+                foodViewModel.allFoodsCategoryOils.observe(this, androidx.lifecycle.Observer { foods ->
+                    allFoodList = foods
+                    foodAdapter.differ.submitList(allFoodList)
+                })
+            }
             android.R.id.home -> onBackPressed()
         }
         return true

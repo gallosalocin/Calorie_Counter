@@ -38,7 +38,6 @@ class MealActivity : AppCompatActivity() {
         setupFabAddFood()
 
         setupRecycleView()
-
         setupListAndMacrosPerMeal()
         configItemTouchHelper()
 
@@ -73,7 +72,7 @@ class MealActivity : AppCompatActivity() {
         foodViewModel.allFoodsByDayAndMeal.observe(this, androidx.lifecycle.Observer { foods ->
             allFoodByDayAndMealList = foods
 
-            meal_cal_total.text = allFoodByDayAndMealList.sumBy { it.calorie }.toString()
+            meal_cal_total.text = String.format("%.0f", allFoodByDayAndMealList.sumByDouble { it.calorie.toDouble() })
             meal_fat_total.text = String.format("%.1f", allFoodByDayAndMealList.sumByDouble { it.fat.toDouble() })
             meal_carb_total.text = String.format("%.1f", allFoodByDayAndMealList.sumByDouble { it.carb.toDouble() })
             meal_prot_total.text = String.format("%.1f", allFoodByDayAndMealList.sumByDouble { it.prot.toDouble() })

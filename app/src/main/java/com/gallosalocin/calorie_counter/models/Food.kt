@@ -13,8 +13,8 @@ data class Food(
     var category: String,
     var color: Int,
     var note: String = "",
-    var calorie: Int,
-    var weight: Int = 100,
+    var calorie: Float,
+    var weight: Int,
     var fat: Float,
     var carb: Float,
     var prot: Float

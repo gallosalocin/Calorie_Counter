@@ -16,7 +16,14 @@ class FoodViewModel(application: Application) : AndroidViewModel(application) {
 
     val allFoods: LiveData<List<Food>>
     val allFoodsByCategory: LiveData<List<Food>>
-    val allFoodsByProtein: LiveData<List<Food>>
+
+    val allFoodsCategoryProteins: LiveData<List<Food>>
+    val allFoodsCategoryCarbs: LiveData<List<Food>>
+    val allFoodsCategoryVeggies: LiveData<List<Food>>
+    val allFoodsCategoryFruits: LiveData<List<Food>>
+    val allFoodsCategoryHealthyfats: LiveData<List<Food>>
+    val allFoodsCategoryOils: LiveData<List<Food>>
+
 
     val allFoodsByDayAndMeal: LiveData<List<Food>>
     val allFoodsByBreakfast: LiveData<List<Food>>
@@ -30,7 +37,14 @@ class FoodViewModel(application: Application) : AndroidViewModel(application) {
         repository = FoodRepository(foodDao)
         allFoods = repository.allFoods
         allFoodsByCategory = repository.allFoodsByCategory
-        allFoodsByProtein = repository.allFoodsByProtein
+
+        allFoodsCategoryProteins = repository.allFoodsCategoryProteins
+        allFoodsCategoryCarbs = repository.allFoodsCategoryCarbs
+        allFoodsCategoryVeggies = repository.allFoodsCategoryVeggies
+        allFoodsCategoryFruits = repository.allFoodsCategoryFruits
+        allFoodsCategoryHealthyfats = repository.allFoodsCategoryHealthyFats
+        allFoodsCategoryOils = repository.allFoodsCategoryOils
+
 
         allFoodsByDayAndMeal = repository.allFoodsSortedByDayAndMeal
         allFoodsByBreakfast = repository.allFoodsSortedByBreakfast

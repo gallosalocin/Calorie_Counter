@@ -1,6 +1,9 @@
 package com.gallosalocin.calorie_counter.repository
 
+import android.content.Context
+import android.content.res.Resources
 import androidx.lifecycle.LiveData
+import com.gallosalocin.calorie_counter.R
 import com.gallosalocin.calorie_counter.db.FoodDao
 import com.gallosalocin.calorie_counter.models.Food
 import com.gallosalocin.calorie_counter.ui.DayActivity
@@ -10,7 +13,14 @@ class FoodRepository(private val foodDao: FoodDao) {
 
     val allFoods: LiveData<List<Food>> = foodDao.getAllFoodsSortedByName()
     val allFoodsByCategory: LiveData<List<Food>> = foodDao.getAllFoodsSortedByCategory()
-    val allFoodsByProtein: LiveData<List<Food>> = foodDao.getAllFoodsFilteredByProtein()
+
+    val allFoodsCategoryProteins: LiveData<List<Food>> = foodDao.getAllFoodsPerCategory("Protéines")
+    val allFoodsCategoryCarbs: LiveData<List<Food>> = foodDao.getAllFoodsPerCategory("Glucides")
+    val allFoodsCategoryVeggies: LiveData<List<Food>> = foodDao.getAllFoodsPerCategory("Légumes")
+    val allFoodsCategoryFruits: LiveData<List<Food>> = foodDao.getAllFoodsPerCategory("Fruits")
+    val allFoodsCategoryHealthyFats: LiveData<List<Food>> = foodDao.getAllFoodsPerCategory("Graisses saines")
+    val allFoodsCategoryOils: LiveData<List<Food>> = foodDao.getAllFoodsPerCategory("Huiles")
+
 
     val allFoodsSortedByDayAndMeal: LiveData<List<Food>> =
         foodDao.getAllFoodsSortedByDayAndMeal(MainActivity.dayTag.toString() + DayActivity.mealTag.toString())

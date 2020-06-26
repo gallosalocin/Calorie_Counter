@@ -59,7 +59,7 @@ class FoodAdapter : RecyclerView.Adapter<FoodAdapter.FoodViewHolder>() {
             cv_food.setBackgroundColor(food.color)
             food_name.text = food.name
             food_gram.text = food.weight.toString()
-            food_cal.text = food.calorie.toString()
+            food_cal.text = String.format("%.0f", food.calorie)
             food_fat.text = String.format("%.1f", food.fat)
             food_carb.text = String.format("%.1f",food.carb)
             food_prot.text = String.format("%.1f",food.prot)

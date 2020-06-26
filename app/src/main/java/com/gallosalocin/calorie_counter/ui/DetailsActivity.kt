@@ -119,8 +119,8 @@ class DetailsActivity : AppCompatActivity() {
             spinner_category.selectedItem.toString(),
             spinner_category.tag as Int,
             details_note.text.toString(),
-            et_details_calorie.text.toString().toInt(),
-            et_details_weight.text.toString().toInt(),
+            et_details_calorie.text.toString().toFloat(),
+            100,
             et_details_fat.text.toString().toFloat(),
             et_details_carb.text.toString().toFloat(),
             et_details_prot.text.toString().toFloat()
@@ -129,10 +129,10 @@ class DetailsActivity : AppCompatActivity() {
         if (SearchActivity.isEditableFood || MealActivity.isEditableFood) {
             saveOrUpdateFood.id = food.id
             saveOrUpdateFood.dayMealId = food.dayMealId
-            saveOrUpdateFood.calorie = (saveOrUpdateFood.weight / 100) * (food.calorie)
-            saveOrUpdateFood.fat = (saveOrUpdateFood.weight / 100) * (food.fat)
-            saveOrUpdateFood.carb = (saveOrUpdateFood.weight / 100) * (food.carb)
-            saveOrUpdateFood.prot = (saveOrUpdateFood.weight / 100) * (food.prot)
+            saveOrUpdateFood.calorie = ((saveOrUpdateFood.weight.toFloat() / 100) * (food.calorie))
+            saveOrUpdateFood.fat = (saveOrUpdateFood.weight.toFloat() / 100) * (food.fat)
+            saveOrUpdateFood.carb = (saveOrUpdateFood.weight.toFloat() / 100) * (food.carb)
+            saveOrUpdateFood.prot = (saveOrUpdateFood.weight.toFloat() / 100) * (food.prot)
             foodViewModel.updateFood(saveOrUpdateFood)
             SearchActivity.isEditableFood = false
             MealActivity.isEditableFood = false
@@ -167,7 +167,7 @@ class DetailsActivity : AppCompatActivity() {
         }
     }
 
-    // If click on item, make invisible some views
+    // Make visible or invisible views
     private fun View.toggleVisibility() {
         visibility = if (visibility == View.VISIBLE) {
             View.INVISIBLE
@@ -192,6 +192,10 @@ class DetailsActivity : AppCompatActivity() {
             SearchActivity.isInvisible = false
             MealActivity.isInvisible = false
         }
+        if (!SearchActivity.isInvisible) {
+            et_details_weight.toggleVisibility()
+            details_weight.toggleVisibility()
+        }
     }
 
     // Press enter to save
@@ -208,7 +212,7 @@ class DetailsActivity : AppCompatActivity() {
 
     // Validate Input Methods
     private fun confirmInput() {
-        if (!validateName() || !validateCategory() || !validateCalorie() || !validateFat() || !validateCarb() || !validateProt() || !validateWeight()) {
+        if (!validateName() || !validateCategory() || !validateCalorie() || !validateFat() || !validateCarb() || !validateProt()) {
             return
         }
         saveOrUpdateFood()

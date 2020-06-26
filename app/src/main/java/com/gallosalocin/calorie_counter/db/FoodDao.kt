@@ -22,11 +22,11 @@ interface FoodDao {
     @Query("SELECT * FROM food_table WHERE day_meal_id = '0' ORDER BY lower(name)")
     fun getAllFoodsSortedByName(): LiveData<List<Food>>
 
-    @Query("SELECT * FROM food_table WHERE day_meal_id = '0' ORDER BY category")
+    @Query("SELECT * FROM food_table WHERE day_meal_id = '0' ORDER BY category, lower(name)")
     fun getAllFoodsSortedByCategory(): LiveData<List<Food>>
 
-    @Query("SELECT * FROM food_table WHERE category = '2131624049'")
-    fun getAllFoodsFilteredByProtein(): LiveData<List<Food>>
+    @Query("SELECT * FROM food_table WHERE day_meal_id = '0' AND category = :category ORDER BY lower(name)")
+    fun getAllFoodsPerCategory(category: String): LiveData<List<Food>>
 
     @Query("SELECT * FROM food_table WHERE day_meal_id = :dayMeal")
     fun getAllFoodsSortedByDayAndMeal(dayMeal: String): LiveData<List<Food>>
