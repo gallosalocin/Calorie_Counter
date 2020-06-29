@@ -34,6 +34,8 @@ class DetailsActivity : AppCompatActivity() {
         isInvisible()
         configEnterButtonSoftKeyboard()
 
+        et_details_weight.requestFocus()
+
         foodViewModel = ViewModelProvider(this).get(FoodViewModel::class.java)
 
     }
@@ -83,11 +85,11 @@ class DetailsActivity : AppCompatActivity() {
 
         et_details_name.setText(food.name)
         spinner_category.setSelection(position)
-        et_details_calorie.setText(food.calorie.toString())
-        et_details_weight.setText(food.weight.toString())
-        et_details_fat.setText(food.fat.toString())
-        et_details_carb.setText(food.carb.toString())
-        et_details_prot.setText(food.prot.toString())
+        et_details_calorie.setText(((100 * food.calorie) / food.weight).toString())
+        et_details_weight.setText(((100 * food.weight) / food.weight).toString())
+        et_details_fat.setText(((100 * food.fat) / food.weight).toString())
+        et_details_carb.setText(((100 * food.carb) / food.weight).toString())
+        et_details_prot.setText(((100 * food.prot) / food.weight).toString())
         details_note.setText(food.note)
     }
 
@@ -103,11 +105,11 @@ class DetailsActivity : AppCompatActivity() {
 
         et_details_name.setText(food.name)
         spinner_category.setSelection(position)
-        et_details_calorie.setText(food.calorie.toString())
-        et_details_weight.setText(food.weight.toString())
-        et_details_fat.setText(food.fat.toString())
-        et_details_carb.setText(food.carb.toString())
-        et_details_prot.setText(food.prot.toString())
+        et_details_calorie.setText(((100 * food.calorie) / food.weight).toString())
+        et_details_weight.setText(((100 * food.weight) / food.weight).toString())
+        et_details_fat.setText(((100 * food.fat) / food.weight).toString())
+        et_details_carb.setText(((100 * food.carb) / food.weight).toString())
+        et_details_prot.setText(((100 * food.prot) / food.weight).toString())
         details_note.setText(food.note)
     }
 
@@ -129,10 +131,11 @@ class DetailsActivity : AppCompatActivity() {
         if (SearchActivity.isEditableFood || MealActivity.isEditableFood) {
             saveOrUpdateFood.id = food.id
             saveOrUpdateFood.dayMealId = food.dayMealId
-            saveOrUpdateFood.calorie = ((saveOrUpdateFood.weight.toFloat() / 100) * (food.calorie))
-            saveOrUpdateFood.fat = (saveOrUpdateFood.weight.toFloat() / 100) * (food.fat)
-            saveOrUpdateFood.carb = (saveOrUpdateFood.weight.toFloat() / 100) * (food.carb)
-            saveOrUpdateFood.prot = (saveOrUpdateFood.weight.toFloat() / 100) * (food.prot)
+            saveOrUpdateFood.weight = et_details_weight.text.toString().toInt()
+            saveOrUpdateFood.calorie = ((saveOrUpdateFood.weight.toFloat() / 100) * ((100 * food.calorie) / food.weight))
+            saveOrUpdateFood.fat = (saveOrUpdateFood.weight.toFloat() / 100) * ((100 * food.fat) / food.weight)
+            saveOrUpdateFood.carb = (saveOrUpdateFood.weight.toFloat() / 100) * ((100 * food.carb) / food.weight)
+            saveOrUpdateFood.prot = (saveOrUpdateFood.weight.toFloat() / 100) * ((100 * food.prot) / food.weight)
             foodViewModel.updateFood(saveOrUpdateFood)
             SearchActivity.isEditableFood = false
             MealActivity.isEditableFood = false
@@ -145,12 +148,12 @@ class DetailsActivity : AppCompatActivity() {
 
     private fun configSpinner() {
         categoryList.add(Category(getString(R.string.choose_category), 0xFFFFFFFF.toInt()))
-        categoryList.add(Category("Protéines", 0xFFE57373.toInt()))
-        categoryList.add(Category("Glucides", 0xFFFFF176.toInt()))
-        categoryList.add(Category("Légumes", 0xFF48B34D.toInt()))
-        categoryList.add(Category("Fruits", 0xFF9575CD.toInt()))
-        categoryList.add(Category("Graisses saines", 0xFF4DD0E1.toInt()))
-        categoryList.add(Category("Huiles", 0xFFC1A36E.toInt()))
+        categoryList.add(Category(getString(R.string.proteins), 0xFFE57373.toInt()))
+        categoryList.add(Category(getString(R.string.carbohydrate), 0xFFFFF176.toInt()))
+        categoryList.add(Category(getString(R.string.veggies), 0xFF48B34D.toInt()))
+        categoryList.add(Category(getString(R.string.fruits), 0xFF9575CD.toInt()))
+        categoryList.add(Category(getString(R.string.healthy_fats), 0xFF4DD0E1.toInt()))
+        categoryList.add(Category(getString(R.string.oils), 0xFFC1A36E.toInt()))
 
         val adapter = ArrayAdapter(this, R.layout.spinner_custom_layout, categoryList)
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item)
@@ -188,13 +191,12 @@ class DetailsActivity : AppCompatActivity() {
             details_carb.toggleVisibility()
             et_details_prot.toggleVisibility()
             details_prot.toggleVisibility()
-            details_note.toggleVisibility()
-            SearchActivity.isInvisible = false
-            MealActivity.isInvisible = false
-        }
-        if (!SearchActivity.isInvisible) {
+
             et_details_weight.toggleVisibility()
             details_weight.toggleVisibility()
+
+            SearchActivity.isInvisible = false
+            MealActivity.isInvisible = false
         }
     }
 

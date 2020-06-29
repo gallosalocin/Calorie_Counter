@@ -55,20 +55,22 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:layout_marginTop="10dp"
+        android:visibility="invisible"
         app:errorEnabled="true"
+        app:layout_constraintBottom_toTopOf="@id/tv_nutrition_facts_text"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/spinner_category"
-        app:layout_constraintBottom_toTopOf="@id/tv_nutrition_facts_text">
+        app:layout_constraintTop_toBottomOf="@id/spinner_category">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_details_weight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/weight_gram_symbol"
-            android:inputType="number"
             android:imeOptions="actionDone"
-            android:selectAllOnFocus="true" />
+            android:inputType="number"
+            android:selectAllOnFocus="true"
+            android:visibility="invisible" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

@@ -165,7 +165,7 @@
         style="@style/NumberDayFontBold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="20dp"
         app:layout_constraintBottom_toBottomOf="@id/tv_bmr_text"
         app:layout_constraintLeft_toRightOf="@id/tv_bmr_text"
         app:layout_constraintTop_toTopOf="@id/tv_bmr_text" />
@@ -237,20 +237,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:text="@string/daily_calorie"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btn_calculate_daily_calorie" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_daily_calorie_result"
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/et_daily_calorie_result"
         style="@style/NumberDayFontBold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
+        android:hint="@string/calorie"
+        android:inputType="number"
+        android:selectAllOnFocus="true"
         app:layout_constraintBottom_toBottomOf="@id/tv_daily_calorie_text"
         app:layout_constraintLeft_toRightOf="@id/tv_daily_calorie_text"
         app:layout_constraintTop_toTopOf="@id/tv_daily_calorie_text" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_custom_calorie"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="20dp"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_save_black"
+        app:layout_constraintBottom_toBottomOf="@id/et_daily_calorie_result"
+        app:layout_constraintLeft_toRightOf="@id/et_daily_calorie_result"
+        app:layout_constraintTop_toTopOf="@id/et_daily_calorie_result" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/fat"

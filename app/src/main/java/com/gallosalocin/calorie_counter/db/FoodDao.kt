@@ -35,16 +35,7 @@ interface FoodDao {
     suspend fun duplicateFood(dayMeal: String, id: Int?)
 
     @Query("SELECT * FROM food_table WHERE day_meal_id = :dayMeal")
-    fun getAllFoodsSortedByBreakfast(dayMeal: String): LiveData<List<Food>>
-
-    @Query("SELECT * FROM food_table WHERE day_meal_id = :dayMeal")
-    fun getAllFoodsSortedByLunch(dayMeal: String): LiveData<List<Food>>
-
-    @Query("SELECT * FROM food_table WHERE day_meal_id = :dayMeal")
-    fun getAllFoodsSortedByDinner(dayMeal: String): LiveData<List<Food>>
-
-    @Query("SELECT * FROM food_table WHERE day_meal_id = :dayMeal")
-    fun getAllFoodsSortedBySnack(dayMeal: String): LiveData<List<Food>>
+    fun getAllFoodsSortedByMeal(dayMeal: String): LiveData<List<Food>>
 
     @Query("SELECT * FROM food_table WHERE day_meal_id BETWEEN :dayMealStart AND :dayMealEnd")
     fun getAllFoodsMacrosTotal(dayMealStart: String, dayMealEnd: String): LiveData<List<Food>>

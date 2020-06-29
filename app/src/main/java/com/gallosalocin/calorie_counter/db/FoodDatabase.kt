@@ -1,10 +1,12 @@
 package com.gallosalocin.calorie_counter.db
 
 import android.content.Context
+import android.content.res.Resources
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.gallosalocin.calorie_counter.R
 import com.gallosalocin.calorie_counter.models.Food
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -19,13 +21,15 @@ abstract class FoodDatabase : RoomDatabase() {
         private val scope: CoroutineScope
     ) : RoomDatabase.Callback() {
 
-        override fun onCreate(db: SupportSQLiteDatabase) {
-            super.onCreate(db)
+        override fun onOpen(db: SupportSQLiteDatabase) {
+            super.onOpen(db)
             INSTANCE?.let { database ->
                 scope.launch {
                     val foodDao = database.foodDao()
 
                     foodDao.deleteAll()
+
+//                    foodDao.insertFood(Food("0","A TEST", Resources.getSystem().getString(R.string.proteins), 0xFFE57373.toInt(), "", 1F, 100, 1F, 1F, 1F))
 
                     foodDao.insertFood(Food("0","Blanc de poulet", "Protéines", 0xFFE57373.toInt(), "", 108F, 100, 1.34F, 0.45F, 23.5F))
                     foodDao.insertFood(Food("0","Jambon cuit à l'étouffée", "Protéines", 0xFFE57373.toInt(), "", 108F, 100, 3F, 1.2F, 19F))

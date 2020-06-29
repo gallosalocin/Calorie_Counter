@@ -11,32 +11,22 @@ import com.gallosalocin.calorie_counter.ui.MainActivity
 
 class FoodRepository(private val foodDao: FoodDao) {
 
+
     val allFoods: LiveData<List<Food>> = foodDao.getAllFoodsSortedByName()
     val allFoodsByCategory: LiveData<List<Food>> = foodDao.getAllFoodsSortedByCategory()
 
-    val allFoodsCategoryProteins: LiveData<List<Food>> = foodDao.getAllFoodsPerCategory("Protéines")
+    val allFoodsCategoryProteins: LiveData<List<Food>> = foodDao.getAllFoodsPerCategory("Protéines")    //  context.getString(R.string.proteins)
     val allFoodsCategoryCarbs: LiveData<List<Food>> = foodDao.getAllFoodsPerCategory("Glucides")
     val allFoodsCategoryVeggies: LiveData<List<Food>> = foodDao.getAllFoodsPerCategory("Légumes")
     val allFoodsCategoryFruits: LiveData<List<Food>> = foodDao.getAllFoodsPerCategory("Fruits")
     val allFoodsCategoryHealthyFats: LiveData<List<Food>> = foodDao.getAllFoodsPerCategory("Graisses saines")
     val allFoodsCategoryOils: LiveData<List<Food>> = foodDao.getAllFoodsPerCategory("Huiles")
 
-
-    val allFoodsSortedByDayAndMeal: LiveData<List<Food>> =
-        foodDao.getAllFoodsSortedByDayAndMeal(MainActivity.dayTag.toString() + DayActivity.mealTag.toString())
-
-    val allFoodsSortedByBreakfast: LiveData<List<Food>> =
-        foodDao.getAllFoodsSortedByBreakfast(MainActivity.dayTag.toString() + "1")
-
-    val allFoodsSortedByLunch: LiveData<List<Food>> =
-        foodDao.getAllFoodsSortedByLunch(MainActivity.dayTag.toString() + "2")
-
-    val allFoodsSortedByDinner: LiveData<List<Food>> =
-        foodDao.getAllFoodsSortedByDinner(MainActivity.dayTag.toString() + "3")
-
-    val allFoodsSortedBySnack: LiveData<List<Food>> =
-        foodDao.getAllFoodsSortedBySnack(MainActivity.dayTag.toString() + "4")
-
+    val allFoodsSortedByDayAndMeal: LiveData<List<Food>> = foodDao.getAllFoodsSortedByDayAndMeal(MainActivity.dayTag.toString() + DayActivity.mealTag.toString())
+    val allFoodsSortedByBreakfast: LiveData<List<Food>> = foodDao.getAllFoodsSortedByMeal(MainActivity.dayTag.toString() + "1")
+    val allFoodsSortedByLunch: LiveData<List<Food>> = foodDao.getAllFoodsSortedByMeal(MainActivity.dayTag.toString() + "2")
+    val allFoodsSortedByDinner: LiveData<List<Food>> = foodDao.getAllFoodsSortedByMeal(MainActivity.dayTag.toString() + "3")
+    val allFoodsSortedBySnack: LiveData<List<Food>> = foodDao.getAllFoodsSortedByMeal(MainActivity.dayTag.toString() + "4")
     val allFoodsMacrosTotal: LiveData<List<Food>> = foodDao.getAllFoodsMacrosTotal(MainActivity.dayTag.toString() + "1", MainActivity.dayTag.toString() + "4")
 
     suspend fun insertFood(food: Food) = foodDao.insertFood(food)

@@ -21,7 +21,7 @@ class FoodViewModel(application: Application) : AndroidViewModel(application) {
     val allFoodsCategoryCarbs: LiveData<List<Food>>
     val allFoodsCategoryVeggies: LiveData<List<Food>>
     val allFoodsCategoryFruits: LiveData<List<Food>>
-    val allFoodsCategoryHealthyfats: LiveData<List<Food>>
+    val allFoodsCategoryHealthyFats: LiveData<List<Food>>
     val allFoodsCategoryOils: LiveData<List<Food>>
 
 
@@ -42,9 +42,8 @@ class FoodViewModel(application: Application) : AndroidViewModel(application) {
         allFoodsCategoryCarbs = repository.allFoodsCategoryCarbs
         allFoodsCategoryVeggies = repository.allFoodsCategoryVeggies
         allFoodsCategoryFruits = repository.allFoodsCategoryFruits
-        allFoodsCategoryHealthyfats = repository.allFoodsCategoryHealthyFats
+        allFoodsCategoryHealthyFats = repository.allFoodsCategoryHealthyFats
         allFoodsCategoryOils = repository.allFoodsCategoryOils
-
 
         allFoodsByDayAndMeal = repository.allFoodsSortedByDayAndMeal
         allFoodsByBreakfast = repository.allFoodsSortedByBreakfast
@@ -54,19 +53,11 @@ class FoodViewModel(application: Application) : AndroidViewModel(application) {
         allFoodsMacrosTotal = repository.allFoodsMacrosTotal
     }
 
-    fun insertFood(food: Food) = viewModelScope.launch(Dispatchers.IO) {
-        repository.insertFood(food)
-    }
+    fun insertFood(food: Food) = viewModelScope.launch(Dispatchers.IO) { repository.insertFood(food) }
 
-    fun updateFood(food: Food) = viewModelScope.launch(Dispatchers.IO) {
-        repository.updateFood(food)
-    }
+    fun updateFood(food: Food) = viewModelScope.launch(Dispatchers.IO) { repository.updateFood(food) }
 
-    fun deleteFood(food: Food) = viewModelScope.launch(Dispatchers.IO) {
-        repository.deleteFood(food)
-    }
+    fun deleteFood(food: Food) = viewModelScope.launch(Dispatchers.IO) { repository.deleteFood(food) }
 
-    fun duplicateFood(dayMeal: String, id: Int?) = viewModelScope.launch(Dispatchers.IO) {
-        repository.duplicateFood(dayMeal, id)
-    }
+    fun duplicateFood(dayMeal: String, id: Int?) = viewModelScope.launch(Dispatchers.IO) { repository.duplicateFood(dayMeal, id) }
 }

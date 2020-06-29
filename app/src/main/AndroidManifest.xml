@@ -5,7 +5,7 @@
     <application
         android:name=".MyApp"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/calorie_counter_logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -13,12 +13,12 @@
         <activity
             android:name=".ui.DetailsActivity"
             android:parentActivityName=".ui.SearchActivity"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="stateVisible" />
         <activity
-            android:name=".ui.SearchActivity"
-            android:parentActivityName=".ui.MealActivity" />
+            android:name=".ui.SearchActivity" />
         <activity
             android:name=".ui.MealActivity"
+            android:noHistory="true"
             android:parentActivityName=".ui.DayActivity" />
         <activity
             android:name=".ui.BmrActivity"

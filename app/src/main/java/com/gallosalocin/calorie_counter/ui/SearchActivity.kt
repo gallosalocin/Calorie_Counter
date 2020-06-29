@@ -1,6 +1,9 @@
 package com.gallosalocin.calorie_counter.ui
 
 import android.content.Intent
+import android.graphics.*
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -8,6 +11,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,7 +30,6 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var allFoodList: List<Food>
     private lateinit var food: Food
 
-
     companion object {
         var isEditableFood = false
         var isInvisible = false
@@ -44,6 +47,7 @@ class SearchActivity : AppCompatActivity() {
 
         setupListLiveData()
         configItemTouchHelper()
+        et_search.requestFocus()
     }
 
     private fun setupRecyclerView() {
@@ -51,6 +55,7 @@ class SearchActivity : AppCompatActivity() {
 
         foodAdapter = FoodAdapter()
         rv_search.apply {
+//            setHasFixedSize(true)
             adapter = foodAdapter
             layoutManager = LinearLayoutManager(this@SearchActivity)
         }
@@ -123,29 +128,34 @@ class SearchActivity : AppCompatActivity() {
                 }
             }
 
-//            override fun onChildDraw(canvas: Canvas, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean) {
-//                val icon: Bitmap
-//                if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
-//
-//                    val itemView = viewHolder.itemView
-//                    val height = itemView.bottom.toFloat() - itemView.top.toFloat()
-//                    val width = height / 3
-//                    val paint = Paint()
-//
-//                    if (dX > 0) {
-//                        paint.color = Color.parseColor("#2F2FD3")
-//                        val background = RectF(itemView.left.toFloat(), itemView.top.toFloat(), dX, itemView.bottom.toFloat())
-//                        canvas.drawRect(background, paint)
-//                        icon = BitmapFactory.decodeResource(resources, R.drawable.ic_delete)
-//                        val iconDest = RectF(itemView.left.toFloat() + width, itemView.top.toFloat() + width, itemView.left.toFloat() + 2 * width, itemView.bottom.toFloat() - width)
-//                        canvas.drawBitmap(icon, null, iconDest, paint)
-//                    }
-//                }
-//
-//
-//
-//                super.onChildDraw(canvas, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
-//            }
+            override fun onChildDraw(canvas: Canvas, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean) {
+                val deleteIcon: Drawable = ContextCompat.getDrawable(this@SearchActivity, R.drawable.ic_delete_swipe_black)!!
+                val addIcon: Drawable = ContextCompat.getDrawable(this@SearchActivity, R.drawable.ic_add_swipe_black)!!
+                val swipeRightBackground = ColorDrawable(Color.parseColor("#FF0000"))
+                val swipeLeftBackground = ColorDrawable(Color.parseColor("#00CC00"))
+                val itemView = viewHolder.itemView
+                val deleteIconMargin = (itemView.height - deleteIcon.intrinsicHeight) / 2
+                val addIconMargin = (itemView.height - addIcon.intrinsicHeight) / 2
+
+                if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
+
+                    if (dX > 0) {
+                        swipeRightBackground.setBounds(itemView.left, itemView.top, dX.toInt(), itemView.bottom)
+                        deleteIcon.setBounds(itemView.left + deleteIconMargin, itemView.top + deleteIconMargin, itemView.left + deleteIconMargin + deleteIcon.intrinsicWidth,
+                            itemView.bottom - deleteIconMargin)
+                        swipeRightBackground.draw(canvas)
+                        deleteIcon.draw(canvas)
+                    } else {
+                        swipeLeftBackground.setBounds(itemView.right + dX.toInt(), itemView.top, itemView.right, itemView.bottom)
+                        addIcon.setBounds(itemView.right - addIconMargin - addIcon.intrinsicWidth, itemView.top + addIconMargin, itemView.right - addIconMargin,
+                            itemView.bottom - addIconMargin)
+                        swipeLeftBackground.draw(canvas)
+                        addIcon.draw(canvas)
+                    }
+
+                }
+                super.onChildDraw(canvas, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+            }
         }
 
         ItemTouchHelper(itemTouchHelperCallback).apply {
@@ -202,7 +212,7 @@ class SearchActivity : AppCompatActivity() {
                 })
             }
             R.id.search_filter_healthy_fats -> {
-                foodViewModel.allFoodsCategoryHealthyfats.observe(this, androidx.lifecycle.Observer { foods ->
+                foodViewModel.allFoodsCategoryHealthyFats.observe(this, androidx.lifecycle.Observer { foods ->
                     allFoodList = foods
                     foodAdapter.differ.submitList(allFoodList)
                 })

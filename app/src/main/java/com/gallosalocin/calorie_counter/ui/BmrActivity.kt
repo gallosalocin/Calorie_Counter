@@ -46,12 +46,20 @@ class BmrActivity : AppCompatActivity() {
         loadData()
 
         btn_calculate_bmr.setOnClickListener { calculateBmr() }
+
         btn_calculate_daily_calorie.setOnClickListener {
             calculateBmr()
             calculateDailyCalories()
             calculateMacros()
         }
+
         btn_calculate_macros.setOnClickListener { calculateMacros() }
+
+        iv_custom_calorie.setOnClickListener {
+            dailyCalories = et_daily_calorie_result.text.toString().toFloat()
+            calculateMacros()
+            Toast.makeText(this, getString(R.string.custom_calorie_saved), Toast.LENGTH_SHORT).show()
+        }
 
     }
 
@@ -64,7 +72,6 @@ class BmrActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.bmr_toolbar_save -> {
                 calculateBmr()
-                calculateDailyCalories()
                 calculateMacros()
                 savedData()
                 finish()
@@ -99,7 +106,7 @@ class BmrActivity : AppCompatActivity() {
             level4 -> dailyCalories = resultBmr * 1.725F
             level5 -> dailyCalories = resultBmr * 1.9F
         }
-        tv_daily_calorie_result.text = dailyCalories.toInt().toString()
+        et_daily_calorie_result.setText(dailyCalories.toInt().toString())
     }
 
     private fun calculateMacros() {
@@ -162,7 +169,7 @@ class BmrActivity : AppCompatActivity() {
         weight_value.setText(savedWeight.toString())
         tv_bmr_result.text = savedResult.toInt().toString()
         radio_group_activity_level.check(savedCheckedActivity)
-        tv_daily_calorie_result.text = savedDailyCalorie.toInt().toString()
+        et_daily_calorie_result.setText(savedDailyCalorie.toInt().toString())
         fat_percent.setText(savedFatPercent.toString())
         carb_percent.setText(savedCarbPercent.toString())
         prot_percent.setText(savedProtPercent.toString())

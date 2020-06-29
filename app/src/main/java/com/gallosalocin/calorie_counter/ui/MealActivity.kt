@@ -1,9 +1,14 @@
 package com.gallosalocin.calorie_counter.ui
 
 import android.content.Intent
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -62,6 +67,7 @@ class MealActivity : AppCompatActivity() {
 
         foodAdapter = FoodAdapter()
         rv_meal.apply {
+            setHasFixedSize(true)
             adapter = foodAdapter
             layoutManager = LinearLayoutManager(this@MealActivity)
         }
@@ -124,6 +130,24 @@ class MealActivity : AppCompatActivity() {
                         show()
                     }
                 }
+            }
+
+            override fun onChildDraw(canvas: Canvas, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean) {
+                val removeIcon: Drawable = ContextCompat.getDrawable(this@MealActivity, R.drawable.ic_remove_swipe_black)!!
+                val swipeRightBackground = ColorDrawable(Color.parseColor("#CC5200"))
+                val itemView = viewHolder.itemView
+                val removeIconMargin = (itemView.height - removeIcon.intrinsicHeight) / 2
+
+                if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
+                    if (dX > 0) {
+                        swipeRightBackground.setBounds(itemView.left, itemView.top, dX.toInt(), itemView.bottom)
+                        removeIcon.setBounds(itemView.left + removeIconMargin, itemView.top + removeIconMargin, itemView.left + removeIconMargin + removeIcon.intrinsicWidth,
+                            itemView.bottom - removeIconMargin)
+                        swipeRightBackground.draw(canvas)
+                        removeIcon.draw(canvas)
+                    }
+                }
+                super.onChildDraw(canvas, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
             }
         }
         ItemTouchHelper(itemTouchHelperCallback).apply {
