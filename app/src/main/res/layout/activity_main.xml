@@ -37,7 +37,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:hapticFeedbackEnabled="true"
-                android:text="@string/main_monday" />
+                android:text="@string/monday_cap" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -60,7 +60,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:hapticFeedbackEnabled="true"
-                android:text="@string/main_tuesday" />
+                android:text="@string/tuesday_cap" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -83,7 +83,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:hapticFeedbackEnabled="true"
-                android:text="@string/main_wednesday" />
+                android:text="@string/wednesday_cap" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -106,7 +106,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:hapticFeedbackEnabled="true"
-                android:text="@string/main_thursday" />
+                android:text="@string/thursday_cap" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -129,7 +129,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:hapticFeedbackEnabled="true"
-                android:text="@string/main_friday" />
+                android:text="@string/friday_cap" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -152,7 +152,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:hapticFeedbackEnabled="true"
-                android:text="@string/main_saturday" />
+                android:text="@string/saturday_cap" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
@@ -175,7 +175,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:hapticFeedbackEnabled="true"
-                android:text="@string/main_sunday" />
+                android:text="@string/sunday_cap" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

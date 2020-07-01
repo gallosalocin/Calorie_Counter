@@ -5,7 +5,12 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:itemBackground">#1B4F55</item>
+        <item name="popupTheme">@style/popupTheme</item>
+    </style>
+
+    <style name="popupTheme" parent="Theme.AppCompat.Light">
+        <item name="android:background">@android:color/white</item>
+        <item name="android:textColor">@android:color/black</item>
     </style>
 
     <style name="TextView_Details">

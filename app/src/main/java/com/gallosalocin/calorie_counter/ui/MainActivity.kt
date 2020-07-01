@@ -1,13 +1,18 @@
 package com.gallosalocin.calorie_counter.ui
 
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.gallosalocin.calorie_counter.R
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -18,6 +23,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        loadLocate()
         setContentView(R.layout.activity_main)
 
         setSupportActionBar(main_toolbar)
@@ -35,8 +41,49 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             R.id.main_toolbar_set_bmr -> Intent(this, BmrActivity::class.java).also {
                 startActivity(it)
             }
+            R.id.main_language -> {
+                showChangeLanguage()
+            }
         }
         return true
+    }
+
+    private fun showChangeLanguage() {
+        val languageList = arrayOf(getString(R.string.english), getString(R.string.french))
+
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.choose_language))
+            .setIcon(R.drawable.ic_language_black)
+            .setSingleChoiceItems(languageList, -1) { dialog, which ->
+                if (which == 0) {
+                    setLocate("en")
+                    recreate()
+                } else if (which == 1) {
+                    setLocate("fr")
+                    recreate()
+                }
+                dialog.dismiss()
+            }.create().show()
+    }
+
+    private fun setLocate(language: String) {
+        val locale = Locale(language)
+        Locale.setDefault(locale)
+        val config = Configuration()
+        config.locale = locale
+        baseContext.resources.updateConfiguration(config, baseContext.resources.displayMetrics)
+
+        val editor = getSharedPreferences("Settings", Context.MODE_PRIVATE).edit()
+        editor.putString("My_Language", language)
+        editor.apply()
+    }
+
+    private fun loadLocate() {
+        val sharedPreferences = getSharedPreferences("Settings", Activity.MODE_PRIVATE)
+        val language = sharedPreferences.getString("My_Language", "")
+        if (language != null) {
+            setLocate(language)
+        }
     }
 
     override fun onClick(view: View?) {

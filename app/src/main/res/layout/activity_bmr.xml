@@ -32,7 +32,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/gender"
                 style="@style/TextBoldBmr"
-                android:layout_width="80dp"
+                android:layout_width="90dp"
                 android:layout_height="wrap_content"
                 android:text="@string/gender"
                 app:layout_constraintBottom_toTopOf="@id/age"
@@ -262,7 +262,7 @@
                 style="@style/TextBoldBmr"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/fat"
+                android:text="@string/fats"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="@id/gender"
                 app:layout_constraintTop_toBottomOf="@id/tv_daily_calorie_text" />
@@ -289,7 +289,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/fat_result"
                 style="@style/TextView_Details"
-                android:layout_marginStart="50dp"
+                android:layout_marginStart="30dp"
                 app:layout_constraintBottom_toBottomOf="@id/fat"
                 app:layout_constraintLeft_toRightOf="@id/percent_symbol"
                 app:layout_constraintTop_toTopOf="@id/fat" />
@@ -307,7 +307,7 @@
                 style="@style/TextBoldBmr"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/carb"
+                android:text="@string/carbs"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="@id/gender"
                 app:layout_constraintTop_toBottomOf="@id/fat" />
@@ -333,7 +333,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/carb_result"
                 style="@style/TextView_Details"
-                android:layout_marginStart="50dp"
+                android:layout_marginStart="30dp"
                 app:layout_constraintBottom_toBottomOf="@id/carb"
                 app:layout_constraintLeft_toRightOf="@id/percent_symbol"
                 app:layout_constraintTop_toTopOf="@id/carb" />
@@ -351,7 +351,7 @@
                 style="@style/TextBoldBmr"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/prot"
+                android:text="@string/proteins"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="@id/gender"
                 app:layout_constraintTop_toBottomOf="@id/carb" />
@@ -377,7 +377,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/prot_result"
                 style="@style/TextView_Details"
-                android:layout_marginStart="50dp"
+                android:layout_marginStart="30dp"
                 app:layout_constraintBottom_toBottomOf="@id/prot"
                 app:layout_constraintLeft_toRightOf="@id/percent_symbol"
                 app:layout_constraintTop_toTopOf="@id/prot" />
