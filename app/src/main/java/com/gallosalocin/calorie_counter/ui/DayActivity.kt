@@ -30,10 +30,10 @@ class DayActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_day)
 
-        setSupportActionBar(meal_toolbar)
+        setSupportActionBar(bmr_toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        toolbarNameDay()
+        toolbarNameDay(MainActivity.dayTag)
         loadData()
         mealChoice()
 
@@ -99,16 +99,13 @@ class DayActivity : AppCompatActivity() {
         })
     }
 
-    private fun toolbarNameDay() {
-        when (MainActivity.dayTag) {
-            1 -> this.title = getString(R.string.monday_cap)
-            2 -> this.title = getString(R.string.tuesday_cap)
-            3 -> this.title = getString(R.string.wednesday_cap)
-            4 -> this.title = getString(R.string.thursday_cap)
-            5 -> this.title = getString(R.string.friday_cap)
-            6 -> this.title = getString(R.string.saturday_cap)
-            7 -> this.title = getString(R.string.sunday_cap)
-        }
+    private fun toolbarNameDay(dayTag: Int) {
+        val dayTagArray = arrayOf(
+            getString(R.string.monday_cap), getString(R.string.tuesday_cap), getString(R.string.wednesday_cap), getString(R.string.thursday_cap),
+            getString(R.string.friday_cap), getString(R.string.saturday_cap), getString(R.string.sunday_cap)
+        )
+
+        this.title = dayTagArray[dayTag - 1]
     }
 
     private fun loadData() {

@@ -89,8 +89,14 @@
     <string name="change_value_title">Changer le poids de :</string>
     <string name="change_weight">Changer le poids</string>
     <string name="weight_replace">Poids remplacé</string>
-    <string name="Successfully_remove_food">Aliment retiré : %1$s</string>
-    <string name="Successfully_add_food">Aliment ajouté : %1$s</string>
+    <string name="successfully_remove_food">Aliment retiré : %1$s</string>
+    <string name="successfully_add_food">Aliment ajouté : %1$s</string>
+    <string name="delete_alert_dialog_question">Êtes-vous sûr de vouloir supprimer \'%1$s\' de la base de donnée?</string>
     <string name="undo_snackbar">Annuler</string>
     <string name="custom_calorie_saved">Calories personnalisées sauvegardé</string>
+    <string name="yes_alert_dialog">Oui</string>
+    <string name="no_alert_dialog">Non</string>
+    <string name="title_alert_dialog">Supprimer aliment</string>
+    <string name="food_updated">Aliment actualisé</string>
+    <string name="food_added">Aliment ajouté</string>
 </resources>

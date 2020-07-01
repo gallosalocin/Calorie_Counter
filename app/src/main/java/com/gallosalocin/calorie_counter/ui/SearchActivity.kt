@@ -1,7 +1,8 @@
 package com.gallosalocin.calorie_counter.ui
 
 import android.content.Intent
-import android.graphics.*
+import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -10,6 +11,7 @@ import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
@@ -21,6 +23,7 @@ import com.gallosalocin.calorie_counter.adapters.FoodAdapter
 import com.gallosalocin.calorie_counter.models.Food
 import com.gallosalocin.calorie_counter.viewmodel.FoodViewModel
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.activity_details.*
 import kotlinx.android.synthetic.main.activity_search.*
 
 class SearchActivity : AppCompatActivity() {
@@ -31,8 +34,10 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var food: Food
 
     companion object {
+        var isEditableMacros = false
         var isEditableFood = false
         var isInvisible = false
+        var isNewFood = false
         const val EXTRA_FOOD = "food extras"
     }
 
@@ -55,7 +60,6 @@ class SearchActivity : AppCompatActivity() {
 
         foodAdapter = FoodAdapter()
         rv_search.apply {
-//            setHasFixedSize(true)
             adapter = foodAdapter
             layoutManager = LinearLayoutManager(this@SearchActivity)
         }
@@ -87,7 +91,7 @@ class SearchActivity : AppCompatActivity() {
                 Intent(this@SearchActivity, DetailsActivity::class.java).also {
                     food = foodAdapter.differ.currentList[position]
                     it.putExtra(EXTRA_FOOD, food)
-                    isEditableFood = true
+                    isEditableMacros = true
                     startActivity(it)
                 }
                 Toast.makeText(applicationContext, foodAdapter.differ.currentList[position].name, Toast.LENGTH_SHORT).show()
@@ -109,28 +113,49 @@ class SearchActivity : AppCompatActivity() {
                 food = foodAdapter.differ.currentList[position]
 
                 if (direction == ItemTouchHelper.RIGHT) {
-                    foodViewModel.deleteFood(food)
-                    et_search.text?.clear()
-                    Snackbar.make(rv_search, (getString(R.string.Successfully_remove_food, food.name)), Snackbar.LENGTH_LONG).apply {
-                        setAction(getString(R.string.undo_snackbar)) {
-                            foodViewModel.insertFood(food)
+
+                    AlertDialog.Builder(this@SearchActivity)
+                        .setCancelable(false)
+                        .setTitle(getString(R.string.title_alert_dialog))
+                        .setIcon(R.drawable.ic_delete_swipe_black)
+                        .setMessage(getString(R.string.delete_alert_dialog_question, food.name))
+                        .setPositiveButton(getString(R.string.yes_alert_dialog)) { _, _ ->
+                            foodViewModel.deleteFood(food)
+                            et_search.text?.clear()
+                            Snackbar.make(rv_search, (getString(R.string.successfully_remove_food, food.name)), Snackbar.LENGTH_LONG).apply {
+                                setAction(getString(R.string.undo_snackbar)) {
+                                    foodViewModel.insertFood(food)
+                                }
+                                show()
+                            }
                         }
-                        show()
-                    }
+                        .setNegativeButton(getString(R.string.no_alert_dialog)) { _, _ ->
+                            et_search.text?.clear()
+                            setupRecyclerView()
+                            setupListLiveData()
+                        }.create().show()
                 } else {
                     Intent(this@SearchActivity, MealActivity::class.java).also {
                         food.dayMealId = MainActivity.dayTag.toString() + DayActivity.mealTag.toString()
                         foodViewModel.duplicateFood(food.dayMealId, food.id)
                         startActivity(it)
-                        Snackbar.make(rv_search, (getString(R.string.Successfully_add_food, food.name)), Snackbar.LENGTH_LONG).show()
+                        Snackbar.make(rv_search, (getString(R.string.successfully_add_food, food.name)), Snackbar.LENGTH_LONG).show()
                     }
                     finish()
                 }
             }
 
-            override fun onChildDraw(canvas: Canvas, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean) {
-                val deleteIcon: Drawable = ContextCompat.getDrawable(this@SearchActivity, R.drawable.ic_delete_swipe_black)!!
-                val addIcon: Drawable = ContextCompat.getDrawable(this@SearchActivity, R.drawable.ic_add_swipe_black)!!
+            override fun onChildDraw(
+                canvas: Canvas,
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                dX: Float,
+                dY: Float,
+                actionState: Int,
+                isCurrentlyActive: Boolean
+            ) {
+                val deleteIcon: Drawable = ContextCompat.getDrawable(this@SearchActivity, R.drawable.ic_delete_swipe)!!
+                val addIcon: Drawable = ContextCompat.getDrawable(this@SearchActivity, R.drawable.ic_add_swipe)!!
                 val swipeRightBackground = ColorDrawable(Color.parseColor("#FF0000"))
                 val swipeLeftBackground = ColorDrawable(Color.parseColor("#00CC00"))
                 val itemView = viewHolder.itemView
@@ -141,14 +166,20 @@ class SearchActivity : AppCompatActivity() {
 
                     if (dX > 0) {
                         swipeRightBackground.setBounds(itemView.left, itemView.top, dX.toInt(), itemView.bottom)
-                        deleteIcon.setBounds(itemView.left + deleteIconMargin, itemView.top + deleteIconMargin, itemView.left + deleteIconMargin + deleteIcon.intrinsicWidth,
-                            itemView.bottom - deleteIconMargin)
+                        deleteIcon.setBounds(
+                            itemView.left + deleteIconMargin,
+                            itemView.top + deleteIconMargin,
+                            itemView.left + deleteIconMargin + deleteIcon.intrinsicWidth,
+                            itemView.bottom - deleteIconMargin
+                        )
                         swipeRightBackground.draw(canvas)
                         deleteIcon.draw(canvas)
                     } else {
                         swipeLeftBackground.setBounds(itemView.right + dX.toInt(), itemView.top, itemView.right, itemView.bottom)
-                        addIcon.setBounds(itemView.right - addIconMargin - addIcon.intrinsicWidth, itemView.top + addIconMargin, itemView.right - addIconMargin,
-                            itemView.bottom - addIconMargin)
+                        addIcon.setBounds(
+                            itemView.right - addIconMargin - addIcon.intrinsicWidth, itemView.top + addIconMargin, itemView.right - addIconMargin,
+                            itemView.bottom - addIconMargin
+                        )
                         swipeLeftBackground.draw(canvas)
                         addIcon.draw(canvas)
                     }
@@ -254,6 +285,7 @@ class SearchActivity : AppCompatActivity() {
     private fun setupFabCreateFood() {
         fab_create_food.setOnClickListener {
             Intent(this, DetailsActivity::class.java).also {
+                isNewFood = true
                 startActivity(it)
             }
         }
@@ -267,10 +299,4 @@ class SearchActivity : AppCompatActivity() {
         }
         foodAdapter.filterList(filteredFood)
     }
-
-    override fun onPause() {
-        super.onPause()
-        et_search.text?.clear()
-    }
-
 }

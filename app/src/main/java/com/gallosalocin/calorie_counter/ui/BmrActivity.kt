@@ -40,9 +40,7 @@ class BmrActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bmr)
 
-        setSupportActionBar(meal_toolbar)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-
+        configToolbar()
         loadData()
 
         btn_calculate_bmr.setOnClickListener { calculateBmr() }
@@ -61,6 +59,11 @@ class BmrActivity : AppCompatActivity() {
             Toast.makeText(this, getString(R.string.custom_calorie_saved), Toast.LENGTH_SHORT).show()
         }
 
+    }
+
+    private fun configToolbar() {
+        setSupportActionBar(bmr_toolbar)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

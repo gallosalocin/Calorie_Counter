@@ -12,13 +12,11 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.DetailsActivity"
-            android:parentActivityName=".ui.SearchActivity"
-            android:windowSoftInputMode="stateVisible" />
+            android:windowSoftInputMode="stateVisible|adjustResize"/>
         <activity
             android:name=".ui.SearchActivity" />
         <activity
             android:name=".ui.MealActivity"
-            android:noHistory="true"
             android:parentActivityName=".ui.DayActivity" />
         <activity
             android:name=".ui.BmrActivity"

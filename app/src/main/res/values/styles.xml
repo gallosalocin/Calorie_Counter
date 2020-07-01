@@ -8,38 +8,135 @@
         <item name="android:itemBackground">#1B4F55</item>
     </style>
 
-    <style name="MainTitleFont">
-        <item name="android:textSize">40sp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:gravity">center</item>
-    </style>
-
-    <style name="NumberDayFontBold">
+    <style name="TextView_Details">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@android:color/black</item>
     </style>
 
-    <style name="NumberDayFont">
+    <style name="TextBmr">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">10dp</item>
         <item name="android:textSize">18sp</item>
         <item name="android:gravity">center</item>
     </style>
 
-    <style name="DayFont">
-        <item name="android:textSize">16sp</item>
-        <item name="android:gravity">center</item>
-    </style>
-
-    <style name="TitleDayFontBold">
-        <item name="android:textSize">22sp</item>
-        <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="BmrDayFontBold">
+    <style name="TextBoldBmr">
+        <item name="android:layout_marginStart">6dp</item>
+        <item name="android:layout_marginTop">10dp</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <dimen name="day_title_number">6dp</dimen>
+    <style name="CardViewMain">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">70dp</item>
+        <item name="android:layout_marginHorizontal">6dp</item>
+        <item name="android:background">@android:color/white</item>
+        <item name="cardCornerRadius">20dp</item>
+    </style>
+
+    <style name="CardViewDay">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginHorizontal">4dp</item>
+        <item name="android:layout_marginTop">30dp</item>
+        <item name="cardCornerRadius">20dp</item>
+    </style>
+
+    <style name="TextViewMain">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textSize">40sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="NameMealDay">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginStart">10dp</item>
+    </style>
+
+    <style name="ValuesMacrosDay">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_marginStart">2dp</item>
+        <item name="android:layout_marginTop">6dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="ValuesMacrosTitle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">2dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="ValuesMacrosDayOverall">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">2dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="NameMacrosOverall">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">2dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">21sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ValuesMacrosItem">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">2dp</item>
+        <item name="android:layout_marginTop">6dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="NameFoodItem">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginStart">6dp</item>
+    </style>
+
+    <style name="WeightItem">
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginHorizontal">2dp</item>
+        <item name="android:layout_marginTop">6dp</item>
+        <item name="android:textAlignment">viewEnd</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="WeightSymbolItem">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginEnd">20dp</item>
+        <item name="android:layout_marginTop">6dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:text">@string/gram</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>

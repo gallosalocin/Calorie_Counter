@@ -7,9 +7,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.gallosalocin.calorie_counter.R
-import kotlinx.android.synthetic.main.activity_day.*
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.meal_toolbar
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -18,17 +16,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        setSupportActionBar(meal_toolbar)
+        setSupportActionBar(main_toolbar)
 
         dayChoice()
-
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -46,7 +40,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(view: View?) {
-        when(view?.id) {
+        when (view?.id) {
             R.id.monday -> Intent(this, DayActivity::class.java).also {
                 dayTag = 1
                 startActivity(it)
@@ -87,8 +81,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         saturday.setOnClickListener(this)
         sunday.setOnClickListener(this)
     }
-
-
 
 
 }

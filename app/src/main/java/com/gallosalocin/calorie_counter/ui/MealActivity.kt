@@ -18,7 +18,6 @@ import com.gallosalocin.calorie_counter.adapters.FoodAdapter
 import com.gallosalocin.calorie_counter.models.Food
 import com.gallosalocin.calorie_counter.viewmodel.FoodViewModel
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.activity_day.meal_toolbar
 import kotlinx.android.synthetic.main.activity_meal.*
 
 class MealActivity : AppCompatActivity() {
@@ -39,7 +38,7 @@ class MealActivity : AppCompatActivity() {
         setContentView(R.layout.activity_meal)
 
         configToolbar()
-        toolbarMealName()
+        toolbarMealName(MainActivity.dayTag, DayActivity.mealTag)
         setupFabAddFood()
 
         setupRecycleView()
@@ -123,7 +122,7 @@ class MealActivity : AppCompatActivity() {
 
                 if (direction == ItemTouchHelper.RIGHT) {
                     foodViewModel.deleteFood(food)
-                    Snackbar.make(rv_meal, (getString(R.string.Successfully_remove_food, food.name)), Snackbar.LENGTH_LONG).apply {
+                    Snackbar.make(rv_meal, (getString(R.string.successfully_remove_food, food.name)), Snackbar.LENGTH_LONG).apply {
                         setAction(getString(R.string.undo_snackbar)) {
                             foodViewModel.insertFood(food)
                         }
@@ -132,17 +131,29 @@ class MealActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onChildDraw(canvas: Canvas, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean) {
-                val removeIcon: Drawable = ContextCompat.getDrawable(this@MealActivity, R.drawable.ic_remove_swipe_black)!!
-                val swipeRightBackground = ColorDrawable(Color.parseColor("#CC5200"))
+            override fun onChildDraw(
+                canvas: Canvas,
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                dX: Float,
+                dY: Float,
+                actionState: Int,
+                isCurrentlyActive: Boolean
+            ) {
+                val removeIcon: Drawable = ContextCompat.getDrawable(this@MealActivity, R.drawable.ic_remove_swipe)!!
+                val swipeRightBackground = ColorDrawable(Color.parseColor("#FF9900"))
                 val itemView = viewHolder.itemView
                 val removeIconMargin = (itemView.height - removeIcon.intrinsicHeight) / 2
 
                 if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
                     if (dX > 0) {
                         swipeRightBackground.setBounds(itemView.left, itemView.top, dX.toInt(), itemView.bottom)
-                        removeIcon.setBounds(itemView.left + removeIconMargin, itemView.top + removeIconMargin, itemView.left + removeIconMargin + removeIcon.intrinsicWidth,
-                            itemView.bottom - removeIconMargin)
+                        removeIcon.setBounds(
+                            itemView.left + removeIconMargin,
+                            itemView.top + removeIconMargin,
+                            itemView.left + removeIconMargin + removeIcon.intrinsicWidth,
+                            itemView.bottom - removeIconMargin
+                        )
                         swipeRightBackground.draw(canvas)
                         removeIcon.draw(canvas)
                     }
@@ -155,12 +166,14 @@ class MealActivity : AppCompatActivity() {
         }
     }
 
-    private fun toolbarMealName() {
-        when (DayActivity.mealTag) {
-            1 -> this.title = getString(R.string.breakfast_cap)
-            2 -> this.title = getString(R.string.lunch_cap)
-            3 -> this.title = getString(R.string.dinner_cap)
-            4 -> this.title = getString(R.string.snack_cap)
-        }
+    private fun toolbarMealName(dayTag: Int, mealTag: Int) {
+        val dayTagArray = arrayOf(
+            getString(R.string.monday_cap), getString(R.string.tuesday_cap), getString(R.string.wednesday_cap), getString(R.string.thursday_cap),
+            getString(R.string.friday_cap), getString(R.string.saturday_cap), getString(R.string.sunday_cap)
+        )
+        val mealTagArray = arrayOf(
+            getString(R.string.breakfast_cap), getString(R.string.lunch_cap), getString(R.string.dinner_cap), getString(R.string.snack_cap))
+
+        this.title = dayTagArray[dayTag - 1] + " / " + mealTagArray[mealTag - 1]
     }
 }

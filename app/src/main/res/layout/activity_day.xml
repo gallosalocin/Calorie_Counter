@@ -8,7 +8,7 @@
     tools:context=".ui.DayActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/meal_toolbar"
+        android:id="@+id/bmr_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
@@ -25,7 +25,7 @@
         app:cardCornerRadius="6dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/meal_toolbar">
+        app:layout_constraintTop_toBottomOf="@id/bmr_toolbar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -33,11 +33,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/overall_day_cal_title"
-                style="@style/TitleDayFontBold"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:gravity="center"
+                style="@style/NameMacrosOverall"
                 android:text="@string/calories"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/overall_day_fat_title"
@@ -45,11 +41,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/overall_day_fat_title"
-                style="@style/TitleDayFontBold"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:gravity="center"
+                style="@style/NameMacrosOverall"
                 android:text="@string/fats"
                 app:layout_constraintLeft_toRightOf="@id/overall_day_cal_title"
                 app:layout_constraintRight_toLeftOf="@id/overall_day_carb_title"
@@ -57,11 +49,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/overall_day_carb_title"
-                style="@style/TitleDayFontBold"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:gravity="center"
+                style="@style/NameMacrosOverall"
                 android:text="@string/carbs"
                 app:layout_constraintLeft_toRightOf="@id/overall_day_fat_title"
                 app:layout_constraintRight_toLeftOf="@id/overall_day_prot_title"
@@ -69,11 +57,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/overall_day_prot_title"
-                style="@style/TitleDayFontBold"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:gravity="center"
+                style="@style/NameMacrosOverall"
                 android:text="@string/proteins"
                 app:layout_constraintLeft_toRightOf="@id/overall_day_carb_title"
                 app:layout_constraintRight_toRightOf="parent"
@@ -81,10 +65,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/day_cal_total"
-                style="@style/NumberDayFont"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
+                style="@style/ValuesMacrosTitle"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/day_fat_total"
                 app:layout_constraintTop_toBottomOf="@id/overall_day_cal_title"
@@ -92,10 +73,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/day_fat_total"
-                style="@style/NumberDayFont"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
+                style="@style/ValuesMacrosTitle"
                 app:layout_constraintLeft_toRightOf="@id/day_cal_total"
                 app:layout_constraintRight_toLeftOf="@id/day_carb_total"
                 app:layout_constraintTop_toBottomOf="@id/overall_day_cal_title"
@@ -103,10 +81,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/day_carb_total"
-                style="@style/NumberDayFont"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
+                style="@style/ValuesMacrosTitle"
                 app:layout_constraintLeft_toRightOf="@id/day_fat_total"
                 app:layout_constraintRight_toLeftOf="@id/day_prot_total"
                 app:layout_constraintTop_toBottomOf="@id/overall_day_cal_title"
@@ -114,10 +89,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/day_prot_total"
-                style="@style/NumberDayFont"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
+                style="@style/ValuesMacrosTitle"
                 app:layout_constraintLeft_toRightOf="@id/day_carb_total"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/overall_day_cal_title"
@@ -125,10 +97,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/overall_day_cal_total"
-                style="@style/NumberDayFontBold"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
+                style="@style/ValuesMacrosDayOverall"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/overall_day_fat_total"
                 app:layout_constraintTop_toBottomOf="@id/day_cal_total"
@@ -136,10 +105,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/overall_day_fat_total"
-                style="@style/NumberDayFontBold"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
+                style="@style/ValuesMacrosDayOverall"
                 app:layout_constraintLeft_toRightOf="@id/overall_day_cal_total"
                 app:layout_constraintRight_toLeftOf="@id/overall_day_carb_total"
                 app:layout_constraintTop_toBottomOf="@id/day_cal_total"
@@ -147,10 +113,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/overall_day_carb_total"
-                style="@style/NumberDayFontBold"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
+                style="@style/ValuesMacrosDayOverall"
                 app:layout_constraintLeft_toRightOf="@id/overall_day_fat_total"
                 app:layout_constraintRight_toLeftOf="@id/overall_day_prot_total"
                 app:layout_constraintTop_toBottomOf="@id/day_cal_total"
@@ -158,10 +121,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/overall_day_prot_total"
-                style="@style/NumberDayFontBold"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
+                style="@style/ValuesMacrosDayOverall"
                 app:layout_constraintLeft_toRightOf="@id/overall_day_carb_total"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/day_cal_total"
@@ -172,12 +132,8 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_breakfast"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="4dp"
-        app:cardCornerRadius="12dp"
+        style="@style/CardViewDay"
+        android:hapticFeedbackEnabled="true"
         app:layout_constraintBottom_toTopOf="@id/cv_lunch"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -187,15 +143,13 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:focusable="true">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/breakfast"
-                style="@style/TitleDayFontBold"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:gravity="center_vertical"
-                android:layout_marginStart="6dp"
+                style="@style/NameMealDay"
                 android:text="@string/breakfast"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -203,54 +157,38 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/breakfast_day_cal"
-                style="@style/DayFont"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="@dimen/day_title_number"
+                style="@style/ValuesMacrosDay"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/breakfast_day_fat"
                 app:layout_constraintTop_toBottomOf="@id/breakfast"
-                app:layout_constraintBottom_toBottomOf="parent"
                 tools:text="2257" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/breakfast_day_fat"
-                style="@style/DayFont"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="@dimen/day_title_number"
+                style="@style/ValuesMacrosDay"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@id/breakfast_day_cal"
                 app:layout_constraintRight_toLeftOf="@id/breakfast_day_carb"
                 app:layout_constraintTop_toBottomOf="@id/breakfast"
-                app:layout_constraintBottom_toBottomOf="parent"
                 tools:text="68" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/breakfast_day_carb"
-                style="@style/DayFont"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="@dimen/day_title_number"
+                style="@style/ValuesMacrosDay"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@id/breakfast_day_fat"
                 app:layout_constraintRight_toLeftOf="@id/breakfast_day_prot"
                 app:layout_constraintTop_toBottomOf="@id/breakfast"
-                app:layout_constraintBottom_toBottomOf="parent"
                 tools:text="237" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/breakfast_day_prot"
-                style="@style/DayFont"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="@dimen/day_title_number"
+                style="@style/ValuesMacrosDay"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@id/breakfast_day_carb"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/breakfast"
-                app:layout_constraintBottom_toBottomOf="parent"
                 tools:text="155" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -259,12 +197,8 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_lunch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="4dp"
-        app:cardCornerRadius="12dp"
+        style="@style/CardViewDay"
+        android:hapticFeedbackEnabled="true"
         app:layout_constraintBottom_toTopOf="@id/cv_dinner"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -272,15 +206,13 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:focusable="true">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/lunch"
-                style="@style/TitleDayFontBold"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:gravity="center_vertical"
-                android:layout_marginStart="6dp"
+                style="@style/NameMealDay"
                 android:text="@string/lunch"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -289,11 +221,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/lunch_day_cal"
-                style="@style/DayFont"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="@dimen/day_title_number"
+                style="@style/ValuesMacrosDay"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/lunch_day_fat"
                 app:layout_constraintTop_toBottomOf="@id/lunch"
@@ -301,11 +229,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/lunch_day_fat"
-                style="@style/DayFont"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="@dimen/day_title_number"
+                style="@style/ValuesMacrosDay"
                 app:layout_constraintLeft_toRightOf="@id/lunch_day_cal"
                 app:layout_constraintRight_toLeftOf="@id/lunch_day_carb"
                 app:layout_constraintTop_toBottomOf="@id/lunch"
@@ -313,11 +237,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/lunch_day_carb"
-                style="@style/DayFont"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="@dimen/day_title_number"
+                style="@style/ValuesMacrosDay"
                 app:layout_constraintLeft_toRightOf="@id/lunch_day_fat"
                 app:layout_constraintRight_toLeftOf="@id/lunch_day_prot"
                 app:layout_constraintTop_toBottomOf="@id/lunch"
@@ -325,11 +245,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/lunch_day_prot"
-                style="@style/DayFont"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="@dimen/day_title_number"
+                style="@style/ValuesMacrosDay"
                 app:layout_constraintLeft_toRightOf="@id/lunch_day_carb"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/lunch"
@@ -340,12 +256,8 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_dinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="4dp"
-        app:cardCornerRadius="12dp"
+        style="@style/CardViewDay"
+        android:hapticFeedbackEnabled="true"
         app:layout_constraintBottom_toTopOf="@id/cv_snack"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -353,15 +265,13 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:focusable="true">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/dinner"
-                style="@style/TitleDayFontBold"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:gravity="center_vertical"
-                android:layout_marginStart="6dp"
+                style="@style/NameMealDay"
                 android:text="@string/dinner"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -370,11 +280,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/dinner_day_cal"
-                style="@style/DayFont"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="@dimen/day_title_number"
+                style="@style/ValuesMacrosDay"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/dinner_day_fat"
                 app:layout_constraintTop_toBottomOf="@id/dinner"
@@ -382,11 +288,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/dinner_day_fat"
-                style="@style/DayFont"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="@dimen/day_title_number"
+                style="@style/ValuesMacrosDay"
                 app:layout_constraintLeft_toRightOf="@id/dinner_day_cal"
                 app:layout_constraintRight_toLeftOf="@id/dinner_day_carb"
                 app:layout_constraintTop_toBottomOf="@id/dinner"
@@ -394,11 +296,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/dinner_day_carb"
-                style="@style/DayFont"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="@dimen/day_title_number"
+                style="@style/ValuesMacrosDay"
                 app:layout_constraintLeft_toRightOf="@id/dinner_day_fat"
                 app:layout_constraintRight_toLeftOf="@id/dinner_day_prot"
                 app:layout_constraintTop_toBottomOf="@id/dinner"
@@ -406,11 +304,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/dinner_day_prot"
-                style="@style/DayFont"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="@dimen/day_title_number"
+                style="@style/ValuesMacrosDay"
                 app:layout_constraintLeft_toRightOf="@id/dinner_day_carb"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/dinner"
@@ -421,12 +315,8 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_snack"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="4dp"
-        app:cardCornerRadius="12dp"
+        style="@style/CardViewDay"
+        android:hapticFeedbackEnabled="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -434,15 +324,13 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:focusable="true">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/snack"
-                style="@style/TitleDayFontBold"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:gravity="center_vertical"
-                android:layout_marginStart="6dp"
+                style="@style/NameMealDay"
                 android:text="@string/snack"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -450,11 +338,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/snack_day_cal"
-                style="@style/DayFont"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="@dimen/day_title_number"
+                style="@style/ValuesMacrosDay"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/snack_day_fat"
                 app:layout_constraintTop_toBottomOf="@id/snack"
@@ -462,11 +346,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/snack_day_fat"
-                style="@style/DayFont"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="@dimen/day_title_number"
+                style="@style/ValuesMacrosDay"
                 app:layout_constraintLeft_toRightOf="@id/snack_day_cal"
                 app:layout_constraintRight_toLeftOf="@id/snack_day_carb"
                 app:layout_constraintTop_toBottomOf="@id/snack"
@@ -474,11 +354,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/snack_day_carb"
-                style="@style/DayFont"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="@dimen/day_title_number"
+                style="@style/ValuesMacrosDay"
                 app:layout_constraintLeft_toRightOf="@id/snack_day_fat"
                 app:layout_constraintRight_toLeftOf="@id/snack_day_prot"
                 app:layout_constraintTop_toBottomOf="@id/snack"
@@ -486,11 +362,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/snack_day_prot"
-                style="@style/DayFont"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="@dimen/day_title_number"
+                style="@style/ValuesMacrosDay"
                 app:layout_constraintLeft_toRightOf="@id/snack_day_carb"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/snack"

@@ -34,11 +34,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/overall_day_cal_title"
-                style="@style/TitleDayFontBold"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:gravity="center"
+                style="@style/NameMacrosOverall"
                 android:text="@string/calories"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/overall_day_fat_title"
@@ -46,11 +42,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/overall_day_fat_title"
-                style="@style/TitleDayFontBold"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:gravity="center"
+                style="@style/NameMacrosOverall"
                 android:text="@string/fats"
                 app:layout_constraintLeft_toRightOf="@id/overall_day_cal_title"
                 app:layout_constraintRight_toLeftOf="@id/overall_day_carb_title"
@@ -58,11 +50,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/overall_day_carb_title"
-                style="@style/TitleDayFontBold"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:gravity="center"
+                style="@style/NameMacrosOverall"
                 android:text="@string/carbs"
                 app:layout_constraintLeft_toRightOf="@id/overall_day_fat_title"
                 app:layout_constraintRight_toLeftOf="@id/overall_day_prot_title"
@@ -70,11 +58,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/overall_day_prot_title"
-                style="@style/TitleDayFontBold"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:gravity="center"
+                style="@style/NameMacrosOverall"
                 android:text="@string/proteins"
                 app:layout_constraintLeft_toRightOf="@id/overall_day_carb_title"
                 app:layout_constraintRight_toRightOf="parent"
@@ -82,10 +66,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/meal_cal_total"
-                style="@style/NumberDayFont"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
+                style="@style/ValuesMacrosTitle"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/meal_fat_total"
                 app:layout_constraintTop_toBottomOf="@id/overall_day_cal_title"
@@ -93,10 +74,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/meal_fat_total"
-                style="@style/NumberDayFont"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
+                style="@style/ValuesMacrosTitle"
                 app:layout_constraintLeft_toRightOf="@id/meal_cal_total"
                 app:layout_constraintRight_toLeftOf="@id/meal_carb_total"
                 app:layout_constraintTop_toBottomOf="@id/overall_day_cal_title"
@@ -104,10 +82,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/meal_carb_total"
-                style="@style/NumberDayFont"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
+                style="@style/ValuesMacrosTitle"
                 app:layout_constraintLeft_toRightOf="@id/meal_fat_total"
                 app:layout_constraintRight_toLeftOf="@id/meal_prot_total"
                 app:layout_constraintTop_toBottomOf="@id/overall_day_cal_title"
@@ -115,10 +90,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/meal_prot_total"
-                style="@style/NumberDayFont"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
+                style="@style/ValuesMacrosTitle"
                 app:layout_constraintLeft_toRightOf="@id/meal_carb_total"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/overall_day_cal_title"
@@ -143,6 +115,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:hapticFeedbackEnabled="true"
         android:src="@drawable/ic_add"
         app:layout_anchor="@id/rv_meal"
         app:layout_anchorGravity="bottom|right"

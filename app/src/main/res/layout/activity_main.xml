@@ -8,7 +8,7 @@
     tools:context=".ui.MainActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/meal_toolbar"
+        android:id="@+id/main_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
@@ -18,89 +18,164 @@
         app:layout_constraintTop_toTopOf="parent"
         app:title="@string/app_name" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/monday"
-        style="@style/MainTitleFont"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@android:color/white"
-        android:text="@string/main_monday"
-        app:layout_constraintBottom_toTopOf="@+id/tuesday"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_main_monday"
+        style="@style/CardViewMain"
+        app:layout_constraintBottom_toTopOf="@+id/cv_main_tuesday"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/meal_toolbar" />
+        app:layout_constraintTop_toBottomOf="@id/main_toolbar">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tuesday"
-        style="@style/MainTitleFont"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@android:color/white"
-        android:text="@string/main_tuesday"
-        app:layout_constraintBottom_toTopOf="@+id/wednesday"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/monday"
+                style="@style/TextViewMain"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:hapticFeedbackEnabled="true"
+                android:text="@string/main_monday" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_main_tuesday"
+        style="@style/CardViewMain"
+        app:layout_constraintBottom_toTopOf="@+id/cv_main_wednesday"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/monday" />
+        app:layout_constraintTop_toBottomOf="@+id/cv_main_monday">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/wednesday"
-        style="@style/MainTitleFont"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@android:color/white"
-        android:text="@string/main_wednesday"
-        app:layout_constraintBottom_toTopOf="@+id/thursday"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tuesday"
+                style="@style/TextViewMain"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:hapticFeedbackEnabled="true"
+                android:text="@string/main_tuesday" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_main_wednesday"
+        style="@style/CardViewMain"
+        app:layout_constraintBottom_toTopOf="@+id/cv_main_thursday"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tuesday" />
+        app:layout_constraintTop_toBottomOf="@+id/cv_main_tuesday">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/thursday"
-        style="@style/MainTitleFont"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@android:color/white"
-        android:text="@string/main_thursday"
-        app:layout_constraintBottom_toTopOf="@+id/friday"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/wednesday"
+                style="@style/TextViewMain"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:hapticFeedbackEnabled="true"
+                android:text="@string/main_wednesday" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_main_thursday"
+        style="@style/CardViewMain"
+        app:layout_constraintBottom_toTopOf="@+id/cv_main_friday"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/wednesday" />
+        app:layout_constraintTop_toBottomOf="@+id/cv_main_wednesday">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/friday"
-        style="@style/MainTitleFont"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@android:color/white"
-        android:text="@string/main_friday"
-        app:layout_constraintBottom_toTopOf="@id/saturday"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/thursday"
+                style="@style/TextViewMain"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:hapticFeedbackEnabled="true"
+                android:text="@string/main_thursday" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_main_friday"
+        style="@style/CardViewMain"
+        app:layout_constraintBottom_toTopOf="@id/cv_main_saturday"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/thursday" />
+        app:layout_constraintTop_toBottomOf="@+id/cv_main_thursday">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/saturday"
-        style="@style/MainTitleFont"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@android:color/white"
-        android:text="@string/main_saturday"
-        app:layout_constraintBottom_toTopOf="@+id/sunday"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/friday"
+                style="@style/TextViewMain"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:hapticFeedbackEnabled="true"
+                android:text="@string/main_friday" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_main_saturday"
+        style="@style/CardViewMain"
+        app:layout_constraintBottom_toTopOf="@+id/cv_main_sunday"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/friday" />
+        app:layout_constraintTop_toBottomOf="@+id/cv_main_friday">
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/sunday"
-        style="@style/MainTitleFont"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@android:color/white"
-        android:text="@string/main_sunday"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/saturday"
+                style="@style/TextViewMain"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:hapticFeedbackEnabled="true"
+                android:text="@string/main_saturday" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_main_sunday"
+        style="@style/CardViewMain"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/saturday" />
+        app:layout_constraintTop_toBottomOf="@+id/cv_main_saturday">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/sunday"
+                style="@style/TextViewMain"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:hapticFeedbackEnabled="true"
+                android:text="@string/main_sunday" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

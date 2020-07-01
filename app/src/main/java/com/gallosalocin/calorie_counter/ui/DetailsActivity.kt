@@ -37,7 +37,6 @@ class DetailsActivity : AppCompatActivity() {
         et_details_weight.requestFocus()
 
         foodViewModel = ViewModelProvider(this).get(FoodViewModel::class.java)
-
     }
 
 
@@ -65,12 +64,8 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private fun isEditableFood() {
-        if (SearchActivity.isEditableFood) {
-            onGetExtrasFromSearch()
-        }
-        if (MealActivity.isEditableFood) {
-            onGetExtrasFromMeal()
-        }
+        if (SearchActivity.isEditableFood || SearchActivity.isEditableMacros) onGetExtrasFromSearch()
+        if (MealActivity.isEditableFood) onGetExtrasFromMeal()
     }
 
     private fun onGetExtrasFromSearch() {
@@ -82,11 +77,10 @@ class DetailsActivity : AppCompatActivity() {
                 position = categoryList.indexOf(item)
             }
         }
-
         et_details_name.setText(food.name)
         spinner_category.setSelection(position)
         et_details_calorie.setText(((100 * food.calorie) / food.weight).toString())
-        et_details_weight.setText(((100 * food.weight) / food.weight).toString())
+        et_details_weight.setText(food.weight.toString())
         et_details_fat.setText(((100 * food.fat) / food.weight).toString())
         et_details_carb.setText(((100 * food.carb) / food.weight).toString())
         et_details_prot.setText(((100 * food.prot) / food.weight).toString())
@@ -102,15 +96,15 @@ class DetailsActivity : AppCompatActivity() {
                 position = categoryList.indexOf(item)
             }
         }
-
         et_details_name.setText(food.name)
         spinner_category.setSelection(position)
         et_details_calorie.setText(((100 * food.calorie) / food.weight).toString())
-        et_details_weight.setText(((100 * food.weight) / food.weight).toString())
+        et_details_weight.setText(food.weight.toString())
         et_details_fat.setText(((100 * food.fat) / food.weight).toString())
         et_details_carb.setText(((100 * food.carb) / food.weight).toString())
         et_details_prot.setText(((100 * food.prot) / food.weight).toString())
         details_note.setText(food.note)
+
     }
 
     private fun saveOrUpdateFood() {
@@ -122,7 +116,7 @@ class DetailsActivity : AppCompatActivity() {
             spinner_category.tag as Int,
             details_note.text.toString(),
             et_details_calorie.text.toString().toFloat(),
-            100,
+            et_details_weight.text.toString().toInt(),
             et_details_fat.text.toString().toFloat(),
             et_details_carb.text.toString().toFloat(),
             et_details_prot.text.toString().toFloat()
@@ -139,10 +133,18 @@ class DetailsActivity : AppCompatActivity() {
             foodViewModel.updateFood(saveOrUpdateFood)
             SearchActivity.isEditableFood = false
             MealActivity.isEditableFood = false
-            Toast.makeText(this, "Aliment actualisé", Toast.LENGTH_SHORT).show()
-        } else {
+            Toast.makeText(this, getString(R.string.food_updated), Toast.LENGTH_SHORT).show()
+        } else if (SearchActivity.isEditableMacros) {
+            et_details_weight.setText(100.toString())
+            saveOrUpdateFood.id = food.id
+            saveOrUpdateFood.dayMealId = food.dayMealId
+            saveOrUpdateFood.weight = et_details_weight.text.toString().toInt()
+            foodViewModel.updateFood(saveOrUpdateFood)
+            SearchActivity.isEditableMacros = false
+            Toast.makeText(this, getString(R.string.food_updated), Toast.LENGTH_SHORT).show()
+        } else if (SearchActivity.isNewFood){
             foodViewModel.insertFood(saveOrUpdateFood)
-            Toast.makeText(this, "Aliment ajouté", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.food_added), Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -214,7 +216,7 @@ class DetailsActivity : AppCompatActivity() {
 
     // Validate Input Methods
     private fun confirmInput() {
-        if (!validateName() || !validateCategory() || !validateCalorie() || !validateFat() || !validateCarb() || !validateProt()) {
+        if (!validateName() || !validateCategory() || !validateCalorie() || !validateFat() || !validateCarb() || !validateProt() || !validateWeight()) {
             return
         }
         saveOrUpdateFood()
