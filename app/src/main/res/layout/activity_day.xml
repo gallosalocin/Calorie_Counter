@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#4335504D"
+    android:background="@drawable/gradient_ryo"
     tools:context=".ui.DayActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -22,6 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="2dp"
+        app:cardBackgroundColor="@color/colorPrimaryDark"
         app:cardCornerRadius="6dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
