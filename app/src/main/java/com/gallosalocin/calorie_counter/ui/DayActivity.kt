@@ -1,14 +1,16 @@
 package com.gallosalocin.calorie_counter.ui
 
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.gallosalocin.calorie_counter.R
 import com.gallosalocin.calorie_counter.models.Food
+import com.gallosalocin.calorie_counter.models.User
 import com.gallosalocin.calorie_counter.viewmodel.FoodViewModel
+import com.gallosalocin.calorie_counter.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.activity_day.*
 
 class DayActivity : AppCompatActivity() {
@@ -20,11 +22,12 @@ class DayActivity : AppCompatActivity() {
     private lateinit var allFoodBySnack: List<Food>
     private lateinit var allFoodMacrosTotal: List<Food>
 
+    private var user: User? = User()
+    private lateinit var userViewModel: UserViewModel
+
     companion object {
         var mealTag = 0
     }
-
-    private lateinit var sharedPref: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,10 +37,13 @@ class DayActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         toolbarNameDay(MainActivity.dayTag)
-        loadData()
         mealChoice()
 
         foodViewModel = ViewModelProvider(this).get(FoodViewModel::class.java)
+        userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
+
+        loadUserData()
+
         calculateMacrosBreakfast()
         calculateMacrosLunch()
         calculateMacrosDinner()
@@ -108,18 +114,14 @@ class DayActivity : AppCompatActivity() {
         this.title = dayTagArray[dayTag - 1]
     }
 
-    private fun loadData() {
-        sharedPref = getSharedPreferences(BmrActivity.PREF_BMR, Context.MODE_PRIVATE)
-
-        val savedDailyCalorie = sharedPref.getFloat("dailyCalories", 0F)
-        val savedFatResult = sharedPref.getInt("fatResult", 0)
-        val savedCarbResult = sharedPref.getInt("carbResult", 0)
-        val savedProtResult = sharedPref.getInt("protResult", 0)
-
-        overall_day_cal_total.text = savedDailyCalorie.toInt().toString()
-        overall_day_fat_total.text = savedFatResult.toString()
-        overall_day_carb_total.text = savedCarbResult.toString()
-        overall_day_prot_total.text = savedProtResult.toString()
+    private fun loadUserData() {
+        userViewModel.getUser.observe(this, Observer {
+            user = it
+            overall_day_cal_total.text = user?.dailyCalories?.toInt().toString()
+            overall_day_fat_total.text = user?.fatResult.toString()
+            overall_day_carb_total.text = user?.carbResult.toString()
+            overall_day_prot_total.text = user?.protResult.toString()
+        })
     }
 
     private fun mealChoice() {

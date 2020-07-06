@@ -1,6 +1,5 @@
 package com.gallosalocin.calorie_counter.ui
 
-import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
@@ -8,57 +7,28 @@ import android.view.MenuItem
 import android.widget.RadioButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.gallosalocin.calorie_counter.R
+import com.gallosalocin.calorie_counter.models.User
+import com.gallosalocin.calorie_counter.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.activity_bmr.*
 
 class BmrActivity : AppCompatActivity() {
 
-    private var resultBmr = 0F
-    private var checkedGender = 0
-    private var age = 0
-    private var height = 0
-    private var weight = 0
-    private var checkedActivity = 0
-    private var fatPercent = 0
-    private var carbPercent = 0
-    private var protPercent = 0
-    private var dailyCalories = 0F
-    private var fatResult = 0
-    private var carbResult = 0
-    private var protResult = 0
-
-
-    private lateinit var sharedPref: SharedPreferences
-    private lateinit var editor: SharedPreferences.Editor
-
-    companion object {
-        const val PREF_BMR = "myBMR"
-    }
-
+    private lateinit var user: User
+    private lateinit var userViewModel: UserViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bmr)
 
         configToolbar()
-        loadData()
 
-        btn_calculate_bmr.setOnClickListener { calculateBmr() }
+        userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
 
-        btn_calculate_daily_calorie.setOnClickListener {
-            calculateBmr()
-            calculateDailyCalories()
-            calculateMacros()
-        }
-
-        btn_calculate_macros.setOnClickListener { calculateMacros() }
-
-        iv_custom_calorie.setOnClickListener {
-            dailyCalories = et_daily_calorie_result.text.toString().toFloat()
-            calculateMacros()
-            Toast.makeText(this, getString(R.string.custom_calorie_saved), Toast.LENGTH_SHORT).show()
-        }
-
+        loadUserData()
+        initButton()
     }
 
     private fun configToolbar() {
@@ -76,7 +46,7 @@ class BmrActivity : AppCompatActivity() {
             R.id.bmr_toolbar_save -> {
                 calculateBmr()
                 calculateMacros()
-                savedData()
+                saveUserData()
                 finish()
                 Toast.makeText(this, getString(R.string.profile_saved), Toast.LENGTH_LONG).show()
             }
@@ -86,99 +56,100 @@ class BmrActivity : AppCompatActivity() {
     }
 
     private fun calculateBmr() {
+        user.checkedGender = radio_group_gender.checkedRadioButtonId
+        val gender = findViewById<RadioButton>(user.checkedGender)
+        user.age = age_value.text.toString().toInt()
+        user.height = height_value.text.toString().toInt()
+        user.weight = weight_value.text.toString().toInt()
 
-        checkedGender = radio_group_gender.checkedRadioButtonId
-        val gender = findViewById<RadioButton>(checkedGender)
-        age = age_value.text.toString().toInt()
-        height = height_value.text.toString().toInt()
-        weight = weight_value.text.toString().toInt()
+        user.bmrResult =
+            (if (gender == gender_male) 66 + (13.7 * user.weight) + (5 * user.height) - (6.8 * user.age) else 655 + (9.6 * user.weight) + (1.8 * user.height) - (4.7 * user.age)).toFloat()
 
-        resultBmr =
-            (if (gender == gender_male) 66 + (13.7 * weight) + (5 * height) - (6.8 * age) else 655 + (9.6 * weight) + (1.8 * height) - (4.7 * age)).toFloat()
-
-        tv_bmr_result.text = resultBmr.toInt().toString()
+        tv_bmr_result.text = user.bmrResult.toInt().toString()
     }
 
     private fun calculateDailyCalories() {
-        checkedActivity = radio_group_activity_level.checkedRadioButtonId
+        user.checkedActivity = radio_group_activity_level.checkedRadioButtonId
 
-        when (findViewById<RadioButton>(checkedActivity)) {
-            level1 -> dailyCalories = resultBmr * 1.2F
-            level2 -> dailyCalories = resultBmr * 1.375F
-            level3 -> dailyCalories = resultBmr * 1.55F
-            level4 -> dailyCalories = resultBmr * 1.725F
-            level5 -> dailyCalories = resultBmr * 1.9F
+        when (findViewById<RadioButton>(user.checkedActivity)) {
+            level1 -> user.dailyCalories = user.bmrResult * 1.2F
+            level2 -> user.dailyCalories = user.bmrResult * 1.375F
+            level3 -> user.dailyCalories = user.bmrResult * 1.55F
+            level4 -> user.dailyCalories = user.bmrResult * 1.725F
+            level5 -> user.dailyCalories = user.bmrResult * 1.9F
         }
-        et_daily_calorie_result.setText(dailyCalories.toInt().toString())
+        et_daily_calorie_result.setText(user.dailyCalories.toInt().toString())
     }
 
     private fun calculateMacros() {
 
-        fatPercent = fat_percent.text.toString().toInt()
-        carbPercent = carb_percent.text.toString().toInt()
-        protPercent = prot_percent.text.toString().toInt()
+        user.fatPercent = fat_percent.text.toString().toInt()
+        user.carbPercent = carb_percent.text.toString().toInt()
+        user.protPercent = prot_percent.text.toString().toInt()
 
-        fatResult = (((dailyCalories * fatPercent) / 100) / 9).toInt()
-        carbResult = (((dailyCalories * carbPercent) / 100) / 4).toInt()
-        protResult = (((dailyCalories * protPercent) / 100) / 4).toInt()
+        user.fatResult = (((user.dailyCalories * user.fatPercent) / 100) / 9).toInt()
+        user.carbResult = (((user.dailyCalories * user.carbPercent) / 100) / 4).toInt()
+        user.protResult = (((user.dailyCalories * user.protPercent) / 100) / 4).toInt()
 
-        fat_result.text = fatResult.toString()
-        carb_result.text = carbResult.toString()
-        prot_result.text = protResult.toString()
-
+        fat_result.text = user.fatResult.toString()
+        carb_result.text = user.carbResult.toString()
+        prot_result.text = user.protResult.toString()
     }
 
-    private fun savedData() {
-        sharedPref = getSharedPreferences(PREF_BMR, Context.MODE_PRIVATE)
-        editor = sharedPref.edit()
-        editor.apply {
-            putInt("checkedGender", checkedGender)
-            putInt("age", age)
-            putInt("height", height)
-            putInt("weight", weight)
-            putFloat("result", resultBmr)
-            putInt("checkedActivity", checkedActivity)
-            putFloat("dailyCalories", dailyCalories)
-            putInt("fatPercent", fatPercent)
-            putInt("carbPercent", carbPercent)
-            putInt("protPercent", protPercent)
-            putInt("fatResult", fatResult)
-            putInt("carbResult", carbResult)
-            putInt("protResult", protResult)
-            apply()
+    private fun saveUserData() {
+        user = User(
+            1,
+            radio_group_gender.checkedRadioButtonId,
+            age_value.text.toString().toInt(),
+            height_value.text.toString().toInt(),
+            weight_value.text.toString().toInt(),
+            radio_group_activity_level.checkedRadioButtonId,
+            fat_percent.text.toString().toInt(),
+            carb_percent.text.toString().toInt(),
+            prot_percent.text.toString().toInt(),
+            et_daily_calorie_result.text.toString().toFloat(),
+            fat_result.text.toString().toInt(),
+            carb_result.text.toString().toInt(),
+            prot_result.text.toString().toInt(),
+            tv_bmr_result.text.toString().toFloat()
+        )
+        userViewModel.upsertUser(user)
+    }
+
+    private fun loadUserData() {
+        userViewModel.getUser.observe(this, Observer {
+            user = it
+            radio_group_gender.check(user.checkedGender)
+            age_value.setText(user.age.toString())
+            height_value.setText(user.height.toString())
+            weight_value.setText(user.weight.toString())
+            tv_bmr_result.text = String.format("%.0f", user.bmrResult)
+            et_daily_calorie_result.setText(String.format("%.0f", user.dailyCalories))
+            radio_group_activity_level.check(user.checkedActivity)
+            fat_percent.setText(user.fatPercent.toString())
+            carb_percent.setText(user.carbPercent.toString())
+            prot_percent.setText(user.protPercent.toString())
+            fat_result.text = user.fatResult.toString()
+            carb_result.text = user.carbResult.toString()
+            prot_result.text = user.protResult.toString()
+        })
+    }
+
+    private fun initButton() {
+        btn_calculate_bmr.setOnClickListener { calculateBmr() }
+
+        btn_calculate_daily_calorie.setOnClickListener {
+            calculateBmr()
+            calculateDailyCalories()
+            calculateMacros()
+        }
+
+        btn_calculate_macros.setOnClickListener { calculateMacros() }
+
+        iv_custom_calorie.setOnClickListener {
+            user.dailyCalories = et_daily_calorie_result.text.toString().toFloat()
+            calculateMacros()
+            Toast.makeText(this, getString(R.string.custom_calorie_saved), Toast.LENGTH_SHORT).show()
         }
     }
-
-    private fun loadData() {
-        sharedPref = getSharedPreferences(PREF_BMR, Context.MODE_PRIVATE)
-
-        val savedCheckedGender = sharedPref.getInt("checkedGender", 0)
-        val savedAge = sharedPref.getInt("age", 0)
-        val savedHeight = sharedPref.getInt("height", 0)
-        val savedWeight = sharedPref.getInt("weight", 0)
-        val savedResult = sharedPref.getFloat("result", 0F)
-        val savedCheckedActivity = sharedPref.getInt("checkedActivity", 0)
-        val savedDailyCalorie = sharedPref.getFloat("dailyCalories", 0F)
-        val savedFatPercent = sharedPref.getInt("fatPercent", 30)
-        val savedCarbPercent = sharedPref.getInt("carbPercent", 40)
-        val savedProtPercent = sharedPref.getInt("protPercent", 30)
-        val savedFatResult = sharedPref.getInt("fatResult", 0)
-        val savedCarbResult = sharedPref.getInt("carbResult", 0)
-        val savedProtResult = sharedPref.getInt("protResult", 0)
-
-        radio_group_gender.check(savedCheckedGender)
-        age_value.setText(savedAge.toString())
-        height_value.setText(savedHeight.toString())
-        weight_value.setText(savedWeight.toString())
-        tv_bmr_result.text = savedResult.toInt().toString()
-        radio_group_activity_level.check(savedCheckedActivity)
-        et_daily_calorie_result.setText(savedDailyCalorie.toInt().toString())
-        fat_percent.setText(savedFatPercent.toString())
-        carb_percent.setText(savedCarbPercent.toString())
-        prot_percent.setText(savedProtPercent.toString())
-        fat_result.text = savedFatResult.toString()
-        carb_result.text = savedCarbResult.toString()
-        prot_result.text = savedProtResult.toString()
-    }
-
 }

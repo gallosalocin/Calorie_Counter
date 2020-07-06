@@ -19,6 +19,8 @@ import com.gallosalocin.calorie_counter.models.Food
 import com.gallosalocin.calorie_counter.viewmodel.FoodViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_meal.*
+import java.util.Collections.swap
+import kotlin.collections.ArrayList
 
 class MealActivity : AppCompatActivity() {
 
@@ -66,7 +68,6 @@ class MealActivity : AppCompatActivity() {
 
         foodAdapter = FoodAdapter()
         rv_meal.apply {
-            setHasFixedSize(true)
             adapter = foodAdapter
             layoutManager = LinearLayoutManager(this@MealActivity)
         }
@@ -113,7 +114,7 @@ class MealActivity : AppCompatActivity() {
             ItemTouchHelper.RIGHT
         ) {
             override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
-                return false
+             return false
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {

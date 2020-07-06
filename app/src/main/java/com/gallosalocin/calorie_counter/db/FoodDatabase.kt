@@ -8,14 +8,16 @@ import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.gallosalocin.calorie_counter.R
 import com.gallosalocin.calorie_counter.models.Food
+import com.gallosalocin.calorie_counter.models.User
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-@Database(entities = [Food::class], version = 1, exportSchema = false)
+@Database(entities = [Food::class, User::class], version = 1, exportSchema = false)
 
 abstract class FoodDatabase : RoomDatabase() {
 
     abstract fun foodDao(): FoodDao
+    abstract fun userDao(): UserDao
 
     private class FoodDatabaseCallback(
         private val scope: CoroutineScope
@@ -26,10 +28,11 @@ abstract class FoodDatabase : RoomDatabase() {
             INSTANCE?.let { database ->
                 scope.launch {
                     val foodDao = database.foodDao()
+                    val userDao = database.userDao()
+
+                    userDao.upsertUser(User(1, 2131230903, 0, 0, 0, 2131230924, 30, 40, 30, 0F,0,0,0,0F ))
 
                     foodDao.deleteAll()
-
-//                    foodDao.insertFood(Food("0","A TEST", Resources.getSystem().getString(R.string.proteins), 0xFFE57373.toInt(), "", 1F, 100, 1F, 1F, 1F))
 
                     foodDao.insertFood(Food("0","Blanc de poulet", "Protéines", 0xFFE57373.toInt(), "", 108F, 100, 1.34F, 0.45F, 23.5F))
                     foodDao.insertFood(Food("0","Jambon cuit à l'étouffée", "Protéines", 0xFFE57373.toInt(), "", 108F, 100, 3F, 1.2F, 19F))
@@ -38,6 +41,7 @@ abstract class FoodDatabase : RoomDatabase() {
                     foodDao.insertFood(Food("0","Boeuf haché 5%", "Protéines", 0xFFE57373.toInt(), "", 130F, 100, 4.6F, 0.3F, 21.9F))
                     foodDao.insertFood(Food("0","Fromage blanc carrefour", "Protéines", 0xFFE57373.toInt(), "", 71F, 100, 3F, 4.5F, 6.5F))
                     foodDao.insertFood(Food("0","Lait demi écrémé", "Protéines", 0xFFE57373.toInt(), "", 46F, 100, 1.6F, 4.8F, 3.2F))
+                    foodDao.insertFood(Food("0","Lait écrémé", "Protéines", 0xFFE57373.toInt(), "", 32F, 100, 0F, 4.8F, 3.2F))
                     foodDao.insertFood(Food("0","Oeuf", "Protéines", 0xFFE57373.toInt(), "", 134F, 100, 8.6F, 0.5F, 13.5F))
                     foodDao.insertFood(Food("0","Whey protein O.N.", "Protéines", 0xFFE57373.toInt(), "", 372F, 100, 3.8F, 5.8F, 78.5F))
                     foodDao.insertFood(Food("0","Whey protein Sci-MX", "Protéines", 0xFFE57373.toInt(), "", 396F, 100, 6.6F, 5.9F, 74F))
@@ -68,6 +72,7 @@ abstract class FoodDatabase : RoomDatabase() {
                     foodDao.insertFood(Food("0","Oignon", "Légumes", 0xFF48B34D.toInt(), "", 39F, 100, 0.6F, 6.2F, 1.1F))
                     foodDao.insertFood(Food("0","Poivron rouge", "Légumes", 0xFF48B34D.toInt(), "", 29F, 100, 0.35F,4.5F, 1.12F))
                     foodDao.insertFood(Food("0","Tomate cerise", "Légumes", 0xFF48B34D.toInt(), "", 21F, 100, 0.4F,3F, 0.8F))
+                    foodDao.insertFood(Food("0","Pousses de haricot Mungo", "Légumes", 0xFF48B34D.toInt(), "", 24F, 100, 0.4F,3.2F, 1.5F))
                     foodDao.insertFood(Food("0","Pomme", "Fruits", 0xFF9575CD.toInt(), "", 52F, 100, 0.2F, 14F, 0.3F))
                     foodDao.insertFood(Food("0","Ananas", "Fruits", 0xFF9575CD.toInt(), "", 53F, 100, 0.24F, 11F, 0.52F))
                     foodDao.insertFood(Food("0","Abricot", "Fruits", 0xFF9575CD.toInt(), "", 48F, 100, 0.4F, 11.1F, 1.4F))
@@ -99,6 +104,7 @@ abstract class FoodDatabase : RoomDatabase() {
                     foodDao.insertFood(Food("0","Sarrasin", "Glucides", 0xFFFFF176.toInt(), "", 353F, 100, 2.2F, 62.8F, 11.8F))
                     foodDao.insertFood(Food("0","Veggie macaroni pois chiche", "Glucides", 0xFFFFF176.toInt(), "", 363F, 100, 5.7F, 55F, 19F))
                     foodDao.insertFood(Food("0","Veggie penne lentilles corail", "Glucides", 0xFFFFF176.toInt(), "", 335F, 100, 1.7F, 52F, 25F))
+                    foodDao.insertFood(Food("0","Vin rosé", "Glucides", 0xFFFFF176.toInt(), "", 71F, 100, 0F, 1.8F, 0.2F))
                 }
             }
         }
