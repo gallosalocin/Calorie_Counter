@@ -1,7 +1,6 @@
 package com.gallosalocin.calorie_counter.ui
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -49,13 +48,11 @@ class DayActivity : AppCompatActivity() {
         calculateMacrosDinner()
         calculateMacrosSnack()
         calculateMacrosTotal()
-
     }
 
     private fun calculateMacrosTotal() {
         foodViewModel.allFoodsMacrosTotal.observe(this, androidx.lifecycle.Observer { foods ->
             allFoodMacrosTotal = foods
-
             day_cal_total.text = String.format("%.0f", allFoodMacrosTotal.sumByDouble { it.calorie.toDouble() })
             day_fat_total.text = String.format("%.1f", allFoodMacrosTotal.sumByDouble { it.fat.toDouble() })
             day_carb_total.text = String.format("%.1f", allFoodMacrosTotal.sumByDouble { it.carb.toDouble() })
@@ -66,7 +63,6 @@ class DayActivity : AppCompatActivity() {
     private fun calculateMacrosBreakfast() {
         foodViewModel.allFoodsByBreakfast.observe(this, androidx.lifecycle.Observer { foods ->
             allFoodByBreakfast = foods
-
             breakfast_day_cal.text = String.format("%.0f", allFoodByBreakfast.sumByDouble { it.calorie.toDouble() })
             breakfast_day_fat.text = String.format("%.1f", allFoodByBreakfast.sumByDouble { it.fat.toDouble() })
             breakfast_day_carb.text = String.format("%.1f", allFoodByBreakfast.sumByDouble { it.carb.toDouble() })
@@ -77,7 +73,6 @@ class DayActivity : AppCompatActivity() {
     private fun calculateMacrosLunch() {
         foodViewModel.allFoodsByLunch.observe(this, androidx.lifecycle.Observer { foods ->
             allFoodByLunch = foods
-
             lunch_day_cal.text = String.format("%.0f", allFoodByLunch.sumByDouble { it.calorie.toDouble() })
             lunch_day_fat.text = String.format("%.1f", allFoodByLunch.sumByDouble { it.fat.toDouble() })
             lunch_day_carb.text = String.format("%.1f", allFoodByLunch.sumByDouble { it.carb.toDouble() })
@@ -110,7 +105,6 @@ class DayActivity : AppCompatActivity() {
             getString(R.string.monday_cap), getString(R.string.tuesday_cap), getString(R.string.wednesday_cap), getString(R.string.thursday_cap),
             getString(R.string.friday_cap), getString(R.string.saturday_cap), getString(R.string.sunday_cap)
         )
-
         this.title = dayTagArray[dayTag - 1]
     }
 

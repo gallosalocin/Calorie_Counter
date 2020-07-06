@@ -30,7 +30,7 @@ abstract class FoodDatabase : RoomDatabase() {
                     val foodDao = database.foodDao()
                     val userDao = database.userDao()
 
-                    userDao.upsertUser(User(1, 2131230903, 0, 0, 0, 2131230924, 30, 40, 30, 0F,0,0,0,0F ))
+                    userDao.upsertUser(User(1, 0, 0, 0, 0, 0, 30, 40, 30, 0F,0,0,0,0F ))
 
                     foodDao.deleteAll()
 

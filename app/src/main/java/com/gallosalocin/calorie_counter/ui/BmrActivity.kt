@@ -1,6 +1,5 @@
 package com.gallosalocin.calorie_counter.ui
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -24,10 +23,8 @@ class BmrActivity : AppCompatActivity() {
         setContentView(R.layout.activity_bmr)
 
         configToolbar()
-
+        user = User()
         userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
-
-        loadUserData()
         initButton()
     }
 
@@ -44,56 +41,70 @@ class BmrActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.bmr_toolbar_save -> {
-                calculateBmr()
-                calculateMacros()
-                saveUserData()
-                finish()
-                Toast.makeText(this, getString(R.string.profile_saved), Toast.LENGTH_LONG).show()
+                if (tv_bmr_result.text.isEmpty() || et_daily_calorie_result.text.isNullOrEmpty()) {
+                    Toast.makeText(this, getString(R.string.toast_fill_fields), Toast.LENGTH_LONG).show()
+                } else {
+                    saveUserData()
+                    finish()
+                    Toast.makeText(this, getString(R.string.profile_saved), Toast.LENGTH_LONG).show()
+                }
             }
+            R.id.bmr_toolbar_load -> loadUserData()
             android.R.id.home -> onBackPressed()
         }
         return true
     }
 
     private fun calculateBmr() {
-        user.checkedGender = radio_group_gender.checkedRadioButtonId
-        val gender = findViewById<RadioButton>(user.checkedGender)
-        user.age = age_value.text.toString().toInt()
-        user.height = height_value.text.toString().toInt()
-        user.weight = weight_value.text.toString().toInt()
+        if (radio_group_gender.checkedRadioButtonId == -1 || age_value.text.isNullOrEmpty() || height_value.text.isNullOrEmpty() || weight_value.text.isNullOrEmpty()) {
+            Toast.makeText(this, getString(R.string.toast_fill_fields), Toast.LENGTH_LONG).show()
+        } else {
+            user.checkedGender = radio_group_gender.checkedRadioButtonId
+            val gender = findViewById<RadioButton>(user.checkedGender)
+            user.age = age_value.text.toString().toInt()
+            user.height = height_value.text.toString().toInt()
+            user.weight = weight_value.text.toString().toInt()
 
-        user.bmrResult =
-            (if (gender == gender_male) 66 + (13.7 * user.weight) + (5 * user.height) - (6.8 * user.age) else 655 + (9.6 * user.weight) + (1.8 * user.height) - (4.7 * user.age)).toFloat()
+            user.bmrResult =
+                (if (gender == gender_male) 66 + (13.7 * user.weight) + (5 * user.height) - (6.8 * user.age) else 655 + (9.6 * user.weight) + (1.8 * user.height) - (4.7 * user.age)).toFloat()
 
-        tv_bmr_result.text = user.bmrResult.toInt().toString()
+            tv_bmr_result.text = user.bmrResult.toInt().toString()
+        }
     }
 
     private fun calculateDailyCalories() {
-        user.checkedActivity = radio_group_activity_level.checkedRadioButtonId
+        if (radio_group_activity_level.checkedRadioButtonId == -1 || tv_bmr_result.text.isNullOrEmpty()) {
+            Toast.makeText(this, getString(R.string.toast_fill_fields), Toast.LENGTH_LONG).show()
+        } else {
+            user.checkedActivity = radio_group_activity_level.checkedRadioButtonId
 
-        when (findViewById<RadioButton>(user.checkedActivity)) {
-            level1 -> user.dailyCalories = user.bmrResult * 1.2F
-            level2 -> user.dailyCalories = user.bmrResult * 1.375F
-            level3 -> user.dailyCalories = user.bmrResult * 1.55F
-            level4 -> user.dailyCalories = user.bmrResult * 1.725F
-            level5 -> user.dailyCalories = user.bmrResult * 1.9F
+            when (findViewById<RadioButton>(user.checkedActivity)) {
+                level1 -> user.dailyCalories = user.bmrResult * 1.2F
+                level2 -> user.dailyCalories = user.bmrResult * 1.375F
+                level3 -> user.dailyCalories = user.bmrResult * 1.55F
+                level4 -> user.dailyCalories = user.bmrResult * 1.725F
+                level5 -> user.dailyCalories = user.bmrResult * 1.9F
+            }
+            et_daily_calorie_result.setText(user.dailyCalories.toInt().toString())
         }
-        et_daily_calorie_result.setText(user.dailyCalories.toInt().toString())
     }
 
     private fun calculateMacros() {
+        if (et_daily_calorie_result.text.isNullOrEmpty()) {
+            Toast.makeText(this, getString(R.string.toast_fill_fields), Toast.LENGTH_LONG).show()
+        } else {
+            user.fatPercent = fat_percent.text.toString().toInt()
+            user.carbPercent = carb_percent.text.toString().toInt()
+            user.protPercent = prot_percent.text.toString().toInt()
 
-        user.fatPercent = fat_percent.text.toString().toInt()
-        user.carbPercent = carb_percent.text.toString().toInt()
-        user.protPercent = prot_percent.text.toString().toInt()
+            user.fatResult = (((user.dailyCalories * user.fatPercent) / 100) / 9).toInt()
+            user.carbResult = (((user.dailyCalories * user.carbPercent) / 100) / 4).toInt()
+            user.protResult = (((user.dailyCalories * user.protPercent) / 100) / 4).toInt()
 
-        user.fatResult = (((user.dailyCalories * user.fatPercent) / 100) / 9).toInt()
-        user.carbResult = (((user.dailyCalories * user.carbPercent) / 100) / 4).toInt()
-        user.protResult = (((user.dailyCalories * user.protPercent) / 100) / 4).toInt()
-
-        fat_result.text = user.fatResult.toString()
-        carb_result.text = user.carbResult.toString()
-        prot_result.text = user.protResult.toString()
+            fat_result.text = user.fatResult.toString()
+            carb_result.text = user.carbResult.toString()
+            prot_result.text = user.protResult.toString()
+        }
     }
 
     private fun saveUserData() {

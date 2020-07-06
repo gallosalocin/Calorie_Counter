@@ -96,4 +96,6 @@
     <string name="english">Anglais</string>
     <string name="french">Français</string>
     <string name="choose_language">Choisir Langue</string>
+    <string name="restore_data_btn">Restore data</string>
+    <string name="toast_fill_fields">Merci de remplir tous les champs.</string>
 </resources>

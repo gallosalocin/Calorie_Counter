@@ -102,7 +102,7 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/overall_day_fat_total"
                 app:layout_constraintTop_toBottomOf="@id/day_cal_total"
-                tools:text="2136" />
+                tools:text="2300" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/overall_day_fat_total"
@@ -110,7 +110,7 @@
                 app:layout_constraintLeft_toRightOf="@id/overall_day_cal_total"
                 app:layout_constraintRight_toLeftOf="@id/overall_day_carb_total"
                 app:layout_constraintTop_toBottomOf="@id/day_cal_total"
-                tools:text="68" />
+                tools:text="75" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/overall_day_carb_total"
@@ -118,7 +118,7 @@
                 app:layout_constraintLeft_toRightOf="@id/overall_day_fat_total"
                 app:layout_constraintRight_toLeftOf="@id/overall_day_prot_total"
                 app:layout_constraintTop_toBottomOf="@id/day_cal_total"
-                tools:text="210" />
+                tools:text="225" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/overall_day_prot_total"
@@ -126,7 +126,7 @@
                 app:layout_constraintLeft_toRightOf="@id/overall_day_carb_total"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/day_cal_total"
-                tools:text="155" />
+                tools:text="160" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

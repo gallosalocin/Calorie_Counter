@@ -10,17 +10,11 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.gallosalocin.calorie_counter.R
-import com.gallosalocin.calorie_counter.models.User
-import com.gallosalocin.calorie_counter.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
-
-    private lateinit var userViewModel: UserViewModel
-    private var user: User? = User()
 
     companion object {
         var dayTag = 0
@@ -34,12 +28,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         setSupportActionBar(main_toolbar)
 
         dayChoice()
-
-
-        userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
-        userViewModel.getUser.observe(this, androidx.lifecycle.Observer {
-            user = it
-        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
